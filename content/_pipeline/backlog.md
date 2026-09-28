@@ -32,12 +32,12 @@ Source files and transcribed copy are in `content/inbox/adobe-portfolio/` (git-i
 
 | Piece                          | Collection | Status | Source                                      | Notes                                                      |
 | ------------------------------ | ---------- | ------ | ------------------------------------------- | ---------------------------------------------------------- |
-| Card Vault                     | projects   | published | `~/Desktop/Projects/Card Vault`             | Short facts-only page. Expand with story, visuals and outcomes |
+| Card Vault                     | projects   | published | `~/Desktop/Projects/Card Vault`             | Screens added (demo data). Could add real usage numbers        |
 | CUPS                           | projects   | published | `~/Desktop/Projects/CUPS`                   | Short facts-only page. Branding folder could be a strong visual section     |
 | Design Growth                  | projects   | idea   | designgrowth.co                             |                                                            |
 | tips.designbydyl.com           | play       | idea   | subdomain project                           | Link out, or feature as writing                            |
 | GlucoTrack                     | play       | draft  | `~/Desktop/Projects/Diabeties_tracker`      | **Privacy:** built for a family member. Get consent and anonymise |
-| WC Sweepstake                  | projects   | draft  | `~/Desktop/Projects/WC Sweepstake`          | Stub. Needs real usage numbers                             |
+| WC Sweepstake                  | projects   | published | `~/Desktop/Projects/WC Sweepstake`       | Screens from a demo league (no real names). Add player/league counts |
 | Swing Trade Co-pilot           | play       | idea   | `~/Desktop/Projects/trading-tool`           | Dashboard / data-viz angle                                 |
 | Handy Men                      | projects   | idea   | `~/Desktop/Projects/Handy Men`              | Lead-gen site for a local business?                        |
 | This site                      | play       | idea   | this repo                                   | "How I built my portfolio with Claude". Goes on /colophon  |

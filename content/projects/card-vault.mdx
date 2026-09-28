@@ -5,6 +5,7 @@ date: "2026-09"
 role: "Design and build"
 tools: ["Claude Code", "Next.js", "Postgres", "Vercel"]
 ai: ["Claude Code"]
+cover: "/work/card-vault/cover.jpg"
 featured: true
 order: 1
 ---
@@ -15,9 +16,30 @@ Card Vault tracks what a card collection is worth. Add a card and its price upda
 
 Raw Pokémon cards are priced from live market data. Graded and sports cards are priced from **sold** listings, because an asking price is only what someone hopes to get.
 
+<Figure
+  src="/work/card-vault/mobile.jpg"
+  width={2400}
+  height={1500}
+  alt="Card Vault on a phone: the dashboard with collection value, the collection grid, and a graded card's detail page"
+  caption="Dashboard, collection and card detail. It installs to the home screen as a PWA. Shown with demo data."
+  wide
+/>
+
+## Pricing you can trust
+
 <Callout label="Design decision">
 Value cards at what people actually paid. A daily job keeps a rolling record of real sales, and each card is valued at the median of the last 30 days, not one lucky outlier.
 </Callout>
+
+Every graded card shows the sales behind its price. If a listing isn't really your card, like a damaged copy or a different grade, untick it and the value recalculates straight away.
+
+<Figure
+  src="/work/card-vault/sold-sales.jpg"
+  width={2400}
+  height={2960}
+  alt="A PSA 8 Charizard card page with its value history and a list of recent eBay sales, one of them unticked"
+  caption="The price is the median of the sales listed. The damaged outlier is unticked, so it doesn't drag the value down."
+/>
 
 ## Designed around the data, not just the screens
 
@@ -27,6 +49,24 @@ Pricing data is messy, so the product gives the collector the final say:
 - **Set your own value** for anything unusual, and the daily updates leave it alone.
 - **Bulk import** a collection from a CSV template. Pokémon rows are matched to live prices automatically.
 
+Adding one card is a search, not a form. Type a name and pick the exact printing from real card art. The set, number and year fill themselves in, and the card is linked to live prices.
+
+<Figure
+  src="/work/card-vault/add-card.jpg"
+  width={1840}
+  height={1620}
+  alt="The Add a card screen with a search for Gengar showing every printing as card images"
+  caption="Pick the exact printing by its art, not by guessing set codes."
+/>
+
 ## A constraint worth designing for: free
 
 Every service it runs on stops at its limit instead of charging. That constraint shaped the product: photos are resized in the browser before upload, the day's pricing work is split across several scheduled jobs, and a settings page shows today's usage against each limit.
+
+<Figure
+  src="/work/card-vault/free-tier.jpg"
+  width={1800}
+  height={900}
+  alt="The free-tier usage panel showing sold-sale rows, eBay searches and photo storage against their daily limits"
+  caption="Today's usage against each free tier, so a limit is never a surprise."
+/>

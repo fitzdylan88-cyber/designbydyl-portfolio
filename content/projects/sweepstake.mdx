@@ -1,25 +1,63 @@
 ---
-title: "A World Cup sweepstake 100 people played"
-summary: "A mobile-first PWA for friend groups and work teams. Random team draws, live points and a leaderboard that ran for the whole 2026 World Cup."
+title: "WC Sweepstake: the office draw, rebuilt as an app"
+summary: "A mobile-first PWA for friend groups and work teams. A fair seeded draw, live points, and a leaderboard that ran for the whole 2026 World Cup."
 date: "2026-06"
 role: "Solo: design and build"
 duration: "Shipped before kick-off"
-tools: ["Claude Code", "Next.js", "Supabase"]
+tools: ["Claude Code", "React", "Vite", "Supabase", "Vercel"]
 ai: ["Claude Code", "planning docs as prompts"]
-draft: true
+cover: "/work/sweepstake/cover.jpg"
 order: 3
 ---
-
-{/* DRAFT. Title claim ("100 people") is a placeholder. Replace it with real numbers. */}
 
 ## The brief I gave myself
 
 Ship before kick-off. A fixed deadline, a real audience and no second chances.
 
+A World Cup sweepstake usually lives in a spreadsheet and a group chat. Someone draws names from a hat, someone else keeps the scores, and by the knockouts nobody remembers who has Morocco. I wanted the draw to feel fair, the points to update themselves, and the leaderboard to be the thing people opened between matches.
+
 ## What it does
 
-Groups get randomly assigned teams, points update live through the tournament, and a leaderboard keeps the group chat going.
+- **Leagues with a PIN.** An organiser sets up a league from the admin panel, and friends join with a four-letter code.
+- **A seeded draw.** The 48 teams are split into pots by FIFA ranking, and every player gets one team from each pot. Nobody walks away with only outsiders.
+- **Live points.** Scores come in automatically. Every result shows exactly where your points came from.
+- **Pick Your Winner.** A side bet on who lifts the trophy, locked at kick-off.
+
+<Figure
+  src="/work/sweepstake/leaderboard.jpg"
+  width={1800}
+  height={1500}
+  alt="The leaderboard with each player's two teams and points, and the Pick Your Winner board grouped by team"
+  caption="The leaderboard shows every player's teams inline, so the table explains itself. Demo league with made-up players."
+/>
+
+<Callout label="Design decision">
+Show the maths. Every result carries its points as small tags, such as "+20 win", "+2 clean sheet" and "+5 pens", so nobody has to trust a number they can't check.
+</Callout>
+
+<Figure
+  src="/work/sweepstake/fixtures.jpg"
+  width={2400}
+  height={1500}
+  alt="Fixtures with a live quarter-final, results with points breakdowns, and the knockout bracket"
+  caption="Live matches, results with a points breakdown for your teams, and the knockout bracket."
+  wide
+/>
+
+## Rules people actually read
+
+The scoring is the whole game, so it opens in plain language on your first visit and stays one tap away in the header. Bonus points are spelled out as per game and stackable, so nobody expects them only once.
+
+<Figure
+  src="/work/sweepstake/rules.jpg"
+  width={1800}
+  height={1500}
+  alt="The How it works rules sheet and the group stage tables"
+  caption="The rules sheet on first open, and live group tables."
+/>
 
 ## What I learned
 
-TODO: 98 commits in ten weeks. What broke on match days?
+- **The home screen is its own platform.** Installed on an iPhone, the bottom navigation drifted, bounced and left gaps above the home indicator. It took about ten releases of layout fixes before one pattern held on every device.
+- **Free data comes with a ceiling.** Live scores started on a free API with a daily request cap. I switched to a different source before kick-off, and scores now update on a schedule.
+- **Real groups aren't a tidy size.** I rebuilt the draw for leagues of 16 players (three teams each) or 24 players (two each), so the pots stay fair either way.
