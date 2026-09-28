@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { capabilities, contact, experience, site, toolkit } from "@/lib/site";
 import { SplitReveal } from "@/components/motion/split-reveal";
 import { Magnetic } from "@/components/motion/magnetic";
+import { Employers } from "@/components/site/employers";
 
 export const metadata: Metadata = {
   title: "About",
@@ -44,6 +45,11 @@ export default function AboutPage() {
             </li>
           ))}
         </ul>
+      </section>
+
+      <section className="col-span-12 mt-32 grid grid-cols-subgrid gap-y-12">
+        <h2 className="eyebrow col-span-12 lg:col-span-3">Where I&rsquo;ve worked</h2>
+        <Employers className="col-span-12 lg:col-span-9" />
       </section>
 
       {experience.length > 0 && (

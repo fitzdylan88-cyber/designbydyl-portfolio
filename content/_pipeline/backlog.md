@@ -13,6 +13,21 @@ Aim for a balanced launch set: **2–3 work (AI) case studies · 3–4 projects 
 | --------------------------------------- | ---------- | ------ | ----------------------------------- |
 | _TODO: list your strongest AI work projects_ | work  | idea   | Pick ones with a clear before/after |
 
+## Earlier work (imported from the old Adobe Portfolio, 2026-09-28)
+
+Source files and transcribed copy are in `content/inbox/adobe-portfolio/` (git-ignored).
+
+| Piece                | Collection | Status    | Notes                                                    |
+| -------------------- | ---------- | --------- | -------------------------------------------------------- |
+| AIB Service Finder   | work       | published | Named AIB, at Dylan's request. Featured                  |
+| Mylo                 | work       | published | Dyson Award Top 3 IE, DRS 2018. Confirm tools used       |
+| DEV X                | work       | published | Date is approximate (undergrad). Confirm the year        |
+| Boston Coffee House  | play       | published | Short entry                                              |
+| De Young Museum      | play       | published | Short entry                                              |
+| Digital Rendering    | play       | published | Short entry. Date approximate                            |
+| Premier League app   | play       | published | Short entry                                              |
+| Runcoin              | play       | published | Short entry. Date approximate                            |
+
 ## Personal projects (seeded from ~/Desktop/Projects and your domains)
 
 | Piece                          | Collection | Status | Source                                      | Notes                                                      |

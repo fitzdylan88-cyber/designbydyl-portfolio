@@ -29,6 +29,18 @@ export const contact = site.email
 /** TODO(Dylan): add roles, newest first. The section stays hidden while this is empty. */
 export const experience: { period: string; role: string; company: string }[] = [];
 
+/**
+ * Logo strip. `logo` is a transparent PNG or SVG in public/logos. It's used
+ * as a mask, so only its shape matters and it always renders in theme ink.
+ * `ratio` is width / height, used to size the mask box. `scale` evens out
+ * optical size between stacked and horizontal marks.
+ */
+export const employers = [
+  { name: "AIB", logo: "/logos/aib.png", ratio: 149 / 193, scale: 1, period: "2021–" },
+  { name: "Design+", logo: null, ratio: 4.2, scale: 1, period: "2018–2020" },
+  { name: "Bord na Móna", logo: "/logos/bord-na-mona.svg", ratio: 969.7 / 283.5, scale: 0.6, period: "2017–2018" },
+] as const;
+
 export const capabilities = [
   "Product strategy",
   "Interaction design",

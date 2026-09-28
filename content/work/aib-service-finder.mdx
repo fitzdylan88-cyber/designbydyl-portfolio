@@ -1,0 +1,136 @@
+---
+title: "AIB Service Finder: search for what you need, not where"
+summary: "Redesigning AIB's branch locator around services, so customers find the right help first and only make the trip when a branch is the answer."
+date: "2022-10"
+role: "UX research and design"
+duration: "6 months"
+context: "AIB, Group website"
+tools: ["Sketch"]
+metrics:
+  - { value: "42%", label: "of surveyed customers couldn't do what they came to do" }
+  - { value: "15", label: "participants across two rounds of usability testing" }
+  - { value: "5", label: "local market leaders interviewed" }
+cover: "/work/aib-service-finder/cover.jpg"
+featured: true
+---
+
+## The problem
+
+AIB's branch locator was built around one question: *where is my nearest branch?* Customers were asking a different one: *where can I get this done?*
+
+The locator didn't make opening hours, available services or appointment booking easy to find. So people turned up with queries the branch couldn't handle, or queries that could only be solved online. That meant queues, overcrowding and wasted trips, and staff time pulled away from conversations only a branch can have, like mortgages and new accounts.
+
+<Metrics items={[{ value: "42%", label: "of surveyed customers couldn't do what they came to do" }]} />
+
+<Figure
+  src="/work/aib-service-finder/old-locator.jpg"
+  width={2390}
+  height={1269}
+  alt="The old AIB branch locator on desktop and mobile, and an old branch page"
+  caption="Before: a location-first map, with services and booking buried on the branch page."
+  wide
+/>
+
+## Research
+
+- **Stakeholder interviews** with five local market leaders, each responsible for several branches.
+- **Customer feedback** from a live survey on the existing locator, plus first-hand reports from the call centres.
+- **Competitor analysis** of banks, fintechs and non-bank finders, such as store and hotel locators.
+
+What came back was consistent:
+
+- Customers arrive with queries outside the branch's scope. Many visits end with staff giving a tutorial on the mobile app.
+- **Customers look for a service near them**, and the location-first flow doesn't support that.
+- Bank terminology doesn't match how customers describe what they need.
+- AIB services at An Post were an alternative almost nobody knew about.
+
+<Figure
+  src="/work/aib-service-finder/competitors.jpg"
+  width={1067}
+  height={896}
+  alt="A wall of competitor branch-locator and store-finder screenshots"
+  caption="Competitors ranged from location-first (Barclays) to service-first (ANZ, Commbank)."
+/>
+
+## Framing the solution
+
+Three goals kept the project honest:
+
+1. Fewer unsuccessful or unnecessary branch visits, by pointing people to the right part of the site or app.
+2. Fewer calls to branches about queries that are better answered elsewhere.
+3. More appointment bookings, for the conversations that do need a branch.
+
+<Callout label="Design decision">
+Lead with the service, not the map. Choose what you need first, then where. Branches that can't help you drop out of the results before you ever travel.
+</Callout>
+
+## Wireframes, prototypes and testing
+
+I started with low-fidelity wireframes and page-hierarchy diagrams, then moved to mobile-first Sketch prototypes, in line with the Group website standard.
+
+<Figure
+  src="/work/aib-service-finder/wireframes.jpg"
+  width={2304}
+  height={715}
+  alt="Low-fidelity wireframes and prototype flows"
+  wide
+/>
+
+I tested with 15 people: a 15-minute interview followed by a 30-minute usability test, run in **two rounds**. Round one used a medium-fidelity flow. Round two used a fully clickable prototype with real content, so each round's findings shaped the next version.
+
+<Figure
+  src="/work/aib-service-finder/testing.jpg"
+  width={1280}
+  height={597}
+  alt="A donut chart of usability findings by theme"
+  caption="Findings coded by theme. Directions, booking and the services list came up most."
+/>
+
+> "I wasn't expecting it to bring to Google Maps, but that was great that it did."
+
+## The service finder
+
+"Find your nearest services" asks what you need, then a town or county. Results show whether each branch is open and which services it offers. Each branch page brings hours, services, accessibility and appointment-only help to the top, with directions one tap away.
+
+<Figure
+  src="/work/aib-service-finder/desktop.jpg"
+  width={2390}
+  height={1429}
+  alt="The new service finder search page and a branch page on desktop"
+  wide
+/>
+
+<Figure
+  src="/work/aib-service-finder/mobile.jpg"
+  width={2390}
+  height={1749}
+  alt="The new service finder on mobile: search, service picker, results and a closed-branch notice"
+  caption="Mobile-first: service picker, results, and a clear notice when a branch is closed today."
+  wide
+/>
+
+Every page carries a **"Save a trip to the branch"** block, which routes app, internet banking and support queries to where they're solved fastest. It also promotes **AIB banking at An Post**, an alternative with 900+ locations and longer hours.
+
+<Figure
+  src="/work/aib-service-finder/improvements.jpg"
+  width={2400}
+  height={1380}
+  alt="Annotated key improvements: service-first search, diverting unnecessary visits, An Post"
+  wide
+/>
+
+## Outcome
+
+The deliverable was a complete, responsive journey from the AIB home page to every branch page. It came with new components for reuse across the Group websites and an operations model for keeping the finder's content up to date. It was scheduled to go live in Q1 2023.
+
+<Figure
+  src="/work/aib-service-finder/devices.jpg"
+  width={1024}
+  height={960}
+  alt="The service finder on a phone and a laptop"
+/>
+
+## What I'd do differently
+
+- **Test more often.** Two rounds were valuable, but a journey this customer-facing deserves more stages, even against budget pushback.
+- **Size the discovery.** The time for upfront research and competitor analysis was too short. Next time I'd push for longer upfront research, so customers' pain points shape the direction rather than business requirements alone.

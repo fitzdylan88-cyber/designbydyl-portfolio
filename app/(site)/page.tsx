@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ViewTransition } from "react";
+import { Employers } from "@/components/site/employers";
 import { getAllEntries, type Entry } from "@/lib/content";
 import { principles, site } from "@/lib/site";
 import { Cover } from "@/components/cover";
@@ -95,6 +96,11 @@ export default function Home() {
             <FeaturedCard key={entry.slug} entry={entry} index={i + 1} />
           ))}
         </div>
+      </section>
+
+      <section className="container-grid pt-32">
+        <h2 className="eyebrow col-span-12 mb-10 border-b border-rule pb-6">Where I&rsquo;ve worked</h2>
+        <Employers className="col-span-12" />
       </section>
 
       {rest.length > 0 && (
