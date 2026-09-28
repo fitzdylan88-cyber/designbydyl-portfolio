@@ -41,7 +41,8 @@ export type Frontmatter = z.infer<typeof frontmatterSchema>;
 export type Entry = Frontmatter & { slug: string; collection: Collection };
 
 const root = path.join(process.cwd(), "content");
-const showDrafts = process.env.NODE_ENV !== "production";
+/** Drafts show in dev and on Vercel preview deploys, never on the live site. */
+export const showDrafts = process.env.NODE_ENV !== "production" || process.env.VERCEL_ENV === "preview";
 
 function readCollection(collection: Collection): Entry[] {
   const dir = path.join(root, collection);
