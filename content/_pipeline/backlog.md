@@ -19,8 +19,6 @@ Aim for a balanced launch set: **2–3 work (AI) case studies · 3–4 projects 
 | ------------------------------ | ---------- | ------ | ------------------------------------------- | ---------------------------------------------------------- |
 | Card Vault                     | projects   | draft  | `~/Desktop/Projects/Card Vault`             | Stub in content/projects/card-vault.mdx                    |
 | CUPS                           | projects   | draft  | `~/Desktop/Projects/CUPS`                   | Stub. Branding folder could be a strong visual section     |
-| ~~FTB Navigator / ftbcalculator.ie~~ | — | excluded | `~/Desktop/Projects/FTB Navigator` | **Do not feature.** Its handoff doc says it must stay faceless, with no link to designbydyl.com |
-| getmykeys.ie / helpingtobuy.ie | ?          | check  | domains                                     | If these belong to the faceless FTB venture, exclude them too |
 | Design Growth                  | projects   | idea   | designgrowth.co                             |                                                            |
 | tips.designbydyl.com           | play       | idea   | subdomain project                           | Link out, or feature as writing                            |
 | GlucoTrack                     | play       | draft  | `~/Desktop/Projects/Diabeties_tracker`      | **Privacy:** built for a family member. Get consent and anonymise |
