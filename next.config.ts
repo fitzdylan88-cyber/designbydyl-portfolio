@@ -1,7 +1,22 @@
 import type { NextConfig } from "next";
+import createMDX from "@next/mdx";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  pageExtensions: ["ts", "tsx", "mdx"],
+  experimental: {
+    viewTransition: true,
+  },
 };
 
-export default nextConfig;
+// Plugins are passed as strings so Turbopack can load them.
+const withMDX = createMDX({
+  options: {
+    remarkPlugins: [
+      "remark-gfm",
+      "remark-frontmatter",
+      ["remark-mdx-frontmatter", { name: "frontmatter" }],
+    ],
+  },
+});
+
+export default withMDX(nextConfig);

@@ -1,0 +1,46 @@
+---
+title: "Placeholder: triage that sorts itself"
+summary: "Pipeline dry run. A fictional anonymised brief promoted to a page to test the template, schema and components. Replace or delete."
+date: "2026-09"
+role: "Lead product designer"
+duration: "6 weeks"
+team: "Me, 2 engineers, 1 PM"
+context: "A mid-size fintech's internal support tooling"
+tools: ["Figma", "Claude Enterprise"]
+ai: ["Claude Projects", "prompt rubric", "eval set"]
+anonymised: true
+draft: true
+---
+
+## The problem
+
+Support agents spent the first minutes of every ticket working out what it
+was actually about. Every new agent learned the triage rules from whoever sat
+next to them, so the rules drifted.
+
+<Callout label="Insight">
+The slow part wasn't answering. It was deciding who should answer.
+</Callout>
+
+## How I used AI
+
+I wrote the triage rules as a rubric, then gave the model graded examples
+so that its reasoning, not just its label, could be reviewed.
+
+<PromptBlock tool="Claude" prompt={`You are triaging support tickets.
+Score each against the rubric below, then explain the score in one line.
+<rubric>…</rubric>
+<examples>…three graded examples…</examples>`}>
+Category: Billing · Confidence: high · Reason: mentions a duplicate charge and includes a transaction date.
+</PromptBlock>
+
+<Metrics items={[
+  { value: "~40%", label: "less time to first action" },
+  { value: "3×", label: "faster onboarding to triage" },
+  { value: "0", label: "new tools for agents to learn" },
+]} />
+
+## What I'd do differently
+
+- Build the eval set on day one, not in week four.
+- Put agents in the rubric-writing room earlier.

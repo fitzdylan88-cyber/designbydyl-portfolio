@@ -1,26 +1,243 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/*
+ * Design tokens — first draft, art-directed in /lab.
+ * Colour, type, grid and motion all live here so CSS and JS share one source
+ * (motion values are mirrored in lib/motion.ts).
+ */
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+:root {
+  /* Colour: warm cream paper, brown-black ink, one orange accent. */
+  --paper: oklch(96.8% 0.014 78);
+  --paper-2: oklch(93.4% 0.02 74);
+  --ink: oklch(20% 0.018 50);
+  --ink-2: oklch(43% 0.022 52);
+  --ink-3: oklch(52% 0.024 56);
+  --rule: oklch(30% 0.03 50 / 0.14);
+  --accent: oklch(64% 0.215 40);
+  --accent-ink: oklch(20% 0.018 50);
+
+  /* Type: one grotesk for display and text (see lib/fonts.ts). */
+  --font-display-face: var(--font-text-face);
+  --display-weight: 500;
+  --display-tracking: -0.035em;
+
+  /* Grid */
+  --gutter: clamp(1rem, 0.6rem + 1.6vw, 2rem);
+  --margin: clamp(1rem, 0.2rem + 4vw, 4.5rem);
+  --max: 1680px;
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-snap: cubic-bezier(0.3, 1.4, 0.5, 1);
+  --dur-1: 120ms;
+  --dur-2: 240ms;
+  --dur-3: 480ms;
+  --dur-4: 900ms;
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  :root:not([data-theme="light"]) {
+    --paper: oklch(16% 0.012 50);
+    --paper-2: oklch(20.5% 0.016 50);
+    --ink: oklch(94.5% 0.016 80);
+    --ink-2: oklch(75% 0.022 72);
+    --ink-3: oklch(64% 0.022 68);
+    --rule: oklch(90% 0.03 75 / 0.13);
+    --accent: oklch(70% 0.19 40);
+    --accent-ink: oklch(16% 0.012 50);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@theme inline {
+  --color-paper: var(--paper);
+  --color-paper-2: var(--paper-2);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-rule: var(--rule);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+
+  --font-display: var(--font-display-face);
+  --font-sans: var(--font-text-face);
+  --font-mono: var(--font-mono-face);
+
+  /* Fluid type scale (~1.25 at 375px → ~1.414 at 1600px). */
+  --text-micro: clamp(0.6875rem, 0.66rem + 0.1vw, 0.75rem);
+  --text-small: clamp(0.8125rem, 0.79rem + 0.1vw, 0.875rem);
+  --text-body: clamp(1rem, 0.96rem + 0.18vw, 1.125rem);
+  --text-lede: clamp(1.25rem, 1.1rem + 0.6vw, 1.625rem);
+  --text-h3: clamp(1.5rem, 1.25rem + 1vw, 2.25rem);
+  --text-h2: clamp(2rem, 1.5rem + 2.2vw, 3.75rem);
+  --text-h1: clamp(2.75rem, 1.6rem + 5vw, 7rem);
+  --text-mega: clamp(3.5rem, 1rem + 11vw, 13rem);
+
+  --ease-out: var(--ease-out);
+  --ease-in-out: var(--ease-in-out);
+  --ease-snap: var(--ease-snap);
+}
+
+@layer base {
+  html {
+    background: var(--paper);
+    color: var(--ink);
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    font-size: var(--text-body);
+    line-height: 1.55;
+    background: var(--paper);
+  }
+
+  ::selection {
+    background: var(--accent);
+    color: var(--accent-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* Lenis */
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+}
+
+@utility container-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--gutter);
+  padding-inline: var(--margin);
+  max-width: var(--max);
+  margin-inline: auto;
+}
+
+@utility eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--text-micro);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Display headings: face, weight and tracking tuned per pairing via tokens. */
+@utility type-display {
+  font-family: var(--font-display-face);
+  font-weight: var(--display-weight);
+  letter-spacing: var(--display-tracking);
+}
+
+/* ── Custom cursor ─────────────────────────────────────────────── */
+html.has-cursor,
+html.has-cursor * {
+  cursor: none;
+}
+html.has-cursor :is(input:not([type="range"]):not([type="checkbox"]):not([type="radio"]), textarea, select, [contenteditable]) {
+  cursor: text;
+}
+
+/* ── Page transitions (React <ViewTransition>) ─────────────────── */
+::view-transition-group(site-header) {
+  animation: none;
+  z-index: 100;
+}
+::view-transition-old(site-header) {
+  display: none;
+}
+::view-transition-new(site-header) {
+  animation: none;
+}
+
+::view-transition-old(.page) {
+  animation: var(--dur-2) var(--ease-in-out) both vt-fade reverse;
+}
+::view-transition-new(.page) {
+  animation:
+    var(--dur-3) var(--ease-out) var(--dur-1) both vt-fade,
+    var(--dur-3) var(--ease-out) var(--dur-1) both vt-rise;
+}
+
+::view-transition-old(.nav-forward) {
+  --slide: -48px;
+  animation:
+    var(--dur-2) var(--ease-in-out) both vt-fade reverse,
+    var(--dur-3) var(--ease-in-out) both vt-slide reverse;
+}
+::view-transition-new(.nav-forward) {
+  --slide: 48px;
+  animation:
+    var(--dur-3) var(--ease-out) var(--dur-2) both vt-fade,
+    var(--dur-4) var(--ease-out) both vt-slide;
+}
+::view-transition-old(.nav-back) {
+  --slide: 48px;
+  animation:
+    var(--dur-2) var(--ease-in-out) both vt-fade reverse,
+    var(--dur-3) var(--ease-in-out) both vt-slide reverse;
+}
+::view-transition-new(.nav-back) {
+  --slide: -48px;
+  animation:
+    var(--dur-3) var(--ease-out) var(--dur-2) both vt-fade,
+    var(--dur-4) var(--ease-out) both vt-slide;
+}
+
+/* Cover → case-study hero morph. */
+::view-transition-group(.morph) {
+  animation-duration: 700ms;
+  animation-timing-function: var(--ease-out);
+  z-index: 90;
+}
+::view-transition-image-pair(.morph) {
+  animation-name: vt-via-blur;
+}
+
+@keyframes vt-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes vt-rise {
+  from { translate: 0 16px; }
+  to { translate: 0 0; }
+}
+@keyframes vt-slide {
+  from { translate: var(--slide) 0; }
+  to { translate: 0 0; }
+}
+@keyframes vt-via-blur {
+  35% { filter: blur(4px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
 }

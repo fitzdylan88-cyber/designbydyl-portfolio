@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# portfolio pipeline: raw briefs stay local until promoted to an .mdx page
+/content/inbox/*
+!/content/inbox/.gitkeep
