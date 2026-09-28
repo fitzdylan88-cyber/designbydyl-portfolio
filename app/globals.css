@@ -241,3 +241,10 @@ html.has-cursor :is(input:not([type="range"]):not([type="checkbox"]):not([type="
     animation: none !important;
   }
 }
+
+/* SplitText line masks clip at the line box; tight display leading would
+   crop descenders (g, y, p). Grow the clip area without moving layout. */
+.split-line-mask {
+  padding-block: 0.08em 0.16em;
+  margin-block: -0.08em -0.16em;
+}

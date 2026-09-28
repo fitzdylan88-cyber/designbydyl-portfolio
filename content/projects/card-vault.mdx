@@ -1,29 +1,32 @@
 ---
 title: "Card Vault: a price tracker that updates itself"
-summary: "A collection tracker for Pokémon and sports cards that reprices itself every morning from free data sources. Built end to end with Claude Code."
+summary: "A collection tracker for Pokémon and sports cards that reprices itself every morning from real sold prices, and runs entirely on free tiers."
 date: "2026-09"
-role: "Solo: design and build"
-duration: "Ongoing"
+role: "Design and build"
 tools: ["Claude Code", "Next.js", "Postgres", "Vercel"]
-ai: ["Claude Code", "agentic build"]
-draft: true
+ai: ["Claude Code"]
+featured: true
 order: 1
 ---
 
-{/* DRAFT. Stub generated from the project README. Run the case-study skill to write it up properly. */}
-
-## Why I built it
-
-TODO: the personal story. What were you tracking before, and what was annoying about it?
-
 ## What it does
 
-Raw Pokémon cards are priced from market data, and graded and sports cards from real **sold** listings rather than asking prices. A daily job keeps a rolling record of sales, so every card is valued at a median instead of one outlier.
+Card Vault tracks what a card collection is worth. Add a card and its price updates automatically every morning, with no spreadsheets and no manual lookups.
+
+Raw Pokémon cards are priced from live market data. Graded and sports cards are priced from **sold** listings, because an asking price is only what someone hopes to get.
 
 <Callout label="Design decision">
-Sold prices, not asking prices. What people actually paid is the only number worth trusting.
+Value cards at what people actually paid. A daily job keeps a rolling record of real sales, and each card is valued at the median of the last 30 days, not one lucky outlier.
 </Callout>
 
-## What I learned
+## Designed around the data, not just the screens
 
-TODO
+Pricing data is messy, so the product gives the collector the final say:
+
+- **Untick a sale** that isn't really your card, and the value recalculates straight away.
+- **Set your own value** for anything unusual, and the daily updates leave it alone.
+- **Bulk import** a collection from a CSV template. Pokémon rows are matched to live prices automatically.
+
+## A constraint worth designing for: free
+
+Every service it runs on stops at its limit instead of charging. That constraint shaped the product: photos are resized in the browser before upload, the day's pricing work is split across several scheduled jobs, and a settings page shows today's usage against each limit.

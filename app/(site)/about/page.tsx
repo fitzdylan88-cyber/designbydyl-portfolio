@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { capabilities, experience, site, toolkit } from "@/lib/site";
+import { capabilities, contact, experience, site, toolkit } from "@/lib/site";
 import { SplitReveal } from "@/components/motion/split-reveal";
 import { Magnetic } from "@/components/motion/magnetic";
 
@@ -74,16 +74,18 @@ export default function AboutPage() {
         </ul>
       </section>
 
+      {contact && (
       <div className="col-span-12 mt-32">
         <Magnetic>
           <a
-            href={`mailto:${site.email}`}
+            href={contact.href}
             className="inline-flex items-center gap-3 rounded-full bg-ink px-7 py-4 text-body font-medium text-paper"
           >
             Say hello <span aria-hidden>→</span>
           </a>
         </Magnetic>
       </div>
+      )}
     </div>
   );
 }

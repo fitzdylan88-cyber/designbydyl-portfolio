@@ -1,13 +1,13 @@
 import { Magnetic } from "@/components/motion/magnetic";
 import { SplitReveal } from "@/components/motion/split-reveal";
-import { site } from "@/lib/site";
+import { contact, site } from "@/lib/site";
 import { Clock } from "./clock";
 
 export function Footer() {
   return (
     <footer className="mt-32 bg-ink text-paper">
       <div className="container-grid pt-24 pb-10 md:pt-32">
-        <p className="eyebrow col-span-12 mb-8 text-paper/60">{site.availability}</p>
+        {site.availability && <p className="eyebrow col-span-12 mb-8 text-paper/60">{site.availability}</p>}
         <SplitReveal
           as="h2"
           by="words"
@@ -17,15 +17,17 @@ export function Footer() {
         </SplitReveal>
 
         <div className="col-span-12 mt-14 flex flex-wrap items-center gap-6 md:mt-20">
-          <Magnetic>
-            <a
-              href={`mailto:${site.email}`}
-              className="inline-flex items-center gap-3 rounded-full bg-accent px-7 py-4 text-body font-medium text-accent-ink transition-transform duration-[var(--dur-2)] active:scale-95"
-            >
-              {site.email}
-              <span aria-hidden>→</span>
-            </a>
-          </Magnetic>
+          {contact && (
+            <Magnetic>
+              <a
+                href={contact.href}
+                className="inline-flex items-center gap-3 rounded-full bg-accent px-7 py-4 text-body font-medium text-accent-ink transition-transform duration-[var(--dur-2)] active:scale-95"
+              >
+                {contact.label}
+                <span aria-hidden>→</span>
+              </a>
+            </Magnetic>
+          )}
           <ul className="flex gap-6 text-small">
             {site.links.map((link) => (
               <li key={link.href}>

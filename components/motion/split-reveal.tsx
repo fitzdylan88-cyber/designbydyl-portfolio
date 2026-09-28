@@ -43,6 +43,7 @@ export function SplitReveal({
         const split = SplitText.create(el, {
           type: by === "lines" ? "lines" : `lines,${by}`,
           mask: "lines",
+          linesClass: "split-line",
           autoSplit: true,
           onSplit(self) {
             return gsap.from(self[by], {

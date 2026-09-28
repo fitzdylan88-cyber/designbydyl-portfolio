@@ -1,6 +1,7 @@
 /**
  * Site-wide copy and links. Edit here, not in components.
- * TODO(Dylan): confirm email and social links before launch.
+ * TODO(Dylan): add a contact email and LinkedIn URL. Contact buttons only
+ * render once one of them is set.
  */
 export const site = {
   name: "Dylan Fitzpatrick",
@@ -11,13 +12,19 @@ export const site = {
   experience: "8+ years",
   intro:
     "Product designer building with AI. I design the product, then use Claude to build it, test it and ship it.",
-  availability: "Open to conversations about senior and lead roles",
-  email: "hello@designbydyl.com",
-  links: [
-    { label: "LinkedIn", href: "https://www.linkedin.com/" },
-    { label: "Tips", href: "https://tips.designbydyl.com" },
-  ],
+  /** Shown above the footer headline. Keep null unless you want to say publicly that you're looking. */
+  availability: null as string | null,
+  email: null as string | null,
+  linkedin: null as string | null,
+  links: [{ label: "Tips", href: "https://tips.designbydyl.com" }],
 } as const;
+
+/** Primary contact route: email if set, otherwise LinkedIn, otherwise none. */
+export const contact = site.email
+  ? { label: site.email, href: `mailto:${site.email}` }
+  : site.linkedin
+    ? { label: "Message me on LinkedIn", href: site.linkedin }
+    : null;
 
 /** TODO(Dylan): add roles, newest first. The section stays hidden while this is empty. */
 export const experience: { period: string; role: string; company: string }[] = [];
