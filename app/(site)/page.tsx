@@ -6,13 +6,7 @@ import { principles, site } from "@/lib/site";
 import { Cover } from "@/components/cover";
 import { DotField } from "@/components/motion/dot-field";
 import { SplitReveal } from "@/components/motion/split-reveal";
-import { WorkList } from "@/components/work-list";
 import { href } from "@/lib/paths";
-
-function pick(entry: Entry) {
-  const { slug, collection, title, summary, date, role, tools, cover, accent, draft } = entry;
-  return { slug, collection, title, summary, date, role, tools, cover, accent, draft };
-}
 
 function FeaturedCard({ entry, index, large }: { entry: Entry; index: number; large?: boolean }) {
   return (
@@ -40,9 +34,6 @@ export default function Home() {
     ...entries.filter((e) => e.featured),
     ...entries.filter((e) => !e.featured),
   ].slice(0, 3);
-  const rest = entries
-    .filter((e) => !featured.includes(e))
-    .sort((a, b) => b.date.localeCompare(a.date));
 
   return (
     <>
@@ -96,21 +87,15 @@ export default function Home() {
             <FeaturedCard key={entry.slug} entry={entry} index={i + 1} />
           ))}
         </div>
+        <Link href="/work" className="eyebrow col-span-12 mt-16 hover:text-ink">
+          See all {entries.length} projects →
+        </Link>
       </section>
 
       <section className="container-grid pt-32">
         <h2 className="eyebrow col-span-12 mb-10 border-b border-rule pb-6">Where I&rsquo;ve worked</h2>
         <Employers className="col-span-12" />
       </section>
-
-      {rest.length > 0 && (
-        <section className="container-grid pt-32">
-          <h2 className="eyebrow col-span-12 mb-6">More projects and experiments</h2>
-          <div className="col-span-12">
-            <WorkList entries={rest.map(pick)} startIndex={featured.length} />
-          </div>
-        </section>
-      )}
 
       <section className="container-grid pt-32 md:pt-44">
         <SplitReveal as="h2" by="words" className="type-display col-span-12 mb-16 max-w-[16ch] text-h1 leading-[0.95] lg:col-span-8">
