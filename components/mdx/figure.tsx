@@ -16,7 +16,7 @@ export function Figure({ src, alt, caption, width = 2400, height = 1500, wide }:
       <div className="overflow-hidden rounded-sm bg-paper-2">
         <Image src={src} alt={alt} width={width} height={height} className="h-auto w-full" />
       </div>
-      {caption && <figcaption className="eyebrow mt-3 normal-case tracking-normal">{caption}</figcaption>}
+      {caption && <figcaption className="label mt-3 normal-case tracking-normal">{caption}</figcaption>}
     </figure>
   );
 }

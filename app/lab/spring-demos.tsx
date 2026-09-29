@@ -19,8 +19,8 @@ function Pad({
     <div>
       <div className="relative h-56 overflow-hidden rounded-sm bg-paper-2">{children}</div>
       <div className="mt-3 flex items-baseline justify-between gap-4">
-        <span className="eyebrow text-ink">{name}</span>
-        <span className="eyebrow normal-case tracking-normal">{hint}</span>
+        <span className="label text-ink">{name}</span>
+        <span className="label">{hint}</span>
       </div>
       <p className="mt-1 font-mono text-micro text-ink-3">{config}</p>
     </div>

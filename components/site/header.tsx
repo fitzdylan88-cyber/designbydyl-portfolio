@@ -47,7 +47,7 @@ export function Header() {
           <span className="hidden text-ink-3 sm:inline">/ {site.role}</span>
         </Link>
 
-        <p className="eyebrow hidden md:col-span-4 md:block">
+        <p className="meta hidden md:col-span-4 md:block">
           <Clock timeZone={site.timeZone} label="Dublin" />
         </p>
 
@@ -58,7 +58,7 @@ export function Header() {
                 <Link
                   href={item.href}
                   aria-current={active === item.href ? "page" : undefined}
-                  className="relative block rounded-full px-3.5 py-1.5 text-small text-ink-2 transition-colors duration-[var(--dur-2)] hover:text-ink aria-[current=page]:text-paper"
+                  className="relative block rounded-full px-3.5 py-1.5 text-small pointer-coarse:py-3 text-ink-2 transition-colors duration-[var(--dur-2)] hover:text-ink aria-[current=page]:text-paper"
                 >
                   {active === item.href && (
                     <motion.span

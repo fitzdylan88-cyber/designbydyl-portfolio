@@ -3,6 +3,7 @@ import { capabilities, contact, experience, site, toolkit } from "@/lib/site";
 import { SplitReveal } from "@/components/motion/split-reveal";
 import { Magnetic } from "@/components/motion/magnetic";
 import { Employers } from "@/components/site/employers";
+import { Arrow } from "@/components/icons";
 
 export const metadata: Metadata = {
   title: "About",
@@ -12,7 +13,6 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <div className="container-grid pt-[20vh]">
-      <p className="eyebrow col-span-12 mb-8">About</p>
       <SplitReveal
         as="h1"
         by="lines"
@@ -36,11 +36,10 @@ export default function AboutPage() {
       </div>
 
       <section className="col-span-12 mt-32 grid grid-cols-subgrid gap-y-12">
-        <h2 className="eyebrow col-span-12 lg:col-span-3">Capabilities</h2>
+        <h2 className="col-span-12 text-h3 font-medium leading-tight tracking-tight lg:col-span-3">Capabilities</h2>
         <ul className="col-span-12 grid grid-cols-1 border-t border-rule sm:grid-cols-2 lg:col-span-9">
-          {capabilities.map((item, i) => (
-            <li key={item} className="flex items-baseline gap-4 border-b border-rule py-4">
-              <span className="eyebrow w-6">{String(i + 1).padStart(2, "0")}</span>
+          {capabilities.map((item) => (
+            <li key={item} className="border-b border-rule py-4">
               <span className="text-h3 font-medium tracking-tight">{item}</span>
             </li>
           ))}
@@ -48,17 +47,17 @@ export default function AboutPage() {
       </section>
 
       <section className="col-span-12 mt-32 grid grid-cols-subgrid gap-y-12">
-        <h2 className="eyebrow col-span-12 lg:col-span-3">Where I&rsquo;ve worked</h2>
+        <h2 className="col-span-12 text-h3 font-medium leading-tight tracking-tight lg:col-span-3">Where I&rsquo;ve worked</h2>
         <Employers className="col-span-12 lg:col-span-9" />
       </section>
 
       {experience.length > 0 && (
         <section className="col-span-12 mt-32 grid grid-cols-subgrid gap-y-12">
-          <h2 className="eyebrow col-span-12 lg:col-span-3">Experience</h2>
+          <h2 className="col-span-12 text-h3 font-medium leading-tight tracking-tight lg:col-span-3">Experience</h2>
           <ol className="col-span-12 border-t border-rule lg:col-span-9">
             {experience.map((job) => (
               <li key={`${job.company}-${job.period}`} className="grid grid-cols-[8rem_1fr] gap-4 border-b border-rule py-5">
-                <span className="eyebrow pt-1.5">{job.period}</span>
+                <span className="meta pt-1.5">{job.period}</span>
                 <span>
                   <span className="block text-h3 font-medium tracking-tight">{job.role}</span>
                   <span className="text-ink-2">{job.company}</span>
@@ -70,7 +69,7 @@ export default function AboutPage() {
       )}
 
       <section className="col-span-12 mt-32 grid grid-cols-subgrid gap-y-12">
-        <h2 className="eyebrow col-span-12 lg:col-span-3">Toolkit</h2>
+        <h2 className="col-span-12 text-h3 font-medium leading-tight tracking-tight lg:col-span-3">Toolkit</h2>
         <ul className="col-span-12 flex flex-wrap gap-2 lg:col-span-9">
           {toolkit.map((tool) => (
             <li key={tool} className="rounded-full border border-rule px-4 py-2 text-small">
@@ -87,7 +86,7 @@ export default function AboutPage() {
             href={contact.href}
             className="inline-flex items-center gap-3 rounded-full bg-ink px-7 py-4 text-body font-medium text-paper"
           >
-            Say hello <span aria-hidden>→</span>
+            Say hello <Arrow />
           </a>
         </Magnetic>
       </div>

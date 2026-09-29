@@ -3,6 +3,7 @@ import { fontVariables } from "@/lib/fonts";
 import { site } from "@/lib/site";
 import { SmoothScroll } from "@/components/motion/smooth-scroll";
 import { Cursor } from "@/components/motion/cursor";
+import { MotionProvider } from "@/components/motion/motion-provider";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -22,8 +23,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={fontVariables}>
       <body className="min-h-dvh">
-        <SmoothScroll>{children}</SmoothScroll>
-        <Cursor />
+        <MotionProvider>
+          <SmoothScroll>{children}</SmoothScroll>
+          <Cursor />
+        </MotionProvider>
       </body>
     </html>
   );

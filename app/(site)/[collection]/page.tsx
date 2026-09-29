@@ -27,10 +27,14 @@ export default async function IndexPage({ params }: { params: Promise<{ collecti
 
   return (
     <div className="container-grid pt-[20vh]">
-      <p className="eyebrow col-span-12 mb-6">Index · {entries.length} pieces</p>
-      <SplitReveal as="h1" by="chars" immediate className="type-display col-span-12 mb-16 text-mega leading-[0.85]">
-        Work
-      </SplitReveal>
+      <div className="col-span-12 mb-16 flex items-start gap-3">
+        <SplitReveal as="h1" by="chars" immediate className="type-display text-mega leading-[0.85]">
+          Work
+        </SplitReveal>
+        <span className="meta mt-2" aria-label={`${entries.length} pieces`}>
+          {entries.length}
+        </span>
+      </div>
       <WorkIndex entries={entries} initial={collection === "work" ? "all" : (collection as "projects" | "play")} />
     </div>
   );

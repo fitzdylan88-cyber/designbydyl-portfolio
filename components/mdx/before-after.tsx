@@ -47,7 +47,7 @@ export function BeforeAfter({
           className="absolute inset-0 h-full w-full cursor-ew-resize opacity-0"
         />
       </div>
-      <figcaption className="eyebrow mt-3 flex justify-between">
+      <figcaption className="label mt-3 flex justify-between">
         <span>{labels[0]}</span>
         <span>{labels[1]}</span>
       </figcaption>

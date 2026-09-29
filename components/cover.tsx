@@ -75,7 +75,6 @@ const forms: ((p: FormProps) => React.ReactNode)[] = [
 
 export function Cover({
   entry,
-  index,
   size = "md",
   className = "",
 }: {
@@ -128,10 +127,7 @@ export function Cover({
       </svg>
 
       <div className={`absolute inset-0 flex flex-col justify-between ${pad}`}>
-        <div className="flex justify-between font-mono text-micro tracking-[0.08em] uppercase">
-          <span>{index !== undefined ? String(index + 1).padStart(2, "0") : "—"}</span>
-          <span>{entry.collection}</span>
-        </div>
+        <span className="font-mono text-micro tracking-[0.06em] uppercase">{entry.collection}</span>
         {size !== "sm" && (
           <p
             className={`type-display max-w-[14ch] leading-[0.95] ${

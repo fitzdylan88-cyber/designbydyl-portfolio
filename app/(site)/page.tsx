@@ -7,6 +7,7 @@ import { Cover } from "@/components/cover";
 import { DotField } from "@/components/motion/dot-field";
 import { SplitReveal } from "@/components/motion/split-reveal";
 import { href } from "@/lib/paths";
+import { Arrow } from "@/components/icons";
 
 function FeaturedCard({ entry, index, large }: { entry: Entry; index: number; large?: boolean }) {
   return (
@@ -21,7 +22,7 @@ function FeaturedCard({ entry, index, large }: { entry: Entry; index: number; la
       </ViewTransition>
       <div className="mt-4 flex items-baseline justify-between gap-6">
         <h3 className="type-display text-h3 leading-tight">{entry.title}</h3>
-        <span className="eyebrow shrink-0">{entry.date.slice(0, 4)}</span>
+        <span className="meta shrink-0">{entry.date.slice(0, 4)}</span>
       </div>
       <p className="mt-2 max-w-[52ch] text-small text-ink-2">{entry.summary}</p>
     </Link>
@@ -40,11 +41,6 @@ export default function Home() {
       <section className="relative flex min-h-svh flex-col justify-end overflow-hidden pb-12 md:pb-16">
         <DotField />
         <div className="container-grid relative w-full">
-          <p className="eyebrow col-span-12 mb-6 flex flex-wrap gap-x-4">
-            <span>{site.role}</span>
-            <span>{site.location}</span>
-            <span>{site.experience}</span>
-          </p>
           <SplitReveal
             as="h1"
             by="chars"
@@ -53,16 +49,15 @@ export default function Home() {
           >
             Dylan Fitzpatrick
           </SplitReveal>
-          <div className="col-span-12 mt-10 grid grid-cols-subgrid items-end gap-y-8">
-            <p className="col-span-12 max-w-[34ch] text-lede leading-snug text-ink-2 md:col-span-7 lg:col-span-5 lg:col-start-8">
+          <div className="col-span-12 mt-10 grid grid-cols-subgrid items-end gap-y-6 border-t border-rule pt-6">
+            <ul className="col-span-12 flex flex-wrap gap-x-6 gap-y-1 text-small text-ink-2 md:col-span-5 lg:col-span-4">
+              <li>{site.role}</li>
+              <li>{site.location}</li>
+              <li>{site.experience}</li>
+            </ul>
+            <p className="col-span-12 max-w-[34ch] text-lede leading-snug text-ink md:col-span-7 lg:col-span-5 lg:col-start-8">
               {site.intro}
             </p>
-            <a
-              href="#work"
-              className="eyebrow col-span-12 row-start-1 flex items-center gap-2 md:col-span-5 md:row-start-auto lg:col-span-4 lg:col-start-1 lg:row-start-1"
-            >
-              <span aria-hidden className="inline-block animate-bounce">↓</span> Selected work
-            </a>
           </div>
         </div>
       </section>
@@ -72,8 +67,9 @@ export default function Home() {
           <SplitReveal as="h2" by="words" className="type-display text-h2 leading-none">
             Selected work
           </SplitReveal>
-          <Link href="/work" className="eyebrow hover:text-ink">
-            All work ({entries.length}) →
+          <Link href="/work" className="group label inline-flex items-center gap-1.5 hover:text-ink">
+            All work <span className="meta">{entries.length}</span>
+            <Arrow className="transition-transform duration-[var(--dur-2)] group-hover:translate-x-0.5" />
           </Link>
         </div>
 
@@ -87,13 +83,19 @@ export default function Home() {
             <FeaturedCard key={entry.slug} entry={entry} index={i + 1} />
           ))}
         </div>
-        <Link href="/work" className="eyebrow col-span-12 mt-16 hover:text-ink">
-          See all {entries.length} projects →
+        <Link
+          href="/work"
+          className="group col-span-12 mt-16 inline-flex w-fit items-center gap-2 text-body font-medium text-ink"
+        >
+          See all {entries.length} projects
+          <Arrow className="text-accent transition-transform duration-[var(--dur-2)] group-hover:translate-x-1" />
         </Link>
       </section>
 
       <section className="container-grid pt-32">
-        <h2 className="eyebrow col-span-12 mb-10 border-b border-rule pb-6">Where I&rsquo;ve worked</h2>
+        <h2 className="type-display col-span-12 mb-10 border-b border-rule pb-6 text-h2 leading-none">
+          Where I&rsquo;ve worked
+        </h2>
         <Employers className="col-span-12" />
       </section>
 
@@ -101,17 +103,20 @@ export default function Home() {
         <SplitReveal as="h2" by="words" className="type-display col-span-12 mb-16 max-w-[16ch] text-h1 leading-[0.95] lg:col-span-8">
           How I work
         </SplitReveal>
-        <ol className="col-span-12 grid gap-12 md:grid-cols-3 md:gap-[var(--gutter)]">
-          {principles.map((p, i) => (
+        <ul className="col-span-12 grid gap-12 md:grid-cols-3 md:gap-[var(--gutter)]">
+          {principles.map((p) => (
             <li key={p.title} className="border-t border-ink pt-5">
-              <span className="eyebrow">{String(i + 1).padStart(2, "0")}</span>
-              <h3 className="mt-6 text-h3 font-medium leading-tight tracking-tight">{p.title}</h3>
+              <h3 className="text-h3 font-medium leading-tight tracking-tight">{p.title}</h3>
               <p className="mt-4 max-w-[38ch] text-ink-2">{p.body}</p>
             </li>
           ))}
-        </ol>
-        <Link href="/about" className="eyebrow col-span-12 mt-14 hover:text-ink">
-          More about me →
+        </ul>
+        <Link
+          href="/about"
+          className="group col-span-12 mt-14 inline-flex w-fit items-center gap-2 text-body font-medium text-ink"
+        >
+          More about me
+          <Arrow className="text-accent transition-transform duration-[var(--dur-2)] group-hover:translate-x-1" />
         </Link>
       </section>
     </>

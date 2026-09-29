@@ -36,8 +36,9 @@ Two jobs. Read `content/_pipeline/brief-schema.md` first either way.
    - Show, don't list. Use `<PromptBlock>` for AI technique,
      `<BeforeAfter>` for redesigns, `<Metrics>` for results and `<Callout>`
      for the one insight a hiring manager should remember.
-   - Visuals: only images Dylan has recreated or owns. Never employer
-     screenshots. Where a visual is needed, leave
+   - Visuals: Dylan is allowed to use employer screenshots. Before
+     publishing one, check it for customer data, colleague names, internal
+     URLs and ticket IDs, and ask Dylan to blur them. Where a visual is needed, leave
      `{/* VISUAL: <description> */}` and add it to the list you hand back.
 4. **Validate**: `npm run build` (zod checks frontmatter) and open
    `/<collection>/<slug>` in dev.

@@ -19,7 +19,7 @@ const scale = [
   { token: "lede", className: "text-lede leading-snug text-ink-2", sample: "Product designer building with AI, from rubric-driven agents to shipped side projects." },
   { token: "body", className: "text-body text-ink-2", sample: "Support agents spent the first minutes of every ticket working out what it was actually about. The rules lived in people's heads." },
   { token: "small", className: "text-small text-ink-2", sample: "Lead product designer · 6 weeks · Me, 2 engineers, 1 PM" },
-  { token: "micro", className: "eyebrow", sample: "Case study · anonymised" },
+  { token: "micro", className: "label", sample: "Case study · anonymised" },
 ];
 
 const colours = ["paper", "paper-2", "ink", "ink-2", "ink-3", "rule", "accent"];
@@ -34,7 +34,7 @@ const easings = [
 function Section({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <section className="container-grid border-t border-rule py-16">
-      <h2 className="eyebrow col-span-12 mb-10 lg:col-span-2 lg:mb-0">{label}</h2>
+      <h2 className="label col-span-12 mb-10 lg:col-span-2 lg:mb-0">{label}</h2>
       <div className="col-span-12 lg:col-span-10">{children}</div>
     </section>
   );
@@ -48,7 +48,7 @@ export function Lab({ pairings, entries }: { pairings: Pairing[]; entries: Entry
   return (
     <div className={`${pairing.className} font-sans`}>
       <header className="container-grid sticky top-0 z-10 items-center gap-y-4 border-b border-rule bg-paper/85 py-4 backdrop-blur-md">
-        <p className="eyebrow col-span-12 md:col-span-4">designbydyl / lab</p>
+        <p className="label col-span-12 md:col-span-4">designbydyl / lab</p>
         <div
           role="radiogroup"
           aria-label="Type pairing"
@@ -95,7 +95,7 @@ export function Lab({ pairings, entries }: { pairings: Pairing[]; entries: Entry
         <div className="space-y-10">
           {scale.map((row) => (
             <div key={row.token} className="grid gap-2 md:grid-cols-[6rem_1fr] md:items-baseline">
-              <span className="eyebrow">{row.token}</span>
+              <span className="label">{row.token}</span>
               <p className={`${row.className} text-balance`}>{row.sample}</p>
             </div>
           ))}
@@ -110,7 +110,7 @@ export function Lab({ pairings, entries }: { pairings: Pairing[]; entries: Entry
                 className="aspect-[4/5] rounded-sm border border-rule"
                 style={{ background: `var(--${name})` }}
               />
-              <p className="eyebrow mt-2">--{name}</p>
+              <p className="label mt-2">--{name}</p>
             </div>
           ))}
         </div>
@@ -131,7 +131,7 @@ export function Lab({ pairings, entries }: { pairings: Pairing[]; entries: Entry
             <div className="space-y-3">
               {easings.map((e) => (
                 <div key={e.name} className="grid grid-cols-[5rem_1fr] items-center gap-4">
-                  <span className="eyebrow">{e.name}</span>
+                  <span className="label">{e.name}</span>
                   <div className="relative h-10 rounded-sm bg-paper-2">
                     <motion.div
                       key={run}
@@ -187,7 +187,7 @@ export function Lab({ pairings, entries }: { pairings: Pairing[]; entries: Entry
                   <span className="type-display text-h3 transition-transform duration-[var(--dur-3)] ease-[var(--ease-out)] group-hover:translate-x-2">
                     {entry.title}
                   </span>
-                  <span className="eyebrow">{entry.draft ? "draft" : entry.href}</span>
+                  <span className="label">{entry.draft ? "draft" : entry.href}</span>
                 </Link>
               </li>
             ))}

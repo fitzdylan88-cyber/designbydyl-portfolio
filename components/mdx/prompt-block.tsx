@@ -14,14 +14,14 @@ export function PromptBlock({
   return (
     <figure className="my-12 overflow-hidden rounded-md border border-rule bg-paper-2 font-mono text-small">
       <div className="flex items-center justify-between border-b border-rule px-4 py-2.5">
-        <span className="eyebrow">Prompt</span>
-        <span className="eyebrow">{tool}</span>
+        <span className="meta">Prompt</span>
+        <span className="meta">{tool}</span>
       </div>
       <pre className="whitespace-pre-wrap px-4 py-4 leading-relaxed text-ink">{prompt}</pre>
       {children && (
         <>
           <div className="border-y border-rule px-4 py-2.5">
-            <span className="eyebrow">Output</span>
+            <span className="meta">Output</span>
           </div>
           <div className="px-4 py-4 font-sans text-body text-ink-2 [&>p]:m-0">{children}</div>
         </>

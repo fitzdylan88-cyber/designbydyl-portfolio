@@ -77,22 +77,21 @@ export function WorkList({ entries, startIndex = 0 }: { entries: ListEntry[]; st
                 data-cursor="View"
                 onPointerEnter={() => setActive(i)}
                 onFocus={() => setActive(i)}
-                className={`group grid grid-cols-[2.5rem_1fr] items-baseline gap-x-4 py-6 transition-opacity duration-[var(--dur-3)] md:grid-cols-[4rem_1fr_10rem_5rem] md:py-8 ${
+                className={`group grid grid-cols-1 items-baseline gap-x-[var(--gutter)] py-6 transition-opacity duration-[var(--dur-3)] md:grid-cols-[1fr_10rem_4rem] md:py-8 ${
                   active !== null && active !== i ? "md:opacity-35" : ""
                 }`}
               >
-                <span className="eyebrow">{String(startIndex + i + 1).padStart(2, "0")}</span>
                 <span className="min-w-0">
                   <span className="type-display block text-h3 leading-[1.05] transition-transform duration-[var(--dur-3)] ease-[var(--ease-out)] md:group-hover:translate-x-3">
                     {entry.title}
                   </span>
                   <span className="mt-2 block max-w-[60ch] text-small text-ink-2 md:hidden">{entry.summary}</span>
                 </span>
-                <span className="eyebrow col-start-2 mt-3 md:col-start-auto md:mt-0">
+                <span className="meta mt-3 md:mt-0">
                   {labels[entry.collection]}
                   {entry.draft && " · draft"}
                 </span>
-                <span className="eyebrow hidden text-right md:block">{entry.date.slice(0, 4)}</span>
+                <span className="meta hidden text-right md:block">{entry.date.slice(0, 4)}</span>
               </Link>
             </motion.li>
           ))}

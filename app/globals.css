@@ -15,6 +15,8 @@
   --ink-3: oklch(52% 0.024 56);
   --rule: oklch(30% 0.03 50 / 0.14);
   --accent: oklch(64% 0.215 40);
+  /* Accent for small text: the brand orange fails 4.5:1 at body sizes. */
+  --accent-deep: oklch(52% 0.17 40);
   --accent-ink: oklch(20% 0.018 50);
 
   /* Type: one grotesk for display and text (see lib/fonts.ts). */
@@ -46,6 +48,7 @@
     --ink-3: oklch(64% 0.022 68);
     --rule: oklch(90% 0.03 75 / 0.13);
     --accent: oklch(70% 0.19 40);
+    --accent-deep: oklch(70% 0.19 40);
     --accent-ink: oklch(16% 0.012 50);
   }
 }
@@ -58,21 +61,22 @@
   --color-ink-3: var(--ink-3);
   --color-rule: var(--rule);
   --color-accent: var(--accent);
+  --color-accent-deep: var(--accent-deep);
   --color-accent-ink: var(--accent-ink);
 
   --font-display: var(--font-display-face);
   --font-sans: var(--font-text-face);
   --font-mono: var(--font-mono-face);
 
-  /* Fluid type scale (~1.25 at 375px → ~1.414 at 1600px). */
+  /* Fluid type scale. Display tops out at 6rem: calm, not shouting. */
   --text-micro: clamp(0.6875rem, 0.66rem + 0.1vw, 0.75rem);
   --text-small: clamp(0.8125rem, 0.79rem + 0.1vw, 0.875rem);
   --text-body: clamp(1rem, 0.96rem + 0.18vw, 1.125rem);
   --text-lede: clamp(1.25rem, 1.1rem + 0.6vw, 1.625rem);
-  --text-h3: clamp(1.5rem, 1.25rem + 1vw, 2.25rem);
-  --text-h2: clamp(2rem, 1.5rem + 2.2vw, 3.75rem);
-  --text-h1: clamp(2.75rem, 1.6rem + 5vw, 7rem);
-  --text-mega: clamp(3.5rem, 1rem + 11vw, 13rem);
+  --text-h3: clamp(1.375rem, 1.2rem + 0.8vw, 2rem);
+  --text-h2: clamp(1.875rem, 1.45rem + 1.8vw, 3.25rem);
+  --text-h1: clamp(2.5rem, 1.7rem + 3.4vw, 4.75rem);
+  --text-mega: clamp(3rem, 1.4rem + 6.6vw, 6rem);
 
   --ease-out: var(--ease-out);
   --ease-in-out: var(--ease-in-out);
@@ -92,6 +96,23 @@
     font-size: var(--text-body);
     line-height: 1.55;
     background: var(--paper);
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p,
+  li,
+  dd {
+    text-wrap: pretty;
+  }
+
+  html {
+    scrollbar-color: color-mix(in oklab, var(--ink) 30%, transparent) transparent;
+    caret-color: var(--accent);
   }
 
   ::selection {
@@ -127,10 +148,20 @@
   margin-inline: auto;
 }
 
-@utility eyebrow {
+/* Small UI label: dt terms, captions, secondary links. Sans, sentence case. */
+@utility label {
+  font-family: var(--font-sans);
+  font-size: var(--text-small);
+  line-height: 1.4;
+  color: var(--ink-3);
+}
+
+/* Data: dates, times, counts, tags. Mono only where the content is data. */
+@utility meta {
   font-family: var(--font-mono);
   font-size: var(--text-micro);
-  letter-spacing: 0.08em;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--ink-3);
 }
@@ -139,9 +170,10 @@
   *,
   *::before,
   *::after {
+    /* Keyframe motion stops; brief colour and opacity fades stay, so state
+       changes are still perceptible. Components handle their own motion. */
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
 }

@@ -94,10 +94,12 @@ how I fixed it. Include 1–2 generic prompt patterns I could show publicly.>
 ## What I'd do differently
 <Honest reflection. 2–3 bullets.>
 
-## Visuals to recreate
-<Ideas for visuals I could rebuild from scratch as mock UI or diagrams
-(NOT screenshots): e.g. "before/after of the triage flow", "diagram of the
-agent pipeline", "the prompt → output loop".>
+## Visuals to capture
+<The screens or moments worth screenshotting (I'm allowed to use employer
+screenshots), e.g. "the triage queue before and after", "the agent's review
+screen". Note anything in them that should be blurred: customer data,
+colleague names, internal URLs. Also suggest diagrams worth drawing, e.g.
+"the agent pipeline" or "the prompt → output loop".>
 
 ## Sensitivity check
 <Bullet list of everything you removed, generalised or were unsure about,
