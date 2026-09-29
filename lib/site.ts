@@ -16,7 +16,8 @@ export const site = {
   availability: null as string | null,
   email: null as string | null,
   linkedin: null as string | null,
-  links: [{ label: "Tips", href: "https://tips.designbydyl.com" }],
+  /** Footer links out. Empty for now: no link to Design Growth or tips yet. */
+  links: [] as { label: string; href: string }[],
 } as const;
 
 /** Primary contact route: email if set, otherwise LinkedIn, otherwise none. */
