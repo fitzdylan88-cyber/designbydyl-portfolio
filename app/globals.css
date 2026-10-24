@@ -201,6 +201,16 @@ html[data-reading="quick"] [data-story] > :not([data-tldr]) {
 [data-figure-row] > figure {
   margin: 0;
 }
+/* The cover steps back in a quick read: on wide screens it shrinks and lines
+   up with the reading column, keeping the whole image rather than cropping it. */
+@media (min-width: 64rem) {
+  html[data-reading="quick"] [data-hero] > * {
+    grid-column: 5 / span 5;
+  }
+  html[data-reading="quick"] [data-hero] > * > * {
+    aspect-ratio: 16 / 10;
+  }
+}
 
 /* ── Custom cursor ─────────────────────────────────────────────── */
 html.has-cursor,
