@@ -27,14 +27,20 @@ export const contact = site.email
     ? { label: "Message me on LinkedIn", href: site.linkedin }
     : null;
 
-/** Roles, newest first. Mirrors LinkedIn. */
-export const experience: { period: string; role: string; company: string }[] = [
-  { period: "2026–", role: "Senior product designer, Customer Safety", company: "Flutter UK & Ireland" },
-  { period: "2024–2026", role: "Product designer, Customer Safety", company: "Flutter UK & Ireland" },
-  { period: "2023–2024", role: "Product designer, Paddy Power Sportsbook", company: "Flutter UK & Ireland" },
-  { period: "2021–2023", role: "UX designer", company: "AIB" },
-  { period: "2020–2021", role: "Freelance product designer", company: "designbydyl" },
-  { period: "2018–2020", role: "Product designer", company: "Design+ Technology Gateway" },
+/** Employers, newest first, each with its roles newest first. Mirrors LinkedIn. */
+export const experience: { company: string; period: string; roles: { period: string; role: string }[] }[] = [
+  {
+    company: "Flutter UK & Ireland",
+    period: "2023–",
+    roles: [
+      { period: "2026–", role: "Senior product designer, Customer Safety" },
+      { period: "2024–2026", role: "Product designer, Customer Safety" },
+      { period: "2023–2024", role: "Product designer, Paddy Power Sportsbook" },
+    ],
+  },
+  { company: "AIB", period: "2021–2023", roles: [{ period: "2021–2023", role: "UX designer" }] },
+  { company: "designbydyl", period: "2020–2021", roles: [{ period: "2020–2021", role: "Freelance product designer" }] },
+  { company: "Design+ Technology Gateway", period: "2018–2020", roles: [{ period: "2018–2020", role: "Product designer" }] },
 ];
 
 /**

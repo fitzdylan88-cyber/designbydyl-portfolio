@@ -119,12 +119,23 @@ export default function AboutPage() {
           <h2 className="col-span-12 text-h3 font-medium leading-tight tracking-tight lg:col-span-3">Experience</h2>
           <ol className="col-span-12 border-t border-rule lg:col-span-9">
             {experience.map((job) => (
-              <li key={`${job.company}-${job.period}`} className="grid grid-cols-[8rem_1fr] gap-4 border-b border-rule py-5">
-                <span className="meta pt-1.5">{job.period}</span>
-                <span>
-                  <span className="block text-h3 font-medium tracking-tight">{job.role}</span>
-                  <span className="text-ink-2">{job.company}</span>
-                </span>
+              <li key={job.company} className="grid gap-1 border-b border-rule py-5 sm:grid-cols-[8rem_1fr] sm:gap-4">
+                <span className="meta sm:pt-1.5">{job.period}</span>
+                <div>
+                  <h3 className="text-h3 font-medium tracking-tight">{job.company}</h3>
+                  {job.roles.length === 1 ? (
+                    <p className="text-ink-2">{job.roles[0].role}</p>
+                  ) : (
+                    <ol className="mt-4 space-y-4 border-l border-rule pl-5">
+                      {job.roles.map((r) => (
+                        <li key={r.role}>
+                          <span className="block font-medium text-ink">{r.role}</span>
+                          <span className="meta">{r.period}</span>
+                        </li>
+                      ))}
+                    </ol>
+                  )}
+                </div>
               </li>
             ))}
           </ol>
