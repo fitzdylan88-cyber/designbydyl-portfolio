@@ -27,8 +27,15 @@ export const contact = site.email
     ? { label: "Message me on LinkedIn", href: site.linkedin }
     : null;
 
-/** TODO(Dylan): add roles, newest first. The section stays hidden while this is empty. */
-export const experience: { period: string; role: string; company: string }[] = [];
+/** Roles, newest first. Mirrors LinkedIn. */
+export const experience: { period: string; role: string; company: string }[] = [
+  { period: "2026–", role: "Senior product designer, Customer Safety", company: "Flutter UK & Ireland" },
+  { period: "2024–2026", role: "Product designer, Customer Safety", company: "Flutter UK & Ireland" },
+  { period: "2023–2024", role: "Product designer, Paddy Power Sportsbook", company: "Flutter UK & Ireland" },
+  { period: "2021–2023", role: "UX designer", company: "AIB" },
+  { period: "2020–2021", role: "Freelance product designer", company: "designbydyl" },
+  { period: "2018–2020", role: "Product designer", company: "Design+ Technology Gateway" },
+];
 
 /**
  * Logo strip. `logo` is a transparent PNG or SVG in public/logos. It's used
