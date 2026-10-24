@@ -1,11 +1,13 @@
 import Image from "next/image";
 import type { Entry } from "@/lib/content";
+import { lightboxTrigger } from "@/lib/lightbox";
 
 /*
  * Generative Swiss-poster cover. Each entry gets a stable composition from
  * its slug: a surface, a single geometric form and a construction grid. Used
  * until a real `cover` image exists, then it steps aside. Parent sets the
  * aspect ratio; hovering a `group` parent sets the form in motion.
+ * `expandable` opens a real cover in the lightbox; leave it off inside links.
  */
 
 function hash(input: string) {
@@ -77,15 +79,25 @@ export function Cover({
   entry,
   size = "md",
   className = "",
+  expandable = false,
 }: {
   entry: Pick<Entry, "slug" | "title" | "collection" | "cover" | "accent">;
   index?: number;
   size?: "sm" | "md" | "lg";
   className?: string;
+  expandable?: boolean;
 }) {
   if (entry.cover) {
+    const Frame = expandable ? "button" : "div";
     return (
-      <div className={`relative overflow-hidden bg-paper-2 ${className}`}>
+      <Frame
+        {...(expandable && {
+          type: "button" as const,
+          ...lightboxTrigger([{ src: entry.cover, alt: entry.title }]),
+          "aria-label": `Expand cover image: ${entry.title}`,
+        })}
+        className={`relative block overflow-hidden bg-paper-2 ${expandable ? "cursor-zoom-in" : ""} ${className}`}
+      >
         <Image
           src={entry.cover}
           alt=""
@@ -93,7 +105,7 @@ export function Cover({
           sizes="(min-width: 1024px) 60vw, 100vw"
           className="object-cover transition-transform duration-[var(--dur-4)] ease-[var(--ease-out)] group-hover:scale-[1.03]"
         />
-      </div>
+      </Frame>
     );
   }
 

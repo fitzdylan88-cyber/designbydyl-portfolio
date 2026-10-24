@@ -211,6 +211,60 @@ html.has-cursor :is(input:not([type="range"]):not([type="checkbox"]):not([type="
   cursor: text;
 }
 
+/* ── Lightbox (components/lightbox.tsx) ───────────────────────── */
+html:has(dialog.lightbox[open]) {
+  overflow: hidden;
+}
+dialog.lightbox {
+  opacity: 0;
+  transition:
+    opacity var(--dur-2) var(--ease-out),
+    display var(--dur-2) allow-discrete,
+    overlay var(--dur-2) allow-discrete;
+}
+dialog.lightbox[open] {
+  opacity: 1;
+  @starting-style {
+    opacity: 0;
+  }
+}
+dialog.lightbox::backdrop {
+  background: transparent;
+}
+/* Native cursors in the viewer; they say zoom and pan better than a ring. */
+dialog.lightbox,
+dialog.lightbox * {
+  cursor: auto;
+}
+.lightbox .lightbox-image {
+  cursor: zoom-in;
+}
+.lightbox [data-zoomed] {
+  cursor: grab;
+}
+.lightbox [data-zoomed]:active {
+  cursor: grabbing;
+}
+.lightbox [data-zoomed] .lightbox-image {
+  cursor: zoom-out;
+}
+.lightbox .lightbox-control {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  background: var(--paper);
+  color: var(--ink);
+  cursor: pointer;
+  transition: border-color var(--dur-2);
+}
+.lightbox .lightbox-control:hover {
+  border-color: var(--ink);
+}
+
 /* ── Page transitions (React <ViewTransition>) ─────────────────── */
 ::view-transition-group(site-header) {
   animation: none;

@@ -13,7 +13,7 @@ const TEXT_INPUTS = "input:not([type=range]):not([type=checkbox]):not([type=radi
  * from the element under the pointer:
  *  - `data-cursor="View"` → labelled disc
  *  - links and buttons → larger ring
- *  - text inputs → native cursor
+ *  - text inputs and open dialogs → native cursor
  * Mouse only; disabled for touch and reduced motion.
  */
 export function Cursor() {
@@ -42,6 +42,8 @@ export function Cursor() {
     function resolve(target: EventTarget | null): Mode {
       if (!(target instanceof Element)) return { kind: "default" };
       if (target.closest(TEXT_INPUTS)) return { kind: "hidden" };
+      // Modal dialogs sit in the top layer, above this cursor: use native ones there.
+      if (target.closest("dialog[open]")) return { kind: "hidden" };
       const labelled = target.closest<HTMLElement>("[data-cursor]");
       if (labelled) {
         const text = labelled.dataset.cursor ?? "";

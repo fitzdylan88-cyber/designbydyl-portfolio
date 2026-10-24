@@ -89,7 +89,7 @@ export default async function EntryPage({ params }: { params: Promise<Params> })
       <div className="container-grid mb-20">
         <div className="col-span-12">
           <ViewTransition name={`cover-${entry.collection}-${entry.slug}`} share="morph">
-            <Cover entry={entry} index={position} size="lg" className="aspect-[16/10] w-full rounded-sm md:aspect-[21/9]" />
+            <Cover entry={entry} index={position} size="lg" expandable className="aspect-[16/10] w-full rounded-sm md:aspect-[21/9]" />
           </ViewTransition>
         </div>
       </div>

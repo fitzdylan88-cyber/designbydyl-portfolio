@@ -2,6 +2,8 @@
 
 import { useId, useState } from "react";
 import Image from "next/image";
+import { Expand } from "@/components/icons";
+import { lightboxTrigger } from "@/lib/lightbox";
 
 /** Drag (or use arrow keys on the range input) to compare two states. */
 export function BeforeAfter({
@@ -46,6 +48,17 @@ export function BeforeAfter({
           onChange={(event) => setSplit(Number(event.target.value))}
           className="absolute inset-0 h-full w-full cursor-ew-resize opacity-0"
         />
+        <button
+          type="button"
+          {...lightboxTrigger([
+            { src: before, alt: `${alt} — ${labels[0]}`, caption: labels[0] },
+            { src: after, alt: `${alt} — ${labels[1]}`, caption: labels[1] },
+          ])}
+          aria-label="Expand both images"
+          className="absolute top-3 right-3 inline-flex size-11 items-center justify-center rounded-full bg-paper/90 text-ink backdrop-blur-sm"
+        >
+          <Expand />
+        </button>
       </div>
       <figcaption className="label mt-3 flex justify-between">
         <span>{labels[0]}</span>
