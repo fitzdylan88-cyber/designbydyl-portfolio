@@ -11,7 +11,7 @@ export const site = {
   timeZone: "Europe/Dublin",
   experience: "8+ years",
   intro:
-    "Product designer building with AI. I design the product, then use Claude to build it, test it and ship it.",
+    "Currently at AIB, working on the website, the app and the design system. In my own time I build things too, with Claude Code doing a lot of the typing.",
   /** Shown above the footer headline. Keep null unless you want to say publicly that you're looking. */
   availability: null as string | null,
   email: null as string | null,
@@ -57,16 +57,16 @@ export const toolkit = ["Figma", "Claude", "Claude Code", "Next.js", "Tailwind",
 
 export const principles = [
   {
-    title: "Design the whole thing",
-    body: "Problem framing, flows, the shipped pixel, and increasingly the code. I don't hand off a Figma file and hope.",
+    title: "Follow it all the way",
+    body: "I'd rather see a design through to production than hand over a Figma file and move on. More and more, that means writing the code myself.",
   },
   {
-    title: "AI is a material",
-    body: "Like any material it has a grain. I learn where models are strong, design around where they fail, and keep people in the loop where it counts.",
+    title: "Know where AI falls over",
+    body: "Models are brilliant at some jobs and confidently wrong at others. I try to find that line early, design around it, and keep a person in charge of anything that matters.",
   },
   {
-    title: "Ship to learn",
-    body: "Most of what's here is live. Real users teach you more in a week than a month of mockups.",
+    title: "Put it in front of people",
+    body: "Most of what's here is live. My World Cup app took ten releases to get one navigation bar sitting right on iPhones. No mockup was ever going to tell me that.",
   },
 ] as const;
 

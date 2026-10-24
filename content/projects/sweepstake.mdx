@@ -15,6 +15,7 @@ order: 3
 <Metrics items={[{ value: "48", label: "teams drawn fairly from ranked pots" }, { value: "16 or 24", label: "player leagues, with fair pots either way" }, { value: "On time", label: "shipped before the 2026 World Cup kicked off" }]} />
 
 - **The brief:** Replace the office spreadsheet sweepstake with an app people actually open between matches.
+- **Who used it:** Somewhere between 30 and 60 friends and colleagues, across a few leagues.
 - **What I built:** A mobile-first PWA with leagues you join by PIN, a seeded draw, live points and a leaderboard.
 
 <Callout label="Key decision">
@@ -29,9 +30,9 @@ Show the maths. Every result carries its points as small tags, such as "+20 win"
 
 ## The brief I gave myself
 
-Ship before kick-off. A fixed deadline, a real audience and no second chances.
+The World Cup wasn't going to wait for me, so the deadline was kick-off.
 
-A World Cup sweepstake usually lives in a spreadsheet and a group chat. Someone draws names from a hat, someone else keeps the scores, and by the knockouts nobody remembers who has Morocco. I wanted the draw to feel fair, the points to update themselves, and the leaderboard to be the thing people opened between matches.
+A World Cup sweepstake usually lives in a spreadsheet and a group chat. Someone draws names from a hat, someone else keeps the scores, and by the knockouts nobody remembers who has Morocco. I wanted the draw to feel fair, the points to update themselves, and the leaderboard to be the thing people opened between matches. My friends and my colleagues both ran leagues on it: somewhere between 30 and 60 people over the tournament.
 
 ## What it does
 
@@ -73,8 +74,13 @@ The scoring is the whole game, so it opens in plain language on your first visit
   caption="The rules sheet on first open, and live group tables."
 />
 
+## How I built it
+
+I started by writing planning docs that described the rules, the draw and every screen, then used them as prompts for Claude Code. For the look, I tried ideas in Figma and gave Claude screenshots of them. This was before Figma had an MCP connection, so screenshots were the only bridge. After that I mostly designed in code, in the browser. I reviewed and tested every change before it went out.
+
 ## What I learned
 
 - **The home screen is its own platform.** Installed on an iPhone, the bottom navigation drifted, bounced and left gaps above the home indicator. It took about ten releases of layout fixes before one pattern held on every device.
 - **Free data comes with a ceiling.** Live scores started on a free API with a daily request cap. I switched to a different source before kick-off, and scores now update on a schedule.
+- **Live means live.** The draw once added teams that weren't actually in the World Cup, and one day mid-tournament the points stopped updating. I spotted some of it myself, and the group chat flagged the rest. Both had to be fixed while people were checking the leaderboard between matches.
 - **Real groups aren't a tidy size.** I rebuilt the draw for leagues of 16 players (three teams each) or 24 players (two each), so the pots stay fair either way.

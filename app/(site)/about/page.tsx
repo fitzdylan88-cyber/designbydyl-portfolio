@@ -19,19 +19,24 @@ export default function AboutPage() {
         immediate
         className="type-display col-span-12 text-h1 leading-[0.95] text-balance lg:col-span-10"
       >
-        I design products and increasingly build them too, with AI as a working material.
+        I design products, and these days I build a lot of them too.
       </SplitReveal>
 
-      {/* TODO(Dylan): make this bio yours. */}
       <div className="col-span-12 mt-20 space-y-6 text-lede leading-snug text-ink-2 md:col-span-8 lg:col-span-6 lg:col-start-7">
         <p>
-          I&rsquo;m a product designer based in Dublin with {site.experience} of experience. I work across the
-          whole arc of a product, from framing the problem to the pixel that ships.
+          I&rsquo;m a product designer in Dublin. I trained in industrial design, so I started out on physical
+          things, like a pair of binoculars and a classroom projector, before moving to screens. Since 2021
+          I&rsquo;ve been at AIB, working across the public website, the mobile app and the design system.
         </p>
         <p>
-          Lately that arc has stretched. With Claude as a collaborator, I prototype in real code, build
-          internal tools and ship side projects that real people use. This site collects that work: case
-          studies, the things I&rsquo;ve built, and the experiments in between.
+          I can see product design moving closer to the code, and I&rsquo;d rather be early than catch up. So
+          outside work I started building my own ideas with Claude Code. Some of them stuck: a World Cup
+          sweepstake my friends and colleagues used for the whole tournament, and a card price tracker I
+          built for a friend. You&rsquo;ll find them here next to the case studies, with a few older experiments.
+        </p>
+        <p>
+          Outside design, I&rsquo;m a Liverpool supporter, which is partly why football keeps turning up in my
+          projects. I love all things tech, and I&rsquo;m usually reading up on whatever&rsquo;s new.
         </p>
       </div>
 

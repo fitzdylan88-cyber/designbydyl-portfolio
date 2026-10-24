@@ -30,6 +30,15 @@ Success: the visitor asks for a conversation. Proxies are time on case studies, 
 
 Voice: first person, plain, specific. Leads with problems and decisions, not adjectives. Never salesy.
 
+Writing rules, so the copy doesn't read as machine-written:
+
+- Prefer something that happened over a principle. "It took ten releases to fix the nav bar" beats "Ship to learn".
+- Use "X, not Y" once per page at most. It's the strongest tell.
+- Don't group things in threes for rhythm. List as many as are true.
+- No slogans or metaphors standing in for a point ("AI is a material", "the arc has stretched").
+- Admit what went wrong or is unfinished. Saying it didn't ship, or what you'd change, is what makes the rest believable.
+- Never invent motives, numbers or quotes. If the real detail is missing, leave a TODO for Dylan.
+
 ## Anti-references
 
 - **Generic AI/SaaS template**: gradient blobs, glass cards, shadcn defaults, "Hi, I'm X 👋", hero-metric strips.

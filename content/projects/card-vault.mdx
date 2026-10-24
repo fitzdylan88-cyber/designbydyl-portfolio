@@ -15,6 +15,7 @@ order: 1
 <Metrics items={[{ value: "Daily", label: "automatic repricing, no manual lookups" }, { value: "30 days", label: "of real sold prices behind each value" }, { value: "Free", label: "to run, on free tiers only" }]} />
 
 - **What it is:** A tracker for Pokémon and sports card collections that reprices itself every morning.
+- **Why:** I built it for a friend's collection, and started collecting myself along the way.
 - **What I did:** Designed and built it end to end, with Claude Code, Next.js, Postgres and Vercel.
 
 <Callout label="Key decision">
@@ -29,7 +30,11 @@ Value cards at what people actually paid, the median of recent sold prices. Coll
 
 ## What it does
 
-Card Vault tracks what a card collection is worth. Add a card and its price updates automatically every morning, with no spreadsheets and no manual lookups.
+I built Card Vault for a friend who collects. Somewhere along the way I started collecting too.
+
+My friend used to track prices in a spreadsheet. Now they check the app every day, and use the sold prices to decide what to buy and sell.
+
+It tracks what a card collection is worth. Add a card and its price updates automatically every morning, with no spreadsheets and no manual lookups.
 
 Raw Pokémon cards are priced from live market data. Graded and sports cards are priced from **sold** listings, because an asking price is only what someone hopes to get.
 
@@ -42,7 +47,7 @@ Raw Pokémon cards are priced from live market data. Graded and sports cards are
   wide
 />
 
-## Pricing you can trust
+## Prices based on what people paid
 
 <Callout label="Design decision">
 Value cards at what people actually paid. A daily job keeps a rolling record of real sales, and each card is valued at the median of the last 30 days, not one lucky outlier.
@@ -58,15 +63,15 @@ Every graded card shows the sales behind its price. If a listing isn't really yo
   caption="The price is the median of the sales listed. The damaged outlier is unticked, so it doesn't drag the value down."
 />
 
-## Designed around the data, not just the screens
+## Messy data, so the collector decides
 
-Pricing data is messy, so the product gives the collector the final say:
+Sold listings include damaged copies and the wrong grades, so the collector always gets the final say:
 
 - **Untick a sale** that isn't really your card, and the value recalculates straight away.
 - **Set your own value** for anything unusual, and the daily updates leave it alone.
 - **Bulk import** a collection from a CSV template. Pokémon rows are matched to live prices automatically.
 
-Adding one card is a search, not a form. Type a name and pick the exact printing from real card art. The set, number and year fill themselves in, and the card is linked to live prices.
+Adding a card starts with a search box. Type a name and pick the exact printing from real card art. The set, number and year fill themselves in, and the card is linked to live prices.
 
 <Figure
   src="/work/card-vault/add-card.jpg"
@@ -76,9 +81,9 @@ Adding one card is a search, not a form. Type a name and pick the exact printing
   caption="Pick the exact printing by its art, not by guessing set codes."
 />
 
-## A constraint worth designing for: free
+## Running it for free
 
-Every service it runs on stops at its limit instead of charging. That constraint shaped the product: photos are resized in the browser before upload, the day's pricing work is split across several scheduled jobs, and a settings page shows today's usage against each limit.
+I didn't want a monthly bill for a side project, and I was curious how far free tiers could go. So every service it runs on stops at its limit instead of charging. That constraint shaped the product: photos are resized in the browser before upload, the day's pricing work is split across several scheduled jobs, and a settings page shows today's usage against each limit.
 
 <Figure
   src="/work/card-vault/free-tier.jpg"

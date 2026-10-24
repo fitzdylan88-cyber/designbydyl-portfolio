@@ -18,7 +18,7 @@ export function Footer() {
           by="words"
           className="type-display col-span-12 text-mega leading-[0.9] text-balance"
         >
-          Let&rsquo;s make something good.
+          Got something in mind? Let&rsquo;s talk.
         </SplitReveal>
 
         <div className="col-span-12 mt-14 flex flex-wrap items-center gap-6 md:mt-20">
