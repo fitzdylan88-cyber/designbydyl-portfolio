@@ -11,6 +11,17 @@ import { z } from "zod";
 export const collections = ["work", "projects", "play"] as const;
 export type Collection = (typeof collections)[number];
 
+/** Outcome tags shown on index rows. A fixed list keeps the wording consistent. */
+export const tagOptions = [
+  "UI design",
+  "UX research",
+  "Accessibility",
+  "Industrial design",
+  "Design + build",
+  "AI-assisted",
+  "Measurable impact",
+] as const;
+
 export const frontmatterSchema = z.object({
   title: z.string().min(1),
   summary: z.string().min(1).max(220),
@@ -21,6 +32,8 @@ export const frontmatterSchema = z.object({
   /** Company descriptor used instead of a name, e.g. "Irish fintech, ~300 people". */
   context: z.string().optional(),
   tools: z.array(z.string()).default([]),
+  /** Up to three outcome tags from tagOptions. */
+  tags: z.array(z.enum(tagOptions)).max(3).default([]),
   /** AI techniques used: prompting, skills, agents, MCP, workflows… */
   ai: z.array(z.string()).default([]),
   metrics: z
