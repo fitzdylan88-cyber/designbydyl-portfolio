@@ -6,12 +6,12 @@
 export const site = {
   name: "Dylan Fitzpatrick",
   shortName: "Dyl",
-  role: "Product designer",
+  role: "Senior product designer",
   location: "Dublin, Ireland",
   timeZone: "Europe/Dublin",
   experience: "8+ years",
   intro:
-    "Currently at AIB, working on the website, the app and the design system. In my own time I build things too, with Claude Code doing a lot of the typing.",
+    "Senior product designer at Flutter, working on safer gambling tools for Paddy Power, Betfair and Sky Bet. In my own time I build things too, with Claude Code doing a lot of the typing.",
   /** Shown above the footer headline. Keep null unless you want to say publicly that you're looking. */
   availability: null as string | null,
   email: null as string | null,
@@ -37,7 +37,8 @@ export const experience: { period: string; role: string; company: string }[] = [
  * optical size between stacked and horizontal marks.
  */
 export const employers = [
-  { name: "AIB", logo: "/logos/aib.png", ratio: 149 / 193, scale: 1, period: "2021–" },
+  { name: "Flutter", logo: null, ratio: 4, scale: 1, period: "2023–" },
+  { name: "AIB", logo: "/logos/aib.png", ratio: 149 / 193, scale: 1, period: "2021–2023" },
   { name: "Design+", logo: null, ratio: 4.2, scale: 1, period: "2018–2020" },
   { name: "Bord na Móna", logo: "/logos/bord-na-mona.svg", ratio: 969.7 / 283.5, scale: 0.6, period: "2017–2018" },
 ] as const;
@@ -45,6 +46,7 @@ export const employers = [
 export const capabilities = [
   "Product strategy",
   "Interaction design",
+  "Behavioural design",
   "Design systems",
   "Prototyping in code",
   "AI product design",

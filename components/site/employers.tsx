@@ -46,7 +46,13 @@ export function Employers({ className = "" }: { className?: string }) {
             />
           ) : (
             <span role="img" aria-label={e.name}>
-              <DesignPlus />
+              {e.name === "Design+" ? (
+                <DesignPlus />
+              ) : (
+                <span className="flex items-center text-[1.65rem] leading-none font-medium tracking-tight" style={{ height: HEIGHT * 0.6 }}>
+                  {e.name}
+                </span>
+              )}
             </span>
           )}
         </li>

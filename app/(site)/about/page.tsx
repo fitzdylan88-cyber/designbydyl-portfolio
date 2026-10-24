@@ -28,13 +28,24 @@ const bio: { label: string; body: ReactNode }[] = [
     label: "Now",
     body: (
       <>
-        Product designer at AIB since 2021, working across the public website, the mobile app and the design
-        system. The <Inline href="/work/aib-service-finder">Service Finder</Inline> is one of my projects there.
+        Senior product designer at Flutter since 2023, in the Customer Safety team for Paddy Power, Betfair
+        and Sky Bet. I design the tools that help people stay in control of their gambling: deposit limits,
+        nudges when play patterns change, and a clear view of their own activity. The hard part is making
+        them feel useful rather than like a telling-off, so people actually use them.
       </>
     ),
   },
   {
     label: "Before",
+    body: (
+      <>
+        Product designer at AIB from 2021 to 2023, across the public website, the mobile app and the design
+        system. The <Inline href="/work/aib-service-finder">Service Finder</Inline> was one of my projects there.
+      </>
+    ),
+  },
+  {
+    label: "Where I started",
     body: (
       <>
         I trained in industrial design, so I started on physical things: a pair of{" "}
