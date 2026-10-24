@@ -21,8 +21,8 @@ export default async function IndexPage({ params }: { params: Promise<{ collecti
 
   const entries = getAllEntries()
     .sort((a, b) => b.date.localeCompare(a.date))
-    .map(({ slug, collection, title, summary, date, role, tools, cover, accent, draft }) => ({
-      slug, collection, title, summary, date, role, tools, cover, accent, draft,
+    .map(({ slug, collection, title, summary, date, role, tools, tags, cover, accent, draft }) => ({
+      slug, collection, title, summary, date, role, tools, tags, cover, accent, draft,
     }));
 
   return (

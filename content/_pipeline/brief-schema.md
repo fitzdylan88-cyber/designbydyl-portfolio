@@ -15,6 +15,7 @@ a brief is mostly writing the prose.
 | `team`       |          | Shape of the team, no names                                              |
 | `context`    |          | Anonymised company or product descriptor (work pieces)                   |
 | `tools`      |          | Public tools only                                                        |
+| `tags`       |          | Up to 3 from `tagOptions` in `lib/content.ts`                            |
 | `ai`         |          | AI techniques used                                                       |
 | `metrics`    |          | `[{ value, label }]`, sanitised                                          |
 | `cover`      |          | `/work/<slug>/cover.jpg` in `public/`                                    |

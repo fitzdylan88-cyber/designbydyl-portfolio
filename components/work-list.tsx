@@ -10,7 +10,7 @@ import { href } from "@/lib/paths";
 
 export type ListEntry = Pick<
   Entry,
-  "slug" | "collection" | "title" | "summary" | "date" | "role" | "tools" | "cover" | "accent" | "draft"
+  "slug" | "collection" | "title" | "summary" | "date" | "role" | "tools" | "tags" | "cover" | "accent" | "draft"
 >;
 
 const labels: Record<Entry["collection"], string> = {
@@ -86,6 +86,9 @@ export function WorkList({ entries, startIndex = 0 }: { entries: ListEntry[]; st
                     {entry.title}
                   </span>
                   <span className="mt-2 block max-w-[60ch] text-small text-ink-2 md:hidden">{entry.summary}</span>
+                  {entry.tags.length > 0 && (
+                    <span className="meta mt-3 block text-ink-2">{entry.tags.join(" · ")}</span>
+                  )}
                 </span>
                 <span className="meta mt-3 md:mt-0">
                   {labels[entry.collection]}
