@@ -4,6 +4,7 @@ import { Callout } from "@/components/mdx/callout";
 import { Figure } from "@/components/mdx/figure";
 import { Metrics } from "@/components/mdx/metrics";
 import { PromptBlock } from "@/components/mdx/prompt-block";
+import { Tldr } from "@/components/mdx/tldr";
 
 const components: MDXComponents = {
   h2: (props) => (
@@ -29,6 +30,7 @@ const components: MDXComponents = {
   Figure,
   Metrics,
   PromptBlock,
+  Tldr,
 };
 
 export function useMDXComponents(): MDXComponents {

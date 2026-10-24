@@ -38,7 +38,34 @@ export const frontmatterSchema = z.object({
 });
 
 export type Frontmatter = z.infer<typeof frontmatterSchema>;
-export type Entry = Frontmatter & { slug: string; collection: Collection };
+export type Reading = {
+  /** True when the MDX has a hand-written <Tldr> short version. */
+  hasTldr: boolean;
+  fullMinutes: number;
+  tldrSeconds: number;
+};
+export type Entry = Frontmatter & Reading & { slug: string; collection: Collection };
+
+const WORDS_PER_MINUTE = 230;
+/** Seconds per image, the usual allowance for looking at a figure. */
+const SECONDS_PER_IMAGE = 12;
+
+/** Reading time in seconds: prose words plus a look at each image. JSX tags and props don't count. */
+function readingSeconds(mdx: string) {
+  const prose = mdx.replace(/<[A-Z][\s\S]*?>/g, " ").replace(/<\/[A-Z]\w*>/g, " ");
+  const words = prose.match(/[\p{L}\p{N}][\p{L}\p{N}'’-]*/gu)?.length ?? 0;
+  const images = mdx.match(/<(Figure|BeforeAfter)\b/g)?.length ?? 0;
+  return (words / WORDS_PER_MINUTE) * 60 + images * SECONDS_PER_IMAGE;
+}
+
+function reading(mdx: string): Reading {
+  const tldr = mdx.match(/<Tldr>([\s\S]*?)<\/Tldr>/);
+  return {
+    hasTldr: Boolean(tldr),
+    fullMinutes: Math.max(1, Math.round(readingSeconds(tldr ? mdx.replace(tldr[0], "") : mdx) / 60)),
+    tldrSeconds: tldr ? Math.max(20, Math.round(readingSeconds(tldr[1]) / 10) * 10) : 0,
+  };
+}
 
 const root = path.join(process.cwd(), "content");
 /** Drafts show in dev and on Vercel preview deploys, never on the live site. */
@@ -53,7 +80,7 @@ function readCollection(collection: Collection): Entry[] {
     .filter((file) => file.endsWith(".mdx") && !file.startsWith("_"))
     .map((file) => {
       const slug = file.replace(/\.mdx$/, "");
-      const { data } = matter(fs.readFileSync(path.join(dir, file), "utf8"));
+      const { data, content } = matter(fs.readFileSync(path.join(dir, file), "utf8"));
       const parsed = frontmatterSchema.safeParse(data);
       if (!parsed.success) {
         // Fail the build loudly rather than ship a half-filled case study.
@@ -61,7 +88,7 @@ function readCollection(collection: Collection): Entry[] {
           `Invalid frontmatter in content/${collection}/${file}:\n${z.prettifyError(parsed.error)}`,
         );
       }
-      return { ...parsed.data, slug, collection };
+      return { ...parsed.data, ...reading(content), slug, collection };
     })
     .filter((entry) => showDrafts || !entry.draft)
     .sort(

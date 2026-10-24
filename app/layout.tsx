@@ -4,6 +4,7 @@ import { site } from "@/lib/site";
 import { SmoothScroll } from "@/components/motion/smooth-scroll";
 import { Cursor } from "@/components/motion/cursor";
 import { MotionProvider } from "@/components/motion/motion-provider";
+import { readingModeScript } from "@/lib/reading-mode";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -21,8 +22,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={fontVariables}>
+    // suppressHydrationWarning: the reading-mode script sets data-reading before hydration.
+    <html lang="en" className={fontVariables} suppressHydrationWarning>
       <body className="min-h-dvh">
+        <script dangerouslySetInnerHTML={{ __html: readingModeScript }} />
         <MotionProvider>
           <SmoothScroll>{children}</SmoothScroll>
           <Cursor />

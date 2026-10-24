@@ -7,6 +7,7 @@ import { Cover } from "@/components/cover";
 import { SplitReveal } from "@/components/motion/split-reveal";
 import { href } from "@/lib/paths";
 import { Arrow } from "@/components/icons";
+import { ReadingToggle } from "@/components/reading-mode";
 
 type Params = { collection: string; slug: string };
 
@@ -78,6 +79,11 @@ export default async function EntryPage({ params }: { params: Promise<Params> })
         <p className="col-span-12 mt-8 max-w-[40ch] text-lede leading-snug text-ink-2 md:col-span-8 lg:col-span-6">
           {entry.summary}
         </p>
+        {entry.hasTldr && (
+          <div className="col-span-12 mt-10">
+            <ReadingToggle fullMinutes={entry.fullMinutes} tldrSeconds={entry.tldrSeconds} />
+          </div>
+        )}
       </header>
 
       <div className="container-grid mb-20">
@@ -108,7 +114,11 @@ export default async function EntryPage({ params }: { params: Promise<Params> })
           )}
         </dl>
 
-        <div className="col-span-12 mt-12 max-w-[68ch] lg:col-span-7 lg:col-start-5 lg:mt-0">
+        <div
+          id="story"
+          data-story={entry.hasTldr || undefined}
+          className="col-span-12 mt-12 max-w-[68ch] lg:col-span-7 lg:col-start-5 lg:mt-0"
+        >
           <Body />
         </div>
       </div>

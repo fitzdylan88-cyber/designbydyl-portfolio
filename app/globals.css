@@ -185,6 +185,12 @@
   letter-spacing: var(--display-tracking);
 }
 
+/* ── Reading mode (components/reading-mode.tsx) ───────────────── */
+html:not([data-reading="quick"]) [data-tldr],
+html[data-reading="quick"] [data-story] > :not([data-tldr]) {
+  display: none;
+}
+
 /* ── Custom cursor ─────────────────────────────────────────────── */
 html.has-cursor,
 html.has-cursor * {

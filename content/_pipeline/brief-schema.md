@@ -37,3 +37,21 @@ a brief is mostly writing the prose.
 `<Callout label="…">`, `<Figure src alt caption wide />`,
 `<Metrics items={[{ value, label }]} />`, `<PromptBlock tool prompt>output</PromptBlock>`,
 `<BeforeAfter before after alt labels />`
+
+## Quick read (`<Tldr>`)
+
+Longer case studies (roughly 400+ words) open with a hand-written quick read,
+for reviewers working through a pile of portfolios. Put it straight after the
+frontmatter: three bold-led bullets (problem / what I did / result) and one
+image or `<Metrics>` row. Its presence adds the "Full story / Quick read"
+toggle to the page, with reading times worked out from the word count.
+
+```mdx
+<Tldr>
+- **The problem:** …
+- **What I did:** …
+- **The result:** …
+
+<Figure src="…" width={…} height={…} alt="…" wide />
+</Tldr>
+```
