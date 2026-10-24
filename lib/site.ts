@@ -70,10 +70,10 @@ export const principles = [
   },
 ] as const;
 
-/** TODO(Dylan): rewrite in your own words. Sits low on the home page, low-key on purpose. */
+/** TODO(Dylan): rewrite in your own words. Second row of "How I work" on the home page. */
 export const ai = [
   {
-    title: "Skills",
+    title: "AI skills",
     items: [
       "Prototyping in real code with Claude Code",
       "Designing AI features: prompts, evals and failure states",
@@ -81,7 +81,7 @@ export const ai = [
     ],
   },
   {
-    title: "Understanding",
+    title: "How I see AI",
     items: [
       "Models have a grain. Design to their strengths, guard their weak spots.",
       "Context is the product. Most quality comes from what the model is given.",
@@ -89,7 +89,7 @@ export const ai = [
     ],
   },
   {
-    title: "Interests",
+    title: "What I’m exploring",
     items: [
       "How people supervise agents and come to trust them",
       "Interfaces beyond the chat box",

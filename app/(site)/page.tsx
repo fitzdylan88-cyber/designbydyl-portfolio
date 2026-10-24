@@ -105,24 +105,16 @@ export default function Home() {
         </SplitReveal>
         <ul className="col-span-12 grid gap-12 md:grid-cols-3 md:gap-[var(--gutter)]">
           {principles.map((p) => (
-            <li key={p.title} className="border-t border-ink pt-5">
+            <li
+              key={p.title}
+              className="border-t border-ink pt-5 transition-colors duration-[var(--dur-2)] hover:border-accent-deep"
+            >
               <h3 className="text-h3 font-medium leading-tight tracking-tight">{p.title}</h3>
               <p className="mt-4 max-w-[38ch] text-ink-2">{p.body}</p>
             </li>
           ))}
         </ul>
-        <Link
-          href="/about"
-          className="group col-span-12 mt-14 inline-flex w-fit items-center gap-2 text-body font-medium text-ink"
-        >
-          More about me
-          <Arrow className="text-accent transition-transform duration-[var(--dur-2)] group-hover:translate-x-1" />
-        </Link>
-      </section>
-
-      <section className="container-grid pt-32 md:pt-44">
-        <h2 className="type-display col-span-12 mb-16 text-h2 leading-none">Working with AI</h2>
-        <ul className="col-span-12 grid gap-12 md:grid-cols-3 md:gap-[var(--gutter)]">
+        <ul className="col-span-12 mt-16 grid gap-12 md:grid-cols-3 md:gap-[var(--gutter)]">
           {ai.map((group) => (
             <li
               key={group.title}
@@ -137,6 +129,13 @@ export default function Home() {
             </li>
           ))}
         </ul>
+        <Link
+          href="/about"
+          className="group col-span-12 mt-14 inline-flex w-fit items-center gap-2 text-body font-medium text-ink"
+        >
+          More about me
+          <Arrow className="text-accent transition-transform duration-[var(--dur-2)] group-hover:translate-x-1" />
+        </Link>
       </section>
     </>
   );
