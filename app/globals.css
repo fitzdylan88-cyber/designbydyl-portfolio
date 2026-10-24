@@ -191,6 +191,17 @@ html[data-reading="quick"] [data-story] > :not([data-tldr]) {
   display: none;
 }
 
+/* Quick reads are dense: tighter rhythm than the full story. */
+[data-tldr] > :is(figure, aside, dl, [data-figure-row]) {
+  margin-block: 2.5rem;
+}
+[data-tldr] > :first-child {
+  margin-top: 0;
+}
+[data-figure-row] > figure {
+  margin: 0;
+}
+
 /* ── Custom cursor ─────────────────────────────────────────────── */
 html.has-cursor,
 html.has-cursor * {

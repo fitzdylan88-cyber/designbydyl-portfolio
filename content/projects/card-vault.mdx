@@ -11,17 +11,19 @@ order: 1
 ---
 
 <Tldr>
-- **What it is:** A tracker for Pokémon and sports card collections that reprices itself every morning, with no spreadsheets or manual lookups.
-- **The design idea:** Value cards at what people actually paid, the median of the last 30 days of real sales. Collectors keep the final say: untick a sale that isn't their card, or set their own value.
-- **The constraint:** It runs entirely on free tiers, and a settings page shows today's usage against each limit.
+<Metrics items={[{ value: "Daily", label: "automatic repricing, no manual lookups" }, { value: "30 days", label: "of real sold prices behind each value" }, { value: "Free", label: "to run, on free tiers only" }]} />
 
-<Figure
-  src="/work/card-vault/mobile.jpg"
-  width={2400}
-  height={1500}
-  alt="Card Vault on a phone: the dashboard with collection value, the collection grid, and a graded card's detail page"
-  wide
-/>
+- **What it is:** A tracker for Pokémon and sports card collections that reprices itself every morning.
+- **What I did:** Designed and built it end to end, with Claude Code, Next.js, Postgres and Vercel.
+
+<Callout label="Key decision">
+Value cards at what people actually paid, the median of recent sold prices. Collectors keep the final say: untick a sale that isn't their card, or set their own value.
+</Callout>
+
+<FigureRow>
+<Figure src="/work/card-vault/mobile.jpg" width={2400} height={1500} alt="Card Vault on a phone: the dashboard with collection value, the collection grid, and a graded card's detail page" caption="Dashboard, collection and card detail." />
+<Figure src="/work/card-vault/free-tier.jpg" width={1800} height={900} alt="The free-tier usage panel showing sold-sale rows, eBay searches and photo storage against their daily limits" caption="Today's usage against each free tier." />
+</FigureRow>
 </Tldr>
 
 ## What it does

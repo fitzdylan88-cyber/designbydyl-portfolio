@@ -11,16 +11,19 @@ order: 3
 ---
 
 <Tldr>
-- **The brief:** Replace the office spreadsheet sweepstake with an app, and ship it before the 2026 World Cup kicked off.
-- **What I built:** A mobile-first PWA with leagues you join by PIN, a seeded draw so nobody ends up with only outsiders, live points and a leaderboard.
-- **The design idea:** Show the maths. Every result carries its points as small tags, so nobody has to trust a number they can't check.
+<Metrics items={[{ value: "48", label: "teams drawn fairly from ranked pots" }, { value: "16 or 24", label: "player leagues, with fair pots either way" }, { value: "On time", label: "shipped before the 2026 World Cup kicked off" }]} />
 
-<Figure
-  src="/work/sweepstake/leaderboard.jpg"
-  width={1800}
-  height={1500}
-  alt="The leaderboard with each player's two teams and points, and the Pick Your Winner board grouped by team"
-/>
+- **The brief:** Replace the office spreadsheet sweepstake with an app people actually open between matches.
+- **What I built:** A mobile-first PWA with leagues you join by PIN, a seeded draw, live points and a leaderboard.
+
+<Callout label="Key decision">
+Show the maths. Every result carries its points as small tags, such as "+20 win" and "+2 clean sheet", so nobody has to trust a number they can't check.
+</Callout>
+
+<FigureRow>
+<Figure src="/work/sweepstake/leaderboard.jpg" width={1800} height={1500} alt="The leaderboard with each player's two teams and points, and the Pick Your Winner board grouped by team" caption="A leaderboard that explains itself." />
+<Figure src="/work/sweepstake/rules.jpg" width={1800} height={1500} alt="The How it works rules sheet and the group stage tables" caption="Rules in plain language on first open." />
+</FigureRow>
 </Tldr>
 
 ## The brief I gave myself

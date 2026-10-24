@@ -6,7 +6,7 @@ import { ReadFullStory } from "@/components/reading-mode";
  */
 export function Tldr({ children }: { children: React.ReactNode }) {
   return (
-    <section data-tldr aria-label="Quick read" className="[&>*:first-child]:mt-0">
+    <section data-tldr aria-label="Quick read">
       {children}
       <ReadFullStory />
     </section>

@@ -2,6 +2,7 @@ import type { MDXComponents } from "mdx/types";
 import { BeforeAfter } from "@/components/mdx/before-after";
 import { Callout } from "@/components/mdx/callout";
 import { Figure } from "@/components/mdx/figure";
+import { FigureRow } from "@/components/mdx/figure-row";
 import { Metrics } from "@/components/mdx/metrics";
 import { PromptBlock } from "@/components/mdx/prompt-block";
 import { Tldr } from "@/components/mdx/tldr";
@@ -28,6 +29,7 @@ const components: MDXComponents = {
   BeforeAfter,
   Callout,
   Figure,
+  FigureRow,
   Metrics,
   PromptBlock,
   Tldr,

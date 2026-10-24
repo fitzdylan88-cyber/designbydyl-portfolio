@@ -42,16 +42,23 @@ a brief is mostly writing the prose.
 
 Longer case studies (roughly 400+ words) open with a hand-written quick read,
 for reviewers working through a pile of portfolios. Put it straight after the
-frontmatter: three bold-led bullets (problem / what I did / result) and one
-image or `<Metrics>` row. Its presence adds the "Full story / Quick read"
-toggle to the page, with reading times worked out from the word count.
+frontmatter. Keep it visual, not just words: a `<Metrics>` row, two or three
+bold-led bullets, the one key decision as a `<Callout>`, and two smaller
+images in a `<FigureRow>`. Its presence adds the "Full story / Quick read"
+toggle to the page, with reading times worked out from words and images.
 
 ```mdx
 <Tldr>
+<Metrics items={[{ value: "…", label: "…" }]} />
+
 - **The problem:** …
 - **What I did:** …
-- **The result:** …
 
-<Figure src="…" width={…} height={…} alt="…" wide />
+<Callout label="Key decision">…</Callout>
+
+<FigureRow>
+<Figure src="…" width={…} height={…} alt="…" caption="…" />
+<Figure src="…" width={…} height={…} alt="…" caption="…" />
+</FigureRow>
 </Tldr>
 ```
