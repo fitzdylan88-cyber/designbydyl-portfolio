@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ViewTransition } from "react";
 import { Employers } from "@/components/site/employers";
 import { getAllEntries, type Entry } from "@/lib/content";
-import { principles, site } from "@/lib/site";
+import { ai, principles, site } from "@/lib/site";
 import { Cover } from "@/components/cover";
 import { DotField } from "@/components/motion/dot-field";
 import { SplitReveal } from "@/components/motion/split-reveal";
@@ -118,6 +118,22 @@ export default function Home() {
           More about me
           <Arrow className="text-accent transition-transform duration-[var(--dur-2)] group-hover:translate-x-1" />
         </Link>
+      </section>
+
+      <section className="container-grid gap-y-10 pt-32">
+        <h2 className="col-span-12 text-h3 font-medium leading-tight tracking-tight lg:col-span-3">Working with AI</h2>
+        <div className="col-span-12 grid gap-10 md:grid-cols-3 md:gap-[var(--gutter)] lg:col-span-9">
+          {ai.map((group) => (
+            <div key={group.title} className="border-t border-rule pt-5">
+              <h3 className="meta">{group.title}</h3>
+              <ul className="mt-4 space-y-2 text-small text-ink-2">
+                {group.items.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
       </section>
     </>
   );

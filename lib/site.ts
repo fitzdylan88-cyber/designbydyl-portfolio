@@ -70,6 +70,34 @@ export const principles = [
   },
 ] as const;
 
+/** TODO(Dylan): rewrite in your own words. Sits low on the home page, low-key on purpose. */
+export const ai = [
+  {
+    title: "Skills",
+    items: [
+      "Prototyping in real code with Claude Code",
+      "Designing AI features: prompts, evals and failure states",
+      "Building agent workflows and reusable skills",
+    ],
+  },
+  {
+    title: "Understanding",
+    items: [
+      "Models have a grain. Design to their strengths, guard their weak spots.",
+      "Context is the product. Most quality comes from what the model is given.",
+      "Evals over vibes. If you can't measure it, you can't ship it with confidence.",
+    ],
+  },
+  {
+    title: "Interests",
+    items: [
+      "How people supervise agents and come to trust them",
+      "Interfaces beyond the chat box",
+      "AI in high-trust products, where a wrong answer has a real cost",
+    ],
+  },
+] as const;
+
 export const nav = [
   { label: "Work", href: "/work" },
   { label: "About", href: "/about" },
