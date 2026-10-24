@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
+import Link from "next/link";
 import { capabilities, contact, experience, site, toolkit } from "@/lib/site";
 import { SplitReveal } from "@/components/motion/split-reveal";
 import { Magnetic } from "@/components/motion/magnetic";
@@ -9,6 +11,60 @@ export const metadata: Metadata = {
   title: "About",
   description: site.intro,
 };
+
+function Inline({ href, children }: { href: string; children: ReactNode }) {
+  return (
+    <Link
+      href={href}
+      className="text-ink underline decoration-rule underline-offset-4 transition-colors duration-[var(--dur-2)] hover:decoration-accent"
+    >
+      {children}
+    </Link>
+  );
+}
+
+const bio: { label: string; body: ReactNode }[] = [
+  {
+    label: "Now",
+    body: (
+      <>
+        Product designer at AIB since 2021, working across the public website, the mobile app and the design
+        system. The <Inline href="/work/aib-service-finder">Service Finder</Inline> is one of my projects there.
+      </>
+    ),
+  },
+  {
+    label: "Before",
+    body: (
+      <>
+        I trained in industrial design, so I started on physical things: a pair of{" "}
+        <Inline href="/work/dev-x">recording binoculars</Inline> and{" "}
+        <Inline href="/work/mylo">Mylo</Inline>, a classroom projector that made the James Dyson Award top three
+        in Ireland. Then I moved to screens.
+      </>
+    ),
+  },
+  {
+    label: "On the side",
+    body: (
+      <>
+        Product design is moving closer to the code, and I&rsquo;d rather be early than catch up. So I build my
+        own ideas with Claude Code, like a <Inline href="/projects/sweepstake">World Cup sweepstake</Inline> my
+        friends and colleagues played all tournament, and a <Inline href="/projects/card-vault">card price
+        tracker</Inline> I built for a friend.
+      </>
+    ),
+  },
+  {
+    label: "Off the clock",
+    body: (
+      <>
+        Liverpool supporter, which is partly why football keeps turning up in my projects. I love all things
+        tech, and I&rsquo;m usually reading up on whatever&rsquo;s new.
+      </>
+    ),
+  },
+];
 
 export default function AboutPage() {
   return (
@@ -22,23 +78,14 @@ export default function AboutPage() {
         I design products, and these days I build a lot of them too.
       </SplitReveal>
 
-      <div className="col-span-12 mt-20 space-y-6 text-lede leading-snug text-ink-2 md:col-span-8 lg:col-span-6 lg:col-start-7">
-        <p>
-          I&rsquo;m a product designer in Dublin. I trained in industrial design, so I started out on physical
-          things, like a pair of binoculars and a classroom projector, before moving to screens. Since 2021
-          I&rsquo;ve been at AIB, working across the public website, the mobile app and the design system.
-        </p>
-        <p>
-          I can see product design moving closer to the code, and I&rsquo;d rather be early than catch up. So
-          outside work I started building my own ideas with Claude Code. Some of them stuck: a World Cup
-          sweepstake my friends and colleagues used for the whole tournament, and a card price tracker I
-          built for a friend. You&rsquo;ll find them here next to the case studies, with a few older experiments.
-        </p>
-        <p>
-          Outside design, I&rsquo;m a Liverpool supporter, which is partly why football keeps turning up in my
-          projects. I love all things tech, and I&rsquo;m usually reading up on whatever&rsquo;s new.
-        </p>
-      </div>
+      <dl className="col-span-12 mt-24 grid grid-cols-subgrid border-b border-rule">
+        {bio.map((row) => (
+          <div key={row.label} className="col-span-12 grid grid-cols-subgrid gap-y-3 border-t border-rule py-8">
+            <dt className="meta col-span-12 pt-1.5 lg:col-span-3">{row.label}</dt>
+            <dd className="col-span-12 max-w-[46ch] text-lede leading-snug text-ink-2 lg:col-span-9">{row.body}</dd>
+          </div>
+        ))}
+      </dl>
 
       <section className="col-span-12 mt-32 grid grid-cols-subgrid gap-y-12">
         <h2 className="col-span-12 text-h3 font-medium leading-tight tracking-tight lg:col-span-3">Capabilities</h2>
