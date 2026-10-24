@@ -120,23 +120,23 @@ export default function Home() {
         </Link>
       </section>
 
-      <section className="container-grid gap-y-10 pt-32">
-        <h2 className="col-span-12 text-h3 font-medium leading-tight tracking-tight lg:col-span-3">Working with AI</h2>
-        <div className="col-span-12 grid gap-10 md:grid-cols-3 md:gap-[var(--gutter)] lg:col-span-9">
+      <section className="container-grid pt-32 md:pt-44">
+        <h2 className="type-display col-span-12 mb-16 text-h2 leading-none">Working with AI</h2>
+        <ul className="col-span-12 grid gap-12 md:grid-cols-3 md:gap-[var(--gutter)]">
           {ai.map((group) => (
-            <div
+            <li
               key={group.title}
-              className="border-t border-rule pt-5 transition-colors duration-[var(--dur-2)] hover:border-accent-deep"
+              className="border-t border-ink pt-5 transition-colors duration-[var(--dur-2)] hover:border-accent-deep"
             >
-              <h3 className="meta">{group.title}</h3>
-              <ul className="mt-4 space-y-2 text-small text-ink-2">
+              <h3 className="text-h3 font-medium leading-tight tracking-tight">{group.title}</h3>
+              <ul className="mt-4 max-w-[38ch] space-y-3 text-ink-2">
                 {group.items.map((item) => (
                   <li key={item}>{item}</li>
                 ))}
               </ul>
-            </div>
+            </li>
           ))}
-        </div>
+        </ul>
       </section>
     </>
   );
