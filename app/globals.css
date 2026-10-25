@@ -148,6 +148,24 @@
   margin-inline: auto;
 }
 
+/* Swimlane (components/project-rail.tsx): full-bleed track whose first card
+   sits on the container-grid's left edge. */
+@utility rail-inset {
+  --rail-inset: max(var(--margin), calc((100% - var(--max)) / 2 + var(--margin)));
+  padding-inline: var(--rail-inset);
+  scroll-padding-inline: var(--rail-inset);
+}
+
+@utility rail-card {
+  width: 82%;
+  @variant md {
+    width: calc((100% - var(--gutter)) / 2);
+  }
+  @variant lg {
+    width: calc((100% - 2 * var(--gutter)) / 3);
+  }
+}
+
 /* Small UI label: dt terms, captions, secondary links. Sans, sentence case. */
 @utility label {
   font-family: var(--font-sans);

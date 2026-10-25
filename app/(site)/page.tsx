@@ -8,17 +8,13 @@ import { DotField } from "@/components/motion/dot-field";
 import { SplitReveal } from "@/components/motion/split-reveal";
 import { href } from "@/lib/paths";
 import { Arrow } from "@/components/icons";
+import { ProjectRail } from "@/components/project-rail";
 
-function FeaturedCard({ entry, index, large }: { entry: Entry; index: number; large?: boolean }) {
+function FeaturedCard({ entry, index }: { entry: Entry; index: number }) {
   return (
     <Link href={href(entry)} transitionTypes={["nav-forward"]} data-cursor="View" className="group block">
       <ViewTransition name={`cover-${entry.collection}-${entry.slug}`} share="morph">
-        <Cover
-          entry={entry}
-          index={index}
-          size={large ? "lg" : "md"}
-          className={`w-full rounded-sm ${large ? "aspect-[4/3] lg:aspect-[5/4]" : "aspect-[4/3]"}`}
-        />
+        <Cover entry={entry} index={index} className="aspect-[4/3] w-full rounded-sm" />
       </ViewTransition>
       <div className="mt-4 flex items-baseline justify-between gap-6">
         <h3 className="type-display text-h3 leading-tight">{entry.title}</h3>
@@ -34,7 +30,7 @@ export default function Home() {
   const featured = [
     ...entries.filter((e) => e.featured),
     ...entries.filter((e) => !e.featured),
-  ].slice(0, 3);
+  ];
 
   return (
     <>
@@ -62,34 +58,34 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="work" className="container-grid scroll-mt-24 pt-24 md:pt-32">
-        <div className="col-span-12 mb-12 flex items-end justify-between border-b border-rule pb-6">
-          <SplitReveal as="h2" by="words" className="type-display text-h2 leading-none">
-            Selected work
-          </SplitReveal>
-          <Link href="/work" className="group label inline-flex items-center gap-1.5 hover:text-ink">
-            All work <span className="meta">{entries.length}</span>
-            <Arrow className="transition-transform duration-[var(--dur-2)] group-hover:translate-x-0.5" />
-          </Link>
+      <section id="work" className="scroll-mt-24 pt-24 md:pt-32">
+        <div className="container-grid">
+          <div className="col-span-12 mb-12 flex items-end justify-between border-b border-rule pb-6">
+            <SplitReveal as="h2" by="words" className="type-display text-h2 leading-none">
+              Selected work
+            </SplitReveal>
+            <Link href="/work" className="group label inline-flex items-center gap-1.5 hover:text-ink">
+              All work <span className="meta">{entries.length}</span>
+              <Arrow className="transition-transform duration-[var(--dur-2)] group-hover:translate-x-0.5" />
+            </Link>
+          </div>
         </div>
 
-        {featured[0] && (
-          <div className="col-span-12 lg:col-span-7">
-            <FeaturedCard entry={featured[0]} index={0} large />
-          </div>
-        )}
-        <div className="col-span-12 mt-16 grid gap-16 lg:col-span-5 lg:mt-0">
-          {featured.slice(1).map((entry, i) => (
-            <FeaturedCard key={entry.slug} entry={entry} index={i + 1} />
+        <ProjectRail label="Selected work">
+          {featured.map((entry, i) => (
+            <FeaturedCard key={`${entry.collection}/${entry.slug}`} entry={entry} index={i} />
           ))}
+        </ProjectRail>
+
+        <div className="container-grid">
+          <Link
+            href="/work"
+            className="group col-span-12 -mt-11 inline-flex h-11 w-fit items-center gap-2 text-body font-medium text-ink"
+          >
+            See all {entries.length} projects
+            <Arrow className="text-accent transition-transform duration-[var(--dur-2)] group-hover:translate-x-1" />
+          </Link>
         </div>
-        <Link
-          href="/work"
-          className="group col-span-12 mt-16 inline-flex w-fit items-center gap-2 text-body font-medium text-ink"
-        >
-          See all {entries.length} projects
-          <Arrow className="text-accent transition-transform duration-[var(--dur-2)] group-hover:translate-x-1" />
-        </Link>
       </section>
 
       <section className="container-grid pt-32">
