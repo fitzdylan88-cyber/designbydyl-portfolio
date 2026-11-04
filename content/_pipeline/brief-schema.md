@@ -12,7 +12,7 @@ a brief is mostly writing the prose.
 | `date`       | yes      | `YYYY-MM`                                                                |
 | `role`       | yes      | What you owned                                                           |
 | `duration`   |          | "6 weeks", "3 weekends"                                                  |
-| `team`       |          | Shape of the team, no names                                              |
+| `team`       |          | List of roles, yours first: `My role (Product designer)`, `Product manager`, `UX researcher`. No names |
 | `context`    |          | Anonymised company or product descriptor (work pieces)                   |
 | `tools`      |          | Public tools only                                                        |
 | `tags`       |          | Up to 3 from `tagOptions` in `lib/content.ts`                            |

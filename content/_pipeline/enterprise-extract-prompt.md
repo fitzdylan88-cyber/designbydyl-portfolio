@@ -72,7 +72,7 @@ summary: "<max 220 chars: problem → what I did → result>"
 date: "<YYYY-MM it shipped or peaked>"
 role: "<my role>"
 duration: "<e.g. 6 weeks>"
-team: "<e.g. Me + 2 engineers + PM, no names>"
+team: ["My role (<your title>)", "Product manager", "<one role per item, no names>"]
 context: "<anonymised company/product descriptor>"
 tools: [<public tools>]
 ai: [<AI techniques, e.g. "Claude Projects", "custom skills", "MCP connectors", "agentic workflow", "prompt rubric", "eval set">]

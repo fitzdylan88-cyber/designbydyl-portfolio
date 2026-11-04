@@ -47,7 +47,7 @@ export default async function EntryPage({ params }: { params: Promise<Params> })
     entry.tools.length > 0 && { label: "Tools", value: entry.tools.join(", ") },
     entry.ai.length > 0 && { label: "AI", value: entry.ai.join(", ") },
     entry.anonymised && { label: "Note", value: "Details anonymised" },
-  ].filter(Boolean) as { label: string; value: string }[];
+  ].filter(Boolean) as { label: string; value: string | string[] }[];
 
   return (
     <article>
@@ -99,7 +99,17 @@ export default async function EntryPage({ params }: { params: Promise<Params> })
           {facts.map((fact) => (
             <div key={fact.label}>
               <dt className="label mb-1">{fact.label}</dt>
-              <dd className="text-small text-ink">{fact.value}</dd>
+              <dd className="text-small text-ink">
+                {Array.isArray(fact.value) ? (
+                  <ul className="space-y-0.5">
+                    {fact.value.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                ) : (
+                  fact.value
+                )}
+              </dd>
             </div>
           ))}
           {entry.liveUrl && (

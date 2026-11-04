@@ -28,7 +28,8 @@ export const frontmatterSchema = z.object({
   date: z.string().regex(/^\d{4}-\d{2}$/, "date must be YYYY-MM"),
   role: z.string().min(1),
   duration: z.string().optional(),
-  team: z.string().optional(),
+  /** One role per item, yours first, e.g. ["My role (Product designer)", "Product manager"]. No names. */
+  team: z.union([z.string(), z.array(z.string())]).optional(),
   /** Company descriptor used instead of a name, e.g. "Irish fintech, ~300 people". */
   context: z.string().optional(),
   tools: z.array(z.string()).default([]),
