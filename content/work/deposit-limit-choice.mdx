@@ -1,0 +1,231 @@
+---
+title: "Designing a fair limit choice across four brands"
+summary: "A regulation made gross deposit limits mandatory alongside net. I designed one choice pattern for four brands, tested it with 300+ people, then reworked it after launch while keeping both options equal."
+date: "2026-09"
+role: "Senior product designer, design lead for the limit journeys"
+duration: "~8 months, from early concepts to post-launch rework"
+team: "Me, a PM, engineers and compliance partners, a colleague who ran some of the early tests, and a designer from the onboarding team who owned registration"
+context: "A large regulated online gambling operator running four consumer brands on a shared platform"
+tools: ["Figma", "Figma Slides", "UserTesting", "Claude"]
+tags: ["UX research", "UI design", "AI-assisted"]
+ai: ["Claude Projects", "Figma MCP connector", "Analysis of raw test exports", "Content audit prompt"]
+metrics:
+  - { value: "1", label: "limit choice pattern across 4 brands, 2 platforms and 4 journeys" }
+  - { value: "300+", label: "participants across 13 usability tests" }
+  - { value: "~3.5x", label: "net limit uptake in testing with a factual tag" }
+  - { value: "~25%", label: "early drop in gross share after the post-launch rework" }
+anonymised: true
+draft: false
+---
+
+{/* TODO: team counts are unknown (roles only). Work Claude's spec says "three brands plus a brand-neutral theme" while the brief says four brands. Confirm which before publishing, since "four brands" is in the title */}
+
+<Tldr>
+<Metrics items={[{ value: "4", label: "brands, one pattern" }, { value: "300+", label: "people across 13 tests" }, { value: "~3.5x", label: "net uptake with a factual tag" }]} />
+
+- **The problem:** A new rule made gross deposit limits mandatory next to net, with equal prominence, in every place a customer can set a limit.
+- **What I found:** Most people picked gross because the regulation gave it the familiar name, not because they understood the difference.
+- **What I did:** One side-by-side choice pattern on the shared design system, tested at volume, shipped by the deadline, then reworked after launch to make switching easier both ways.
+
+<Callout label="Key decision">
+Make the choice informed, not steered. Both limits sit side by side at the same size and weight, one tap away, in every journey.
+</Callout>
+
+<FigureRow phone>
+<Figure src="/work/deposit-limit-choice/set-a-limit.png" width={823} height={1677} alt="Set a deposit control form with net and gross side by side, net tagged Most popular" caption="Set a limit, both types side by side." />
+<Figure src="/work/deposit-limit-choice/which-limit-sheet.png" width={823} height={1677} alt="Which limit is right for you sheet comparing net and gross with a worked £100 example" caption="The optional explainer." />
+<Figure src="/work/deposit-limit-choice/limit-dashboard.png" width={823} height={1677} alt="Limit dashboard showing a net limit set by you and a stricter limit set by us" caption="The dashboard, with a limit set by us." />
+<Figure src="/work/deposit-limit-choice/current-limit-form.png" width={823} height={1677} alt="Set a deposit control form with the current deposit limit of £300 per month shown at the top" caption="After the rework: the form, with the current limit." />
+</FigureRow>
+</Tldr>
+
+## The problem
+
+There are two ways to cap how much a customer can deposit. A **gross** limit counts every deposit. A **net** limit counts deposits minus withdrawals, so money a customer withdraws frees up room under the limit.
+
+Gross is the firmer of the two. Net is more flexible for people who regularly withdraw winnings. It also lets the same limit support more total deposits, so the split between the two has a commercial impact.
+
+Until this project, every customer limit was net. Then the regulator made gross mandatory. Wherever net was offered, gross had to be offered with equal prominence, and the name "deposit limit" had to mean gross.
+
+That one rule touched every place a customer can set a limit: registration, safer gambling tools, the deposit page, help pages, emails and marketing. Four brands, mobile and desktop, one fixed deadline.
+
+The design problem was to add a new decision, gross or net, to every journey in a way customers could understand and that treated both options fairly.
+
+{/* VISUAL: gross vs net explainer graphic. £100 weekly limit, deposit £100, withdraw £40. Net: £60 used, £40 left. Gross ("deposit limit"): £100 used, £0 left. Nothing to blur */}
+
+## Constraints
+
+- **A regulatory deadline.** Originally end of June, later extended to end of September.
+- **Equal prominence.** Neither limit type could be favoured, visually or structurally.
+- **Naming I didn't choose.** The regulation gave gross the familiar name ("deposit limit") and net the unfamiliar one.
+- **Four brand themes on one design system**, each on mobile and desktop.
+- **Edge cases that had to keep working:** pending increases with a 24-hour cooling-off period, limits set by us that override a customer's own, and switching between limit types.
+- **Commercial sensitivity.** The gross/net split affected revenue, but the forecast for it could only be tested after launch.
+
+{/* TODO: why the deadline moved, and whether it changed scope */}
+
+## What success meant
+
+This is how I framed it for myself:
+
+1. **First:** compliant journeys live at every touchpoint by the deadline.
+2. **Then:** customers understand the difference well enough to make a real choice.
+3. **Guardrail:** the gross/net split lands close to forecast.
+
+I measured the first and third directly. I didn't measure comprehension directly. I used limit choice and ease scores as proxies, and that's a gap I'd close next time.
+
+{/* TODO: this framing is mine, not recorded from the PM. Confirm with the PM, then drop "for myself" if it matches */}
+
+## Approach
+
+### One decision, not seven touchpoints
+
+I mapped every route into a limit. Existing customers have three: a "set your limit in under a minute" banner on the homepage, the safer gambling tools page, and a safer gambling message on the deposit page. All three land on the same limit page, which then asks for limit type, time period and amount before a confirmation. Registration is its own path, with the limit set inside the sign-up form.
+
+Every route converged on the same new decision. That turned "update seven touchpoints" into "design one decision pattern well, then apply it everywhere".
+
+{/* VISUAL: journey map, built in code. Homepage banner / safer gambling tools / deposit page → limit page → type → period → amount → confirm. Registration as its own path. TODO: check the wireframe legend for whether the "limits page with deposit, net and loss limits" path was the current state or a rejected option */}
+
+### Side by side, not one at a time
+
+I explored showing both limit types together versus asking customers to pick one type first. Side by side won. It met equal prominence head on and made the difference easier to compare.
+
+### Test at volume
+
+I planned 13 tests with 300+ participants, running most of them myself and analysing all of them. An early 10-person test suggested a 50/50 split. In a 50-person sign-up test, close to 9 in 10 chose gross.
+
+Their reasons were the real finding. Most said gross was the familiar name, and many couldn't explain what net did.
+
+<Callout label="Insight">
+This wasn't a preference. It was a misunderstanding, created by which option the regulation gave the familiar name.
+</Callout>
+
+That shifted my focus from "make the UI clearer" to "help people understand the choice".
+
+### Test interventions, not just layouts
+
+I tested a longer inline explainer, different wording, and a "most popular" tag on net. In sign-up tests of about 20 people each, about 1 in 10 chose net at baseline. The explainer moved that to about 1 in 6. The tag moved it to about 1 in 3, and got the best ease scores.
+
+Those are small samples, so I read them as direction, not a forecast. The direction was clear, though: more words helped a little, and a plain fact helped a lot.
+
+{/* VISUAL: net uptake chart. Navigation test ~12% (n≈50), baseline ~10% (n≈20), expanded explainer ~16% (n≈19), "most popular" tag ~35% (n≈20). Leave the early 50/50 test off, it has no raw export */}
+
+### Design the system and the edge cases
+
+I designed for pending limits, limits set by us versus set by you, switching limit types, and a plain-English comparison sheet with a worked £100 example.
+
+I built it as one pattern on the shared design system, themed for four brands on two platforms, instead of 32 bespoke designs.
+
+<FigureRow phone>
+<Figure src="/work/deposit-limit-choice/set-a-limit.png" width={823} height={1677} alt="Set a deposit control form with net and gross side by side, net tagged Most popular" caption="Set a limit, both types side by side." />
+<Figure src="/work/deposit-limit-choice/which-limit-sheet.png" width={823} height={1677} alt="Which limit is right for you sheet comparing net and gross with a worked £100 example" caption="The optional explainer." />
+<Figure src="/work/deposit-limit-choice/limit-dashboard.png" width={823} height={1677} alt="Limit dashboard showing a net limit set by you and a stricter limit set by us" caption="The dashboard, with a limit set by us." />
+<Figure src="/work/deposit-limit-choice/current-limit-form.png" width={823} height={1677} alt="Set a deposit control form with the current deposit limit of £300 per month shown at the top" caption="After the rework: the form, with the current limit." />
+</FigureRow>
+
+{/* VISUAL: add the confirm and all-set screens here if wanted (blur balances) */}
+{/* VISUAL: process strip, small thumbnails: both concepts, pending limits, set by us / set by you, tooltip explainer, design QA, handover. Remove Figma comments, cursors, avatars, page names, balances and any brand copy */}
+
+## Balancing safety, regulation and commercial pressure
+
+This is a safety project where two of my interventions moved people towards net, the more flexible limit. So I want to be direct about how I held that tension.
+
+- **Equal prominence was the floor.** Both limits sit side by side at the same size and weight in every journey, and either is one tap away. Nothing hides, delays or adds friction to gross.
+- **The tag had to be true.** Before this change, net was the only limit type, so it was by far the most common limit customers held. The tag states that fact. It doesn't manufacture a preference.
+- **The goal was an informed choice, not a particular outcome.** People defaulting to the familiar label isn't a choice. The side-by-side layout and the worked example are there so they can actually compare.
+- **The post-launch change reduced effort, not added persuasion.** It made switching easier in both directions.
+
+<Callout label="Where I drew a line">
+An AI-drafted suggestion to celebrate net choices on the confirmation screen ("Smart choice!") would have favoured one option. It never shipped. Both confirmations stay neutral.
+</Callout>
+
+{/* TODO, blocker: the tag's basis above is inferred (net was the only limit type before), not a recorded sign-off. Confirm with compliance that it's the real basis, how they reviewed the tag and the rework, how the tag will be reviewed as gross grows, and any pushback. Don't publish this section until then */}
+
+## Key decisions
+
+### Both limits side by side
+
+**Tradeoff:** more to take in at the point of choice. I offset it with an optional "which limit is right for me?" explainer, so people who want the detail can get it without everyone carrying it.
+
+### A factual tag over more explanation
+
+Explainer copy alone did little. A factual "most popular" tag on net helped people who were unsure.
+
+**Tradeoff:** it had to stay inside equal prominence: same size, same weight, one tap to either option.
+
+### A lighter control over a richer one
+
+A chip-based version of the form had the same success rate as the simpler one. It also took about 19 clicks on average, against about 9. I went back to the simpler control.
+
+**Tradeoff:** less guidance in the control itself. But limit setting is a safety task, and extra friction risks people giving up on it altogether.
+
+{/* TODO: which chip pattern exactly (check the test prototype or with the colleague who set it up) */}
+
+### After launch: straight to the form
+
+Live data showed more customers choosing gross than forecast, and I was brought back in to rework the journey. I designed two options for managing a limit, across every brand on mobile and desktop, and the simpler one went live.
+
+It removed an intermediate screen. Customers now go straight from their limit dashboard to the form, with their current limit shown and a clear notice when they switch type.
+
+**Tradeoff:** one less screen to hold context. I moved the current limit and the switching notice onto the form, so nothing was lost.
+
+{/* TODO: who made the final call on each decision (check with the PM), the rework turnaround, and the 2–3 biggest product and tech trade-offs (PM and tech lead). Sources don't record any of these */}
+
+## Collaborating on registration
+
+A designer from the onboarding team was revamping registration at the same time. We worked together to build the limit choice into the new sign-up form from the start, instead of bolting it on afterwards. I contributed the limit pattern. They owned the registration experience.
+
+For me, that was one of the biggest wins of the project. Designing the choice into the form from the start meant registration didn't need a second pass later.
+
+{/* TODO: add paraphrased stakeholder feedback if any exists. None is recorded in the sources */}
+
+## Why testing and live numbers look so different
+
+In testing, about 9 in 10 people chose gross. Live, before the rework, it was closer to 1 in 5. They aren't measuring the same thing.
+
+- **Participants weren't customers at a real limit moment.** They were completing a task in a prototype.
+- **The task wording nudged them.** We asked people to set a "deposit control", and several said they picked "deposit limit" because it matched the instruction.
+- **The live figure is a share across every touchpoint**, including registration, on one brand. Many of those customers already understood the choice or skipped past it.
+
+<Callout label="What I took from it">
+Testing was good at finding *why* people chose gross. It wasn't good at predicting *how many* would.
+</Callout>
+
+{/* TODO: whether the live figure includes defaults or only new limits (check with whoever reported it) */}
+
+## How I used AI
+
+I worked with Claude in a project set up with my discovery framework and research context, plus a Figma connector. I owned the interpretation and the calls. It did the heavy lifting on data and drafting.
+
+**Research analysis was the most valuable use.** Claude parsed the raw test exports and recomputed the limit-choice splits from individual responses. Then I had it check the AI-written summary reports against that raw data. They didn't hold up. Sample sizes were off in two tests, the baseline was quoted inconsistently, and the headline lift was measured against the wrong test. From then on I only used figures I could trace back to the raw responses.
+
+The interpretation stayed mine. Spotting the task-wording bias came from reading participants' own reasons, not from the numbers.
+
+**Drafting design changes.** I used it to draft copy and layout changes from the findings, and reviewed everything against equal prominence. That's where the "Smart choice!" suggestion came from, and where it stopped.
+
+**Telling the story.** For the internal presentation, Claude built slides on our template through the Figma connector, then audited the deck as a content designer would. Its most useful catch was a post-launch line that, read cold, made the rework sound like moving customers off the firmer limit. That isn't what it did, and on a safety project that kind of framing costs trust.
+
+**What didn't work at first.** Moving images between Figma files programmatically gave low-quality results, so I placed the final screens myself. And AI summaries looked authoritative while containing wrong numbers.
+
+<Callout label="What I'd reuse">
+Never trust a summary's numbers. Recompute from the raw data, and ask the model to list where the summary disagrees.
+</Callout>
+
+## Outcome
+
+The new limit choice shipped across four brands on mobile and desktop by the extended deadline. It covers registration, setting and managing a limit, and the deposit page.
+
+After the post-launch rework, the early signal on one brand was that the share of customers choosing gross fell by about a quarter on the first full day. That's a before-and-after comparison, not a controlled test, so I treat it as directional.
+
+- **Choosing a limit (testing, ~20 people per variant):** at baseline, about 1 in 10 chose net. With the factual tag, about 1 in 3 did.
+- **Managing a limit (live):** before, dashboard → manage controls → form, three steps. After, dashboard → form, two steps, with the current limit and a switching notice on the form.
+- **Live gross share:** about a quarter lower on the first full day after the rework, on one brand. Directional.
+
+{/* VISUAL: the "you are switching limit types" notice, if there's a screenshot of it */}
+{/* TODO: a longer-term read on the split, if one exists. No controlled comparison exists, so keep "directional" */}
+
+## What I'd do differently
+
+- **Measure comprehension, not just choice.** The core problem was that people didn't understand net, but I measured which option they picked. A simple comprehension check would show whether the design actually informed the choice.
+- **Test at volume earlier, with neutral task wording.** The small early test misled us, and asking for a "deposit control" nudged people towards "deposit limit".
+- **Model the commercial split before launch.** The rework was quick, but forecasting the split with product beforehand would have made it planned rather than reactive.
