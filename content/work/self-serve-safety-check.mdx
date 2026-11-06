@@ -1,0 +1,162 @@
+---
+title: "Replacing the safety call nobody answers"
+summary: "Risk checks went to a phone call most customers never picked up, then a blanket limit. I'm designing a self-serve journey in the product instead, and a shared layer other teams can reuse. In progress."
+date: "2026-10"
+role: "Product designer, sole design lead"
+duration: "~2 months so far, ongoing"
+team: "Me, a design colleague whose earlier prototype set the bar, and several risk-domain PMs"
+context: "An online gambling operator's safer gambling team"
+tools: ["Figma", "Miro", "Claude Code"]
+tags: ["AI-assisted", "UX research", "UI design"]
+ai: ["Agentic HTML prototyping", "Self-critique pass", "Framework-driven audit", "Figma MCP build", "Build-method comparison"]
+metrics:
+  - { value: "17", label: "connected screens, prototyped in HTML and Figma" }
+  - { value: "4", label: "customer archetypes instead of one generic flow" }
+  - { value: "7", label: "shared journey components proposed for reuse" }
+anonymised: true
+draft: true
+---
+
+<Tldr>
+<Metrics items={[{ value: "17", label: "connected screens, in HTML and Figma" }, { value: "4", label: "customer archetypes" }, { value: "7", label: "shared journey components" }]} />
+
+- **The problem:** When a customer trips a risk control, an agent tries to call them. Most calls go unanswered, so a generic restriction gets applied with no conversation.
+- **What I did:** Split customers into four archetypes, prototyped the first as a 17-screen clickable flow, audited it against a seven-part framework, then rebuilt it in Figma three different ways.
+- **Where it is:** Not shipped. I've pitched it to other risk teams as shared infrastructure rather than a one-team feature.
+
+<Callout label="Key decision">
+Escalation to a human is triggered by what the customer writes, in any text field, not by a "talk to someone" button they have to choose.
+</Callout>
+
+{/* VISUAL: FigureRow of two images: the blanket-restriction before state next to the tailored affordability result, and the three-layer architecture diagram */}
+</Tldr>
+
+## The problem
+
+When a customer's account activity trips a risk control, like a sudden spike in deposits or an unusual staking pattern, the process today sends every trigger to a person. An agent makes an outbound call.
+
+Most of those calls go unanswered. When nobody picks up, the default is a blanket restriction, applied the same way to everyone, with no real conversation about whether it fits.
+
+Take a customer who loses many times their usual weekly amount in a single day. They get the same automatic monthly deposit limit as everyone else. Our working research suggested many customers in that group could comfortably afford more. The restriction is uniform. The people behind it aren't.
+
+<Callout label="Insight">
+The phone call wasn't the safeguard. It was a bottleneck in front of the safeguard, and when it failed, everyone got the same answer.
+</Callout>
+
+## Constraints
+
+- **Nothing to build from.** There was no in-product journey for this case. A colleague's earlier prototype, for a related segmentation, set the quality bar but wasn't part of this flow.
+- **One component library, no exceptions.** The Figma build had to use one specific library and token set, even where similar components existed elsewhere in the file.
+- **No chart primitive.** That library has nothing for data visualisation, so one screen had to be simplified.
+- **Safeguarding comes first.** Anything a customer types is a possible signal that they need help. That limits how "self-serve" the flow can safely be.
+
+## Approach
+
+### Segment, don't generalise
+
+I split customers into four archetypes by harm type (financial or behavioural) and history (first trigger or repeat). Each has its own usage pattern, so each gets its own journey. I specified the first, "the high spender", end to end: financial harm, first-time trigger.
+
+{/* VISUAL: simple 2×2 of the four archetypes (financial / behavioural × first-time / repeat), no stats */}
+
+### Prototype the logic, not just the screens
+
+I built the high spender journey as a real clickable HTML prototype, 17 screens with working branches. A static mock-up shows what a screen looks like. A branching prototype shows which screen a customer actually lands on, and that decision logic is the whole point of this flow. I drafted the other three archetypes the same way.
+
+### Audit against a framework, not instinct
+
+I checked the build against a seven-part framework for this kind of intervention: data playback, education, comfort check, bridging the gap, future intentions, affordability and appropriate action, plus an escalation-to-human branch. That surfaced a gap I hadn't seen, covered below.
+
+### Compare build methods before committing
+
+To rebuild the journey in Figma, I built the same screen set three ways: by hand, with a generative Figma tool, and with Claude working inside the file through an MCP connector. The goal was to find the approach the wider team could standardise on, not just to finish one flow.
+
+{/* VISUAL: redrawn process graphic of the three build approaches side by side */}
+
+### Zoom out before scaling
+
+Once one archetype worked end to end, I asked what happens if five other teams each build their own version. The answer was five intervention UIs, five sets of copy and five ways of getting the safeguarding wrong. So I reframed the work as three layers: risk identification, a shared intervention decision, and a shared in-product component layer.
+
+{/* VISUAL: the three-layer architecture diagram from the workshop. Caption any per-domain numbers as illustrative */}
+
+## Key decisions
+
+### Escalation follows the signal, not the button
+
+I considered sending every trigger to self-serve, with an opt-in "talk to someone" link. I decided against it. Escalation has to be automatic and cross-cutting, triggered by concerning language in any free-text field. Relying on a customer to say they need help undersells the duty of care.
+
+**Tradeoff:** every open text field needs risk-language detection wired to the human path. That wasn't fully in place at the time of the audit, and it's still open.
+
+### Verified data outranks self-report, visibly
+
+For affordability, customers can connect read-only bank data or enter figures themselves. I decided the two shouldn't carry equal confidence. Verified data is presented as a confident recommendation. Self-reported data is a provisional starting point.
+
+**Tradeoff:** more complex copy and logic, in exchange for not overstating what unverified numbers tell us.
+
+### Decreases apply now, increases wait
+
+A lower limit takes effect immediately. A higher one has a mandatory cooling-off period, stated on every confirmation screen where it applies.
+
+**Tradeoff:** slower gratification for customers who can afford more, in exchange for removing any reason to game the flow for a quick raise.
+
+### Pitch shared infrastructure, not a feature
+
+Once the first archetype worked, I presented the approach to the other risk-domain PMs as a shared decision layer plus a reusable component set, rather than keeping it to my team's problem.
+
+**Tradeoff:** a wider pitch raises hard questions a narrow one avoids. Who owns the shared layer? What happens when two teams' signals fire on the same customer at once?
+
+## How I used AI
+
+Claude Code was a build partner throughout, not a drafting tool. I set the framework, the constraints and the bar. It built, critiqued and checked.
+
+**Build, then critique the build.** It built the full interactive prototype. Then, in a separate pass, I asked it to critique that same build for structural flaws. That pass caught a limit-period selector that relabelled a figure instead of recalculating it, and a self-report exit that silently left an old restriction unexamined.
+
+**Audit against a named framework.** "Does this look right?" gets vague answers. So I gave it the seven components and asked it to check the build against each one explicitly.
+
+<PromptBlock tool="Claude Code" prompt={`Audit this prototype against the intervention framework below.
+For each component, say whether the flow covers it, on which screens,
+and what's missing. Then check the escalation branch: can every path
+that captures customer input reach a human?
+
+<framework>
+1. Data playback  2. Education  3. Comfort check
+4. Bridging the gap  5. Future intentions
+6. Affordability  7. Appropriate action
++ Escalation to a human
+</framework>`}>
+Escalation: partial. The explicit "I need help" option routes to a human, but free-text fields that can capture risk language aren't consistently wired to the escalation path.
+</PromptBlock>
+
+That's the finding that reshaped the first key decision. A looser "review this" prompt likely wouldn't have found it.
+
+**Build in the real file, and compare.** For the Figma build, Claude worked directly in the team's design file through an MCP connector, using only the approved component library and the design system's real token values. I ran it alongside the two other approaches so the comparison was fair.
+
+<Callout label="What I'd reuse">
+Asking a model to audit finished work against an explicit, named checklist gets far more specific findings than an open review.
+</Callout>
+
+**What didn't work at first.** An early version let customers leave the affordability flow with a low-friction "I'm comfortable with my activity" option. It quietly left the original blanket restriction in place, with no record that any decision had been made. The audit caught it. The first build didn't.
+
+## Before and proposed after
+
+Nothing here is live yet. This is the prototyped design.
+
+- **Before:** every risk trigger → an outbound call → usually unanswered → a generic restriction, with no input from the customer.
+- **Proposed:** every risk trigger → a self-serve journey in the product, tailored to the customer's situation → a verified or self-reported affordability check → an explicit choice of limit, break or no action → a human only when the customer's own words signal risk or distress.
+- **Before:** each risk team would design and build its own intervention UI from scratch.
+- **Proposed:** seven shared journey components and one escalation branch, configured per risk type instead of rebuilt per team.
+
+{/* VISUAL: BeforeAfter of the blanket-restriction screen vs the tailored affordability result */}
+
+## Where it stands
+
+This is a work in progress, and nothing has shipped. What exists is the high spender journey as a complete, connected 17-screen prototype, both as an interactive HTML build and as matching frames in the team's Figma file using real design-system components and tokens.
+
+I generalised it into the three-layer architecture and presented it at a workshop with the PMs who each own a different category of risk signal. No build decision, engineering handoff or go-live has happened yet.
+
+{/* TODO: update once there's a post-workshop decision, stakeholder feedback or a measured impact (e.g. a change in agent call volume) */}
+
+## What I'd do differently
+
+- **Wire escalation in from the start.** It's the one part of the flow with direct safeguarding consequences. It deserved to be built right first time, not found in an audit.
+- **Name an owner before the workshop.** A shared-infrastructure pitch with no owner invites the idea to stall.
+- **Design for collisions early.** A customer tripping two risk domains at once is predictable as soon as two teams plug into the same layer. An arbitration rule is easier to design up front than to retrofit.

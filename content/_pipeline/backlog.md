@@ -11,6 +11,8 @@ Aim for a balanced launch set: **2–3 work (AI) case studies · 3–4 projects 
 
 | Piece                                   | Collection | Status | Notes                               |
 | --------------------------------------- | ---------- | ------ | ----------------------------------- |
+| Self-serve safety check                 | work       | draft  | In progress, not shipped. Needs visuals and confirmed stats. Flutter sign-off before publishing |
+| Fair deposit limit choice (gross/net)   | work       | draft  | Shipped. Needs visuals and the brief's TODOs (compliance review, decision owners, live metric definition). Flutter sign-off before publishing |
 | _TODO: list your strongest AI work projects_ | work  | idea   | Pick ones with a clear before/after |
 
 ## Earlier work (imported from the old Adobe Portfolio, 2026-09-28)
