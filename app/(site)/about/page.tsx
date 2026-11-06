@@ -48,8 +48,7 @@ const bio: { label: string; body: ReactNode }[] = [
     label: "Where I started",
     body: (
       <>
-        I trained in industrial design, so I started on physical things: a pair of{" "}
-        <Inline href="/work/dev-x">recording binoculars</Inline> and{" "}
+        I trained in industrial design, so I started on physical things like{" "}
         <Inline href="/work/mylo">Mylo</Inline>, a classroom projector that made the James Dyson Award top three
         in Ireland. Then I moved to screens.
       </>

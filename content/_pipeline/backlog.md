@@ -23,11 +23,9 @@ Source files and transcribed copy are in `content/inbox/adobe-portfolio/` (git-i
 | -------------------- | ---------- | --------- | -------------------------------------------------------- |
 | AIB Service Finder   | work       | published | Named AIB, at Dylan's request. Featured                  |
 | Mylo                 | work       | published | Dyson Award Top 3 IE, DRS 2018. Confirm tools used       |
-| DEV X                | work       | published | Date is approximate (undergrad). Confirm the year        |
 | Boston Coffee House  | play       | published | Short entry                                              |
 | De Young Museum      | play       | published | Short entry                                              |
 | Digital Rendering    | play       | published | Short entry. Date approximate                            |
-| Premier League app   | play       | published | Short entry                                              |
 | Runcoin              | play       | published | Short entry. Date approximate                            |
 
 ## Personal projects (seeded from ~/Desktop/Projects and your domains)
