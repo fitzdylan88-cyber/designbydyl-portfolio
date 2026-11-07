@@ -7,17 +7,22 @@
  */
 
 :root {
-  /* Colour: warm cream paper, brown-black ink, one orange accent. */
-  --paper: oklch(96.8% 0.014 78);
-  --paper-2: oklch(93.4% 0.02 74);
-  --ink: oklch(20% 0.018 50);
-  --ink-2: oklch(43% 0.022 52);
-  --ink-3: oklch(52% 0.024 56);
-  --rule: oklch(30% 0.03 50 / 0.14);
-  --accent: oklch(64% 0.215 40);
-  /* Accent for small text: the brand orange fails 4.5:1 at body sizes. */
-  --accent-deep: oklch(52% 0.17 40);
-  --accent-ink: oklch(20% 0.018 50);
+  /*
+   * Colour: near-white paper, Steel Azure ink, Fresh Sky as the light
+   * second colour, Tiger Orange as the one accent. Light only, never black.
+   */
+  --paper: oklch(97.4% 0.004 240);
+  --paper-2: oklch(93.6% 0.022 232);
+  --ink: #084887;
+  --ink-2: oklch(44% 0.07 250);
+  --ink-3: oklch(50% 0.055 245);
+  --rule: oklch(40.2% 0.121 254 / 0.16);
+  --sky: #34a5d5;
+  --accent: #f58a07;
+  /* Accent for small text: Tiger Orange fails 4.5:1 on paper. */
+  --accent-deep: oklch(54% 0.15 52);
+  /* Text on orange or sky fills: a deeper azure that passes 4.5:1 on both. */
+  --accent-ink: #06274a;
 
   /* Type: one grotesk for display and text (see lib/fonts.ts). */
   --font-display-face: var(--font-text-face);
@@ -39,21 +44,8 @@
   --dur-4: 900ms;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --paper: oklch(16% 0.012 50);
-    --paper-2: oklch(20.5% 0.016 50);
-    --ink: oklch(94.5% 0.016 80);
-    --ink-2: oklch(75% 0.022 72);
-    --ink-3: oklch(64% 0.022 68);
-    --rule: oklch(90% 0.03 75 / 0.13);
-    --accent: oklch(70% 0.19 40);
-    --accent-deep: oklch(70% 0.19 40);
-    --accent-ink: oklch(16% 0.012 50);
-  }
-}
-
 @theme inline {
+  --color-sky: var(--sky);
   --color-paper: var(--paper);
   --color-paper-2: var(--paper-2);
   --color-ink: var(--ink);
@@ -85,6 +77,7 @@
 
 @layer base {
   html {
+    color-scheme: light;
     background: var(--paper);
     color: var(--ink);
     text-rendering: optimizeLegibility;

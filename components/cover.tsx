@@ -20,9 +20,9 @@ function hash(input: string) {
 }
 
 const surfaces = [
-  { bg: "var(--paper-2)", form: "var(--accent)", line: "var(--ink)", text: "var(--ink)" },
+  { bg: "var(--sky)", form: "var(--accent)", line: "var(--accent-ink)", text: "var(--accent-ink)" },
   { bg: "var(--ink)", form: "var(--accent)", line: "var(--paper)", text: "var(--paper)" },
-  { bg: "var(--accent)", form: "var(--ink)", line: "var(--ink)", text: "var(--ink)" },
+  { bg: "var(--accent)", form: "var(--ink)", line: "var(--accent-ink)", text: "var(--accent-ink)" },
 ] as const;
 
 type FormProps = { fill: string; seed: number };

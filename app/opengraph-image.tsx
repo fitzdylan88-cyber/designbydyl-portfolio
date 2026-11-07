@@ -6,10 +6,10 @@ export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 // Hex equivalents of the paper / ink / accent tokens in globals.css.
-const paper = "#faf4ea";
-const ink = "#1d140f";
-const ink2 = "#5a4d45";
-const accent = "#f04a00";
+const paper = "#f4f6f8";
+const ink = "#084887";
+const ink2 = "#46607e";
+const accent = "#f58a07";
 
 export default function Image() {
   return new ImageResponse(
