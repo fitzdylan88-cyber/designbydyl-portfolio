@@ -9,6 +9,8 @@ import { SplitReveal } from "@/components/motion/split-reveal";
 import { href } from "@/lib/paths";
 import { Arrow } from "@/components/icons";
 import { ProjectRail } from "@/components/project-rail";
+import { ScrollHighlight } from "@/components/motion/scroll-highlight";
+import { ScrollReveal } from "@/components/motion/scroll-reveal";
 
 function FeaturedCard({ entry, index }: { entry: Entry; index: number }) {
   return (
@@ -51,9 +53,9 @@ export default function Home() {
               <li>{site.location}</li>
               <li>{site.experience}</li>
             </ul>
-            <p className="col-span-12 max-w-[34ch] text-lede leading-snug text-ink md:col-span-7 lg:col-span-5 lg:col-start-8">
+            <ScrollHighlight className="col-span-12 max-w-[34ch] text-lede leading-snug text-ink md:col-span-7 lg:col-span-5 lg:col-start-8">
               {site.intro}
-            </p>
+            </ScrollHighlight>
           </div>
         </div>
       </section>
@@ -92,14 +94,16 @@ export default function Home() {
         <h2 className="type-display col-span-12 mb-10 border-b border-rule pb-6 text-h2 leading-none">
           Where I&rsquo;ve worked
         </h2>
-        <Employers className="col-span-12" />
+        <div data-reveal className="col-span-12">
+          <Employers />
+        </div>
       </section>
 
       <section className="container-grid pt-32 md:pt-44">
         <SplitReveal as="h2" by="words" className="type-display col-span-12 mb-16 max-w-[16ch] text-h1 leading-[0.95] lg:col-span-8">
           How I work
         </SplitReveal>
-        <ul className="col-span-12 grid gap-12 md:grid-cols-3 md:gap-[var(--gutter)]">
+        <ul data-reveal className="col-span-12 grid gap-12 md:grid-cols-3 md:gap-[var(--gutter)]">
           {principles.map((p) => (
             <li key={p.title} className="border-t border-ink pt-5">
               <h3 className="text-h3 font-medium leading-tight tracking-tight">{p.title}</h3>
@@ -115,6 +119,7 @@ export default function Home() {
           <Arrow className="text-accent transition-transform duration-[var(--dur-2)] group-hover:translate-x-1" />
         </Link>
       </section>
+      <ScrollReveal />
     </>
   );
 }

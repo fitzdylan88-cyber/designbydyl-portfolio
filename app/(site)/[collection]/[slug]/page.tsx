@@ -8,6 +8,8 @@ import { SplitReveal } from "@/components/motion/split-reveal";
 import { href } from "@/lib/paths";
 import { Arrow } from "@/components/icons";
 import { ReadingToggle } from "@/components/reading-mode";
+import { ScrollHighlight } from "@/components/motion/scroll-highlight";
+import { ScrollReveal } from "@/components/motion/scroll-reveal";
 
 type Params = { collection: string; slug: string };
 
@@ -76,26 +78,10 @@ export default async function EntryPage({ params }: { params: Promise<Params> })
         >
           {entry.title}
         </SplitReveal>
-        <p className="col-span-12 mt-8 max-w-[40ch] text-lede leading-snug text-ink-2 md:col-span-8 lg:col-span-6">
+        <ScrollHighlight className="col-span-12 mt-8 max-w-[40ch] text-lede leading-snug text-ink md:col-span-8 lg:col-span-6">
           {entry.summary}
-        </p>
-        {entry.hasTldr && (
-          <div className="col-span-12 mt-10">
-            <ReadingToggle fullMinutes={entry.fullMinutes} tldrSeconds={entry.tldrSeconds} />
-          </div>
-        )}
-      </header>
-
-      <div data-hero={entry.hasTldr || undefined} className="container-grid mb-20">
-        <div className="col-span-12">
-          <ViewTransition name={`cover-${entry.collection}-${entry.slug}`} share="morph">
-            <Cover entry={entry} index={position} size="lg" expandable className="aspect-[16/10] w-full rounded-sm md:aspect-[21/9]" />
-          </ViewTransition>
-        </div>
-      </div>
-
-      <div className="container-grid">
-        <dl className="col-span-12 grid grid-cols-2 gap-6 border-t border-rule pt-6 md:grid-cols-4 lg:sticky lg:top-24 lg:col-span-3 lg:grid-cols-1 lg:self-start">
+        </ScrollHighlight>
+        <dl className="col-span-12 mt-12 grid grid-cols-2 gap-x-[var(--gutter)] gap-y-6 border-t border-rule pt-6 md:grid-cols-4">
           {facts.map((fact) => (
             <div key={fact.label}>
               <dt className="label mb-1">{fact.label}</dt>
@@ -123,11 +109,27 @@ export default async function EntryPage({ params }: { params: Promise<Params> })
             </div>
           )}
         </dl>
+        {entry.hasTldr && (
+          <div className="col-span-12 mt-10">
+            <ReadingToggle fullMinutes={entry.fullMinutes} tldrSeconds={entry.tldrSeconds} />
+          </div>
+        )}
+      </header>
 
+      <div data-hero className="container-grid mb-24">
+        <div className="col-span-12">
+          <ViewTransition name={`cover-${entry.collection}-${entry.slug}`} share="morph">
+            <Cover entry={entry} index={position} size="lg" expandable className="aspect-[4/3] w-full md:aspect-[2/1]" />
+          </ViewTransition>
+        </div>
+      </div>
+
+      <div className="container-grid">
         <div
           id="story"
+          data-prose
           data-story={entry.hasTldr || undefined}
-          className="col-span-12 mt-12 max-w-[68ch] lg:col-span-7 lg:col-start-5 lg:mt-0"
+          className="col-span-12"
         >
           <Body />
         </div>
@@ -153,12 +155,13 @@ export default async function EntryPage({ params }: { params: Promise<Params> })
             </div>
             <div className="col-span-12 md:col-span-5">
               <ViewTransition name={`cover-${next.collection}-${next.slug}`} share="morph">
-                <Cover entry={next} index={(position + 1) % all.length} className="aspect-[4/3] w-full rounded-sm" />
+                <Cover entry={next} index={(position + 1) % all.length} className="aspect-[4/3] w-full" />
               </ViewTransition>
             </div>
           </Link>
         </nav>
       )}
+      <ScrollReveal />
     </article>
   );
 }

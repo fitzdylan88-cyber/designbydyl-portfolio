@@ -26,7 +26,7 @@ export function BeforeAfter({
 
   return (
     <figure className="my-12">
-      <div className="relative overflow-hidden rounded-sm bg-paper-2 select-none">
+      <div className="relative overflow-hidden bg-paper-2 select-none">
         <Image src={after} alt={`${alt} — ${labels[1]}`} width={width} height={height} className="h-auto w-full" />
         <div className="absolute inset-0" style={{ clipPath: `inset(0 ${100 - split}% 0 0)` }}>
           <Image src={before} alt={`${alt} — ${labels[0]}`} width={width} height={height} className="h-auto w-full" />

@@ -13,11 +13,11 @@ type Props = {
 
 export function Figure({ src, alt, caption, width = 2400, height = 1500, wide }: Props) {
   return (
-    <figure className={wide ? "my-16 -mx-[var(--margin)] md:mx-0" : "my-12"}>
+    <figure data-wide={wide || undefined} className={wide ? "my-16 -mx-[var(--margin)] md:mx-0" : "my-12"}>
       <button
         type="button"
         {...lightboxTrigger([{ src, alt, caption }])}
-        className="block w-full cursor-zoom-in overflow-hidden rounded-sm bg-paper-2"
+        className="block w-full cursor-zoom-in overflow-hidden bg-paper-2"
       >
         <Image src={src} alt={alt} width={width} height={height} className="h-auto w-full" />
       </button>
