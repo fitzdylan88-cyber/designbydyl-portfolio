@@ -10,7 +10,7 @@ import { useEffect } from "react";
  * that appear later, like the quick read, still reveal when shown.
  */
 const TARGETS = "[data-prose] > :not([data-tldr]), [data-tldr] > *, [data-reveal]";
-const STAGGER_MS = 90;
+const STAGGER_MS = 30;
 
 export function ScrollReveal() {
   useEffect(() => {

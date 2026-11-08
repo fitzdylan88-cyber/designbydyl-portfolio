@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, useMotionValueEvent, useReducedMotion, useScroll } from "motion/react";
 import { nav, site } from "@/lib/site";
-import { spring } from "@/lib/motion";
+import { tween } from "@/lib/motion";
 
 export function Header() {
   const pathname = usePathname();
@@ -29,7 +29,7 @@ export function Header() {
     <motion.header
       style={{ viewTransitionName: "site-header" }}
       animate={{ y: hidden ? "-110%" : "0%" }}
-      transition={spring.settle}
+      transition={tween.move}
       className="fixed inset-x-0 top-0 z-50"
     >
       <div
@@ -53,12 +53,12 @@ export function Header() {
                 <Link
                   href={item.href}
                   aria-current={active === item.href ? "page" : undefined}
-                  className="relative block rounded-sm px-3.5 py-1.5 text-small pointer-coarse:py-3 text-ink-2 transition-colors duration-[var(--dur-2)] hover:text-ink aria-[current=page]:text-paper"
+                  className="relative block rounded-sm px-3.5 py-1.5 text-small pointer-coarse:py-3 text-ink-2 transition-[color,scale] duration-[var(--dur-2)] active:scale-[0.97] hover:text-ink aria-[current=page]:text-paper"
                 >
                   {active === item.href && (
                     <motion.span
                       layoutId="nav-pill"
-                      transition={spring.snappy}
+                      transition={tween.move}
                       className="absolute inset-0 rounded-sm bg-ink"
                     />
                   )}

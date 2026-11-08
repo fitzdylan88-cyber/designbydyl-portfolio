@@ -39,7 +39,7 @@ export function ProjectRail({ children, label }: { children: React.ReactNode; la
   }
 
   const button =
-    "grid size-11 place-items-center rounded-full border border-rule text-ink transition-[color,border-color,opacity] duration-[var(--dur-2)] hover:border-ink disabled:pointer-events-none disabled:opacity-30";
+    "grid size-11 place-items-center rounded-full border border-rule text-ink transition-[color,border-color,opacity,scale] duration-[var(--dur-2)] active:scale-[0.97] hover:border-ink disabled:pointer-events-none disabled:opacity-30";
 
   return (
     <div className="relative">

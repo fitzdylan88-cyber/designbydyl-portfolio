@@ -6,7 +6,7 @@ import { motion } from "motion/react";
 import { SplitReveal } from "@/components/motion/split-reveal";
 import { Magnetic } from "@/components/motion/magnetic";
 import { SpringDemos } from "./spring-demos";
-import { duration, ease, spring } from "@/lib/motion";
+import { duration, ease, tween } from "@/lib/motion";
 
 type Pairing = { id: string; name: string; note: string; className: string };
 type EntryLink = { href: string; title: string; draft: boolean };
@@ -27,7 +27,6 @@ const colours = ["paper", "paper-2", "ink", "ink-2", "ink-3", "rule", "accent"];
 const easings = [
   { name: "out", css: "var(--ease-out)", value: ease.out },
   { name: "inOut", css: "var(--ease-in-out)", value: ease.inOut },
-  { name: "snap", css: "var(--ease-snap)", value: ease.snap },
   { name: "linear", css: "linear", value: [0, 0, 1, 1] as const },
 ];
 
@@ -65,7 +64,7 @@ export function Lab({ pairings, entries }: { pairings: Pairing[]; entries: Entry
               {p.id === pairingId && (
                 <motion.span
                   layoutId="pairing-pill"
-                  transition={spring.snappy}
+                  transition={tween.move}
                   className="absolute inset-0 rounded-full bg-ink"
                 />
               )}

@@ -3,7 +3,7 @@
 import { useId, useSyncExternalStore } from "react";
 import { motion } from "motion/react";
 import { useLenis } from "lenis/react";
-import { spring } from "@/lib/motion";
+import { tween } from "@/lib/motion";
 import { Arrow } from "@/components/icons";
 import { READING_STORAGE_KEY } from "@/lib/reading-mode";
 
@@ -84,12 +84,12 @@ export function ReadingToggle({ fullMinutes, tldrSeconds }: { fullMinutes: numbe
               type="button"
               aria-pressed={selected}
               onClick={() => setMode(option.value)}
-              className="relative rounded-xs px-4 py-2 text-small transition-colors duration-[var(--dur-2)] pointer-coarse:py-2.5"
+              className="relative rounded-xs px-4 py-2 text-small transition-[color,scale] duration-[var(--dur-2)] active:scale-[0.97] pointer-coarse:py-2.5"
             >
               {selected && (
                 <motion.span
                   layoutId="reading-pill"
-                  transition={spring.snappy}
+                  transition={tween.move}
                   className="absolute inset-0 rounded-xs bg-ink"
                 />
               )}

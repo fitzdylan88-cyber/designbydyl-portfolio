@@ -2,7 +2,14 @@
 
 import { useState } from "react";
 import { motion, useMotionValue, useSpring } from "motion/react";
-import { spring } from "@/lib/motion";
+import { spring as siteSpring } from "@/lib/motion";
+
+// The site tweens everyday UI; these springs are kept here as lab specimens.
+const spring = {
+  snappy: { type: "spring", stiffness: 520, damping: 34, mass: 0.6 },
+  settle: { type: "spring", stiffness: 220, damping: 28, mass: 1 },
+  follow: siteSpring.follow,
+} as const;
 
 function Pad({
   name,

@@ -25,7 +25,7 @@ export function Footer() {
             <Magnetic>
               <a
                 href={contact.href}
-                className="inline-flex items-center gap-3 rounded-sm bg-accent px-7 py-4 text-body font-medium text-accent-ink transition-transform duration-[var(--dur-2)] active:scale-95"
+                className="inline-flex items-center gap-3 rounded-sm bg-accent px-7 py-4 text-body font-medium text-accent-ink transition-transform duration-[var(--dur-2)] active:scale-[0.97]"
               >
                 {contact.label}
                 <Arrow />

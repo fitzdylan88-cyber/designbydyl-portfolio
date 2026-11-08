@@ -6,7 +6,6 @@
 export const ease = {
   out: [0.16, 1, 0.3, 1],
   inOut: [0.65, 0, 0.35, 1],
-  snap: [0.3, 1.4, 0.5, 1],
 } as const;
 
 export const gsapEase = {
@@ -21,12 +20,25 @@ export const duration = {
   slow: 0.9,
 } as const;
 
+/*
+ * Everyday UI is tweened, never sprung: ease-out for things arriving,
+ * ease-in-out for things moving on screen, and exits about 20% shorter
+ * than entrances so the new state takes over quickly.
+ */
+export const tween = {
+  /** Something arriving: popovers, rows, labels. */
+  enter: { duration: 0.24, ease: ease.out },
+  /** Something leaving. */
+  exit: { duration: 0.19, ease: ease.out },
+  /** Something already on screen moving to a new place: pills, the header. */
+  move: { duration: 0.24, ease: ease.inOut },
+} as const;
+
+/** Rows in a list come in one after another. */
+export const rowStagger = 0.03;
+
 export const spring = {
-  /** UI feedback: buttons, toggles. */
-  snappy: { type: "spring", stiffness: 520, damping: 34, mass: 0.6 },
-  /** Layout shifts, cards moving into place. */
-  settle: { type: "spring", stiffness: 220, damping: 28, mass: 1 },
-  /** Cursor-following, magnetic pulls. */
+  /** Hand-driven motion only: cursor-following, magnetic pulls. */
   follow: { type: "spring", stiffness: 180, damping: 18, mass: 0.4 },
 } as const;
 

@@ -4,7 +4,7 @@ import { useRef, useState, ViewTransition } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion, useMotionValue, useSpring } from "motion/react";
 import { Cover } from "@/components/cover";
-import { spring } from "@/lib/motion";
+import { spring, tween, rowStagger } from "@/lib/motion";
 import type { Entry } from "@/lib/content";
 import { href } from "@/lib/paths";
 
@@ -66,9 +66,9 @@ export function WorkList({ entries, startIndex = 0 }: { entries: ListEntry[]; st
               key={`${entry.collection}/${entry.slug}`}
               layout
               initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, transition: { duration: 0.15 } }}
-              transition={spring.settle}
+              animate={{ opacity: 1, y: 0, transition: { ...tween.enter, delay: i * rowStagger } }}
+              exit={{ opacity: 0, transition: tween.exit }}
+              transition={{ layout: tween.move }}
               className="border-b border-rule"
             >
               <Link
@@ -109,14 +109,14 @@ export function WorkList({ entries, startIndex = 0 }: { entries: ListEntry[]; st
       >
         <motion.div
           initial={false}
-          animate={{ opacity: visible ? 1 : 0, scale: visible ? 1 : 0.6, rotate: visible ? 0 : -6 }}
-          transition={spring.settle}
+          animate={{ opacity: visible ? 1 : 0, scale: visible ? 1 : 0.95 }}
+          transition={visible ? tween.enter : tween.exit}
           className="-translate-x-1/2 -translate-y-[60%] overflow-hidden rounded-sm shadow-[0_30px_60px_-20px_rgb(0_0_0/0.35)]"
-          style={{ width: "min(26vw, 380px)", aspectRatio: "4 / 3" }}
+          style={{ width: "min(26vw, 380px)", aspectRatio: "4 / 3", transformOrigin: "50% 60%" }}
         >
           <motion.div
             animate={{ y: `${-(active ?? 0) * 100}%` }}
-            transition={spring.settle}
+            transition={tween.move}
             className="h-full"
           >
             {entries.map((entry, i) =>

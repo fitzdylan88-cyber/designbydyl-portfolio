@@ -157,7 +157,7 @@ export default function AboutPage() {
         <Magnetic>
           <a
             href={contact.href}
-            className="inline-flex items-center gap-3 rounded-sm bg-ink px-7 py-4 text-body font-medium text-paper"
+            className="inline-flex items-center gap-3 rounded-sm bg-ink px-7 py-4 text-body font-medium text-paper transition-transform duration-[var(--dur-1)] active:scale-[0.97]"
           >
             Say hello <Arrow />
           </a>

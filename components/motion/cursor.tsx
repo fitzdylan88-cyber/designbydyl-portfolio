@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useMotionValue, useSpring } from "motion/react";
-import { spring } from "@/lib/motion";
+import { spring, tween } from "@/lib/motion";
 
 type Mode = { kind: "default" } | { kind: "link" } | { kind: "label"; text: string } | { kind: "hidden" };
 
@@ -119,17 +119,16 @@ export function Cursor() {
             opacity: ring.opacity,
             scale: pressed ? 0.85 : 1,
           }}
-          transition={spring.snappy}
+          transition={tween.move}
           className="flex -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border"
         >
           <AnimatePresence mode="popLayout">
             {mode.kind === "label" && (
               <motion.span
                 key={mode.text}
-                initial={{ opacity: 0, scale: 0.6 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.6 }}
-                transition={spring.snappy}
+                initial={{ opacity: 0, scale: 0.8, filter: "blur(4px)" }}
+                animate={{ opacity: 1, scale: 1, filter: "blur(0px)", transition: tween.enter }}
+                exit={{ opacity: 0, scale: 0.8, filter: "blur(4px)", transition: tween.exit }}
                 className="text-[12px] font-medium text-paper"
               >
                 {mode.text}
@@ -142,7 +141,7 @@ export function Cursor() {
       <motion.div
         style={{ x, y }}
         animate={{ opacity: mode.kind === "default" ? 1 : 0, scale: mode.kind === "default" ? 1 : 0 }}
-        transition={spring.snappy}
+        transition={tween.move}
         className="absolute top-0 left-0 -mt-1 -ml-1 size-2 rounded-full bg-accent"
       />
     </div>
