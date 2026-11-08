@@ -1,18 +1,14 @@
-import { IBM_Plex_Mono, Schibsted_Grotesk } from "next/font/google";
+import { Inter } from "next/font/google";
 
 /*
- * "Swiss" pairing, chosen in /lab. One grotesk does display and text (the
- * display face is aliased in globals.css), with a mono for labels and data.
+ * Apple-style type. The stack in globals.css asks for the system font first,
+ * so Apple devices render SF Pro (the licence doesn't allow serving it as a
+ * web font). Inter is the fallback everywhere else; browsers only download it
+ * when the system font isn't SF.
  */
-export const text = Schibsted_Grotesk({
+export const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-text-face",
+  variable: "--font-inter",
 });
 
-export const mono = IBM_Plex_Mono({
-  weight: ["400", "500"],
-  subsets: ["latin"],
-  variable: "--font-mono-face",
-});
-
-export const fontVariables = [text.variable, mono.variable].join(" ");
+export const fontVariables = inter.variable;

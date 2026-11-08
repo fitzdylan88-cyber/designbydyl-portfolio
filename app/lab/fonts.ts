@@ -24,7 +24,7 @@ export const pairings = [
   {
     id: "swiss",
     name: "Swiss",
-    note: "Schibsted Grotesk / IBM Plex Mono · current",
+    note: "Schibsted Grotesk / IBM Plex Mono",
     className: "",
   },
   {

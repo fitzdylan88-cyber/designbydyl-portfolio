@@ -45,7 +45,7 @@ export function WorkIndex({ entries, initial }: { entries: ListEntry[]; initial:
               )}
               <span className="relative">
                 {f.label}
-                <sup className="ml-1 font-mono text-[0.65em] opacity-60">{count}</sup>
+                <sup className="ml-1 text-[0.65em] tabular-nums opacity-60">{count}</sup>
               </span>
             </button>
           );

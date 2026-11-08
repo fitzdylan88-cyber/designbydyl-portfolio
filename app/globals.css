@@ -24,10 +24,13 @@
   /* Text on orange or sky fills: a deeper azure that passes 4.5:1 on both. */
   --accent-ink: #06274a;
 
-  /* Type: one grotesk for display and text (see lib/fonts.ts). */
+  /* Type: the system font, so SF Pro on Apple devices, Inter elsewhere
+     (see lib/fonts.ts). Headings semibold with slight negative tracking. */
+  --font-text-face: -apple-system, BlinkMacSystemFont, "SF Pro Text", var(--font-inter), "Helvetica Neue", Arial, sans-serif;
+  --font-mono-face: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
   --font-display-face: var(--font-text-face);
-  --display-weight: 500;
-  --display-tracking: -0.035em;
+  --display-weight: 600;
+  --display-tracking: -0.015em;
 
   /* Grid */
   --gutter: clamp(1rem, 0.6rem + 1.6vw, 2rem);
@@ -59,15 +62,16 @@
   --font-sans: var(--font-text-face);
   --font-mono: var(--font-mono-face);
 
-  /* Fluid type scale. Display tops out at 6rem: calm, not shouting. */
+  /* Fluid type scale on Apple's steps: 17px body, 28px card titles,
+     48px section heads, 56px page titles, 80px for the name. */
   --text-micro: clamp(0.75rem, 0.72rem + 0.1vw, 0.8125rem);
   --text-small: clamp(0.875rem, 0.85rem + 0.1vw, 0.9375rem);
-  --text-body: clamp(1rem, 0.96rem + 0.18vw, 1.125rem);
+  --text-body: clamp(1rem, 0.97rem + 0.12vw, 1.0625rem);
   --text-lede: clamp(1.1875rem, 1.08rem + 0.45vw, 1.5rem);
-  --text-h3: clamp(1.375rem, 1.2rem + 0.8vw, 2rem);
-  --text-h2: clamp(1.875rem, 1.45rem + 1.8vw, 3.25rem);
-  --text-h1: clamp(2.5rem, 1.7rem + 3.4vw, 4.75rem);
-  --text-mega: clamp(3rem, 1.4rem + 6.6vw, 6rem);
+  --text-h3: clamp(1.375rem, 1.22rem + 0.6vw, 1.75rem);
+  --text-h2: clamp(1.875rem, 1.5rem + 1.5vw, 3rem);
+  --text-h1: clamp(2.5rem, 1.9rem + 2.4vw, 3.5rem);
+  --text-mega: clamp(3rem, 1.8rem + 4.8vw, 5rem);
 
   --ease-out: var(--ease-out);
   --ease-in-out: var(--ease-in-out);
@@ -85,7 +89,7 @@
   body {
     font-family: var(--font-sans);
     font-size: var(--text-body);
-    line-height: 1.55;
+    line-height: 1.47;
     background: var(--paper);
   }
 
@@ -170,14 +174,14 @@
 @utility kicker {
   font-family: var(--font-sans);
   font-size: var(--text-small);
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.4;
   color: var(--accent-deep);
 }
 
-/* Data: dates, times, counts, tags. Mono only where the content is data. */
+/* Data: dates, times, counts, tags. Tabular figures so numbers line up. */
 @utility meta {
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: var(--text-micro);
   font-variant-numeric: tabular-nums;
   color: var(--ink-3);

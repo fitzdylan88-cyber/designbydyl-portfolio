@@ -96,7 +96,7 @@ export default function Home() {
         <ul data-reveal className="col-span-12 grid gap-12 md:grid-cols-3 md:gap-[var(--gutter)]">
           {principles.map((p) => (
             <li key={p.title} className="border-t border-ink pt-5">
-              <h3 className="text-h3 font-medium leading-tight tracking-tight">{p.title}</h3>
+              <h3 className="text-h3 font-semibold leading-tight tracking-tight">{p.title}</h3>
               <p className="mt-4 max-w-[38ch] text-ink-2">{p.body}</p>
             </li>
           ))}

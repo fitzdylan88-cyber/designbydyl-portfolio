@@ -40,7 +40,7 @@ export function Header() {
         <Link
           href="/"
           transitionTypes={["nav-back"]}
-          className="col-span-6 flex items-baseline gap-2 text-small font-medium md:col-span-4"
+          className="col-span-6 flex items-baseline gap-2 text-small font-semibold md:col-span-4"
         >
           {site.name}
           <span className="hidden text-ink-3 sm:inline">/ {site.role}</span>

@@ -98,30 +98,30 @@ export default function AboutPage() {
       </dl>
 
       <section className="col-span-12 mt-32 grid grid-cols-subgrid gap-y-12">
-        <h2 className="col-span-12 text-h3 font-medium leading-tight tracking-tight lg:col-span-3">Capabilities</h2>
+        <h2 className="col-span-12 text-h3 font-semibold leading-tight tracking-tight lg:col-span-3">Capabilities</h2>
         <ul className="col-span-12 grid grid-cols-1 gap-y-3 sm:grid-cols-2 lg:col-span-9">
           {capabilities.map((item) => (
             <li key={item}>
-              <span className="text-h3 font-medium tracking-tight">{item}</span>
+              <span className="text-h3 font-semibold tracking-tight">{item}</span>
             </li>
           ))}
         </ul>
       </section>
 
       <section className="col-span-12 mt-32 grid grid-cols-subgrid gap-y-12">
-        <h2 className="col-span-12 text-h3 font-medium leading-tight tracking-tight lg:col-span-3">Where I&rsquo;ve worked</h2>
+        <h2 className="col-span-12 text-h3 font-semibold leading-tight tracking-tight lg:col-span-3">Where I&rsquo;ve worked</h2>
         <Employers className="col-span-12 lg:col-span-9" />
       </section>
 
       {experience.length > 0 && (
         <section className="col-span-12 mt-32 grid grid-cols-subgrid gap-y-12">
-          <h2 className="col-span-12 text-h3 font-medium leading-tight tracking-tight lg:col-span-3">Experience</h2>
+          <h2 className="col-span-12 text-h3 font-semibold leading-tight tracking-tight lg:col-span-3">Experience</h2>
           <ol className="col-span-12 space-y-10 lg:col-span-9">
             {experience.map((job) => (
               <li key={job.company} className="grid gap-1 sm:grid-cols-[8rem_1fr] sm:gap-4">
                 <span className="meta sm:pt-1.5">{job.period}</span>
                 <div>
-                  <h3 className="text-h3 font-medium tracking-tight">{job.company}</h3>
+                  <h3 className="text-h3 font-semibold tracking-tight">{job.company}</h3>
                   {job.roles.length === 1 ? (
                     <p className="text-ink-2">{job.roles[0].role}</p>
                   ) : (
@@ -142,7 +142,7 @@ export default function AboutPage() {
       )}
 
       <section className="col-span-12 mt-32 grid grid-cols-subgrid gap-y-12">
-        <h2 className="col-span-12 text-h3 font-medium leading-tight tracking-tight lg:col-span-3">Toolkit</h2>
+        <h2 className="col-span-12 text-h3 font-semibold leading-tight tracking-tight lg:col-span-3">Toolkit</h2>
         <ul className="col-span-12 flex flex-wrap gap-2 lg:col-span-9">
           {toolkit.map((tool) => (
             <li key={tool} className="rounded-sm bg-paper-2 px-3 py-1.5 text-small text-ink">
