@@ -48,11 +48,18 @@ export default function Home() {
             Dylan Fitzpatrick
           </SplitReveal>
           <div className="col-span-12 mt-10 grid grid-cols-subgrid items-end gap-y-6 border-t border-rule pt-6">
-            <ul className="col-span-12 flex flex-wrap gap-x-6 gap-y-1 text-small text-ink-2 md:col-span-5 lg:col-span-4">
-              <li>{site.role}</li>
-              <li>{site.location}</li>
-              <li>{site.experience}</li>
-            </ul>
+            <dl className="col-span-12 grid grid-cols-3 gap-x-[var(--gutter)] md:col-span-5 lg:col-span-5">
+              {[
+                { label: "Role", value: site.role },
+                { label: "Based in", value: site.location },
+                { label: "Experience", value: site.experience },
+              ].map((fact) => (
+                <div key={fact.label}>
+                  <dt className="kicker mb-1">{fact.label}</dt>
+                  <dd className="text-body leading-snug text-ink">{fact.value}</dd>
+                </div>
+              ))}
+            </dl>
             <ScrollHighlight className="col-span-12 max-w-[34ch] text-lede leading-snug text-ink md:col-span-7 lg:col-span-5 lg:col-start-8">
               {site.intro}
             </ScrollHighlight>

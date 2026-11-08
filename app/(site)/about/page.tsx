@@ -91,7 +91,7 @@ export default function AboutPage() {
       <dl className="col-span-12 mt-24 grid grid-cols-subgrid border-b border-rule">
         {bio.map((row) => (
           <div key={row.label} className="col-span-12 grid grid-cols-subgrid gap-y-3 border-t border-rule py-8">
-            <dt className="meta col-span-12 pt-1.5 lg:col-span-3">{row.label}</dt>
+            <dt className="kicker col-span-12 pt-1 lg:col-span-3">{row.label}</dt>
             <dd className="col-span-12 max-w-[46ch] text-lede leading-snug text-ink-2 lg:col-span-9">{row.body}</dd>
           </div>
         ))}

@@ -84,7 +84,7 @@ export default async function EntryPage({ params }: { params: Promise<Params> })
         <dl className="col-span-12 mt-12 grid grid-cols-2 gap-x-[var(--gutter)] gap-y-6 border-t border-rule pt-6 md:grid-cols-4">
           {facts.map((fact) => (
             <div key={fact.label}>
-              <dt className="label mb-1">{fact.label}</dt>
+              <dt className="kicker mb-1">{fact.label}</dt>
               <dd className="text-small text-ink">
                 {Array.isArray(fact.value) ? (
                   <ul className="space-y-0.5">
@@ -100,7 +100,7 @@ export default async function EntryPage({ params }: { params: Promise<Params> })
           ))}
           {entry.liveUrl && (
             <div>
-              <dt className="label mb-1">Live</dt>
+              <dt className="kicker mb-1">Live</dt>
               <dd className="text-small">
                 <a href={entry.liveUrl} className="text-ink underline decoration-accent underline-offset-4">
                   {new URL(entry.liveUrl).hostname.replace(/^www\./, "")}
