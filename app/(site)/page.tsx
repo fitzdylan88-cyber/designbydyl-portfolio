@@ -1,31 +1,14 @@
 import Link from "next/link";
-import { ViewTransition } from "react";
 import { Employers } from "@/components/site/employers";
-import { getAllEntries, type Entry } from "@/lib/content";
+import { getAllEntries } from "@/lib/content";
 import { principles, site } from "@/lib/site";
-import { Cover } from "@/components/cover";
 import { DotField } from "@/components/motion/dot-field";
 import { SplitReveal } from "@/components/motion/split-reveal";
-import { href } from "@/lib/paths";
 import { Arrow } from "@/components/icons";
 import { ProjectRail } from "@/components/project-rail";
+import { DeviceCard } from "@/components/device-card";
 import { ScrollHighlight } from "@/components/motion/scroll-highlight";
 import { ScrollReveal } from "@/components/motion/scroll-reveal";
-
-function FeaturedCard({ entry, index }: { entry: Entry; index: number }) {
-  return (
-    <Link href={href(entry)} transitionTypes={["nav-forward"]} data-cursor="View" className="group block">
-      <ViewTransition name={`cover-${entry.collection}-${entry.slug}`} share="morph">
-        <Cover entry={entry} index={index} className="aspect-[4/3] w-full rounded-sm" />
-      </ViewTransition>
-      <div className="mt-4 flex items-baseline justify-between gap-6">
-        <h3 className="type-display text-h3 leading-tight">{entry.title}</h3>
-        <span className="meta shrink-0">{entry.date.slice(0, 4)}</span>
-      </div>
-      <p className="mt-2 max-w-[52ch] text-small text-ink-2">{entry.summary}</p>
-    </Link>
-  );
-}
 
 export default function Home() {
   const entries = getAllEntries();
@@ -82,7 +65,7 @@ export default function Home() {
 
         <ProjectRail label="Selected work">
           {featured.map((entry, i) => (
-            <FeaturedCard key={`${entry.collection}/${entry.slug}`} entry={entry} index={i} />
+            <DeviceCard key={`${entry.collection}/${entry.slug}`} entry={entry} index={i} />
           ))}
         </ProjectRail>
 

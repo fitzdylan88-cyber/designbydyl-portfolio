@@ -41,6 +41,8 @@ export const frontmatterSchema = z.object({
     .array(z.object({ label: z.string(), value: z.string() }))
     .default([]),
   cover: z.string().optional(),
+  /** Device mockup on a transparent background, cropped into the home swimlane card. */
+  mockup: z.string().optional(),
   accent: z.string().optional(),
   liveUrl: z.url().optional(),
   repoUrl: z.url().optional(),
