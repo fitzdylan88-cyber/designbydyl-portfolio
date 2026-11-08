@@ -27,7 +27,7 @@ export function DeviceCard({ entry, index }: { entry: CardEntry; index: number }
       href={href(entry)}
       transitionTypes={["nav-forward"]}
       data-cursor="View"
-      className="group relative flex aspect-[4/5] flex-col overflow-hidden rounded-sm"
+      className="group relative flex aspect-[4/5] flex-col overflow-hidden rounded-2xl md:rounded-3xl"
       style={{ background: tints[index % tints.length] }}
     >
       <div className="relative z-10 p-6 md:p-8">
@@ -47,7 +47,7 @@ export function DeviceCard({ entry, index }: { entry: CardEntry; index: number }
             />
           </div>
         ) : (
-          <div className="absolute top-[46%] -right-[8%] -bottom-[8%] left-[14%] overflow-hidden rounded-sm shadow-[0_24px_48px_-24px_rgb(8_72_135/0.45)] transition-transform duration-[var(--dur-3)] ease-[var(--ease-out)] group-hover:-translate-y-2">
+          <div className="absolute top-[46%] -right-[8%] -bottom-[8%] left-[14%] overflow-hidden rounded-xl shadow-[0_24px_48px_-24px_rgb(8_72_135/0.45)] transition-transform duration-[var(--dur-3)] ease-[var(--ease-out)] group-hover:-translate-y-2">
             {entry.cover ? (
               <Image
                 src={entry.cover}
