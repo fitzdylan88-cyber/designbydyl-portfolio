@@ -49,12 +49,12 @@ export const experience: { company: string; period: string; roles: { period: str
  * `ratio` is width / height, used to size the mask box. `scale` evens out
  * optical size between stacked and horizontal marks.
  */
-export const employers = [
-  { name: "Flutter", logo: null, ratio: 4, scale: 1, period: "2023–" },
+export const employers: { name: string; logo: string | null; ratio: number; scale: number; period: string }[] = [
+  { name: "Flutter UK & Ireland", logo: "/logos/flutter-uki.png", ratio: 1840 / 586, scale: 1, period: "2023–" },
   { name: "AIB", logo: "/logos/aib.png", ratio: 149 / 193, scale: 1, period: "2021–2023" },
   { name: "Design+", logo: null, ratio: 4.2, scale: 1, period: "2018–2020" },
   { name: "Bord na Móna", logo: "/logos/bord-na-mona.svg", ratio: 969.7 / 283.5, scale: 0.6, period: "2017–2018" },
-] as const;
+];
 
 export const capabilities = [
   "Product strategy",
