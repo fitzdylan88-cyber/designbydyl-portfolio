@@ -1,7 +1,6 @@
 import { Magnetic } from "@/components/motion/magnetic";
 import { SplitReveal } from "@/components/motion/split-reveal";
 import { contact, site } from "@/lib/site";
-import { Clock } from "./clock";
 import { Arrow } from "@/components/icons";
 
 export function Footer() {
@@ -18,7 +17,7 @@ export function Footer() {
           by="words"
           className="type-display col-span-12 text-mega leading-[0.9] text-balance"
         >
-          Got something in mind? Let&rsquo;s talk.
+          Got something in mind? Let&rsquo;s talk
         </SplitReveal>
 
         <div className="col-span-12 mt-14 flex flex-wrap items-center gap-6 md:mt-20">
@@ -26,7 +25,7 @@ export function Footer() {
             <Magnetic>
               <a
                 href={contact.href}
-                className="inline-flex items-center gap-3 rounded-full bg-accent px-7 py-4 text-body font-medium text-accent-ink transition-transform duration-[var(--dur-2)] active:scale-95"
+                className="inline-flex items-center gap-3 rounded-sm bg-accent px-7 py-4 text-body font-medium text-accent-ink transition-transform duration-[var(--dur-2)] active:scale-95"
               >
                 {contact.label}
                 <Arrow />
@@ -49,11 +48,10 @@ export function Footer() {
           )}
         </div>
 
-        <div className="col-span-12 mt-24 flex flex-wrap justify-between gap-4 border-t border-paper/15 pt-6 text-small text-paper/60">
+        <div className="col-span-12 mt-24 flex flex-wrap justify-between gap-4 text-small text-paper/60">
           <span>
             © {new Date().getFullYear()} {site.name}
           </span>
-          <Clock timeZone={site.timeZone} label={site.location} />
           <span>Designed and built with Claude</span>
         </div>
       </div>

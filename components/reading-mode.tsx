@@ -74,7 +74,7 @@ export function ReadingToggle({ fullMinutes, tldrSeconds }: { fullMinutes: numbe
       <div
         role="group"
         aria-labelledby={noteId}
-        className="inline-flex rounded-full border border-rule p-1"
+        className="inline-flex rounded-sm bg-paper-2 p-1"
       >
         {options.map((option) => {
           const selected = mode === option.value;
@@ -84,13 +84,13 @@ export function ReadingToggle({ fullMinutes, tldrSeconds }: { fullMinutes: numbe
               type="button"
               aria-pressed={selected}
               onClick={() => setMode(option.value)}
-              className="relative rounded-full px-4 py-2 text-small transition-colors duration-[var(--dur-2)] pointer-coarse:py-2.5"
+              className="relative rounded-xs px-4 py-2 text-small transition-colors duration-[var(--dur-2)] pointer-coarse:py-2.5"
             >
               {selected && (
                 <motion.span
                   layoutId="reading-pill"
                   transition={spring.snappy}
-                  className="absolute inset-0 rounded-full bg-ink"
+                  className="absolute inset-0 rounded-xs bg-ink"
                 />
               )}
               <span className={`relative font-medium ${selected ? "text-paper" : "text-ink"}`}>{option.label}</span>

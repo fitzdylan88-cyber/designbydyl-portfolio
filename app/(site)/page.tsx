@@ -47,7 +47,7 @@ export default function Home() {
           >
             Dylan Fitzpatrick
           </SplitReveal>
-          <div className="col-span-12 mt-10 grid grid-cols-subgrid items-end gap-y-6 border-t border-rule pt-6">
+          <div className="col-span-12 mt-10 grid grid-cols-subgrid items-end gap-y-6">
             <dl className="col-span-12 grid grid-cols-3 gap-x-[var(--gutter)] md:col-span-5 lg:col-span-5">
               {[
                 { label: "Role", value: site.role },
@@ -69,12 +69,12 @@ export default function Home() {
 
       <section id="work" className="scroll-mt-24 pt-24 md:pt-32">
         <div className="container-grid">
-          <div className="col-span-12 mb-12 flex items-end justify-between border-b border-rule pb-6">
+          <div className="col-span-12 mb-12 flex items-end justify-between">
             <SplitReveal as="h2" by="words" className="type-display text-h2 leading-none">
               Selected work
             </SplitReveal>
             <Link href="/work" className="group label inline-flex items-center gap-1.5 hover:text-ink">
-              All work <span className="meta">{entries.length}</span>
+              All work
               <Arrow className="transition-transform duration-[var(--dur-2)] group-hover:translate-x-0.5" />
             </Link>
           </div>
@@ -98,7 +98,7 @@ export default function Home() {
       </section>
 
       <section className="container-grid pt-32">
-        <h2 className="type-display col-span-12 mb-10 border-b border-rule pb-6 text-h2 leading-none">
+        <h2 className="type-display col-span-12 mb-10 text-h2 leading-none">
           Where I&rsquo;ve worked
         </h2>
         <div data-reveal className="col-span-12">

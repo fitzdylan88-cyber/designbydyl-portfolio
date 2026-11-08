@@ -182,8 +182,6 @@
   font-family: var(--font-mono);
   font-size: var(--text-micro);
   font-variant-numeric: tabular-nums;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
   color: var(--ink-3);
 }
 

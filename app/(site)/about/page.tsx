@@ -85,12 +85,12 @@ export default function AboutPage() {
         immediate
         className="type-display col-span-12 text-h1 leading-[0.95] text-balance lg:col-span-10"
       >
-        I design products, and these days I build a lot of them too.
+        I design products, and these days I build a lot of them too
       </SplitReveal>
 
-      <dl className="col-span-12 mt-24 grid grid-cols-subgrid border-b border-rule">
+      <dl className="col-span-12 mt-24 grid grid-cols-subgrid gap-y-12">
         {bio.map((row) => (
-          <div key={row.label} className="col-span-12 grid grid-cols-subgrid gap-y-3 border-t border-rule py-8">
+          <div key={row.label} className="col-span-12 grid grid-cols-subgrid gap-y-3">
             <dt className="kicker col-span-12 pt-1 lg:col-span-3">{row.label}</dt>
             <dd className="col-span-12 max-w-[46ch] text-lede leading-snug text-ink-2 lg:col-span-9">{row.body}</dd>
           </div>
@@ -99,9 +99,9 @@ export default function AboutPage() {
 
       <section className="col-span-12 mt-32 grid grid-cols-subgrid gap-y-12">
         <h2 className="col-span-12 text-h3 font-medium leading-tight tracking-tight lg:col-span-3">Capabilities</h2>
-        <ul className="col-span-12 grid grid-cols-1 border-t border-rule sm:grid-cols-2 lg:col-span-9">
+        <ul className="col-span-12 grid grid-cols-1 gap-y-3 sm:grid-cols-2 lg:col-span-9">
           {capabilities.map((item) => (
-            <li key={item} className="border-b border-rule py-4">
+            <li key={item}>
               <span className="text-h3 font-medium tracking-tight">{item}</span>
             </li>
           ))}
@@ -116,16 +116,16 @@ export default function AboutPage() {
       {experience.length > 0 && (
         <section className="col-span-12 mt-32 grid grid-cols-subgrid gap-y-12">
           <h2 className="col-span-12 text-h3 font-medium leading-tight tracking-tight lg:col-span-3">Experience</h2>
-          <ol className="col-span-12 border-t border-rule lg:col-span-9">
+          <ol className="col-span-12 space-y-10 lg:col-span-9">
             {experience.map((job) => (
-              <li key={job.company} className="grid gap-1 border-b border-rule py-5 sm:grid-cols-[8rem_1fr] sm:gap-4">
+              <li key={job.company} className="grid gap-1 sm:grid-cols-[8rem_1fr] sm:gap-4">
                 <span className="meta sm:pt-1.5">{job.period}</span>
                 <div>
                   <h3 className="text-h3 font-medium tracking-tight">{job.company}</h3>
                   {job.roles.length === 1 ? (
                     <p className="text-ink-2">{job.roles[0].role}</p>
                   ) : (
-                    <ol className="mt-4 space-y-4 border-l border-rule pl-5">
+                    <ol className="mt-4 space-y-4">
                       {job.roles.map((r) => (
                         <li key={r.role}>
                           <span className="block font-medium text-ink">{r.role}</span>
@@ -145,7 +145,7 @@ export default function AboutPage() {
         <h2 className="col-span-12 text-h3 font-medium leading-tight tracking-tight lg:col-span-3">Toolkit</h2>
         <ul className="col-span-12 flex flex-wrap gap-2 lg:col-span-9">
           {toolkit.map((tool) => (
-            <li key={tool} className="rounded-full border border-rule px-4 py-2 text-small">
+            <li key={tool} className="rounded-sm bg-paper-2 px-3 py-1.5 text-small text-ink">
               {tool}
             </li>
           ))}
@@ -157,7 +157,7 @@ export default function AboutPage() {
         <Magnetic>
           <a
             href={contact.href}
-            className="inline-flex items-center gap-3 rounded-full bg-ink px-7 py-4 text-body font-medium text-paper"
+            className="inline-flex items-center gap-3 rounded-sm bg-ink px-7 py-4 text-body font-medium text-paper"
           >
             Say hello <Arrow />
           </a>

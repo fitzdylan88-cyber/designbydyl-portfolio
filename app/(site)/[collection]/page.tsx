@@ -31,9 +31,6 @@ export default async function IndexPage({ params }: { params: Promise<{ collecti
         <SplitReveal as="h1" by="chars" immediate className="type-display text-mega leading-[0.85]">
           Work
         </SplitReveal>
-        <span className="meta mt-2" aria-label={`${entries.length} pieces`}>
-          {entries.length}
-        </span>
       </div>
       <WorkIndex entries={entries} initial={collection === "work" ? "all" : (collection as "projects" | "play")} />
     </div>

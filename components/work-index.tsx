@@ -38,10 +38,10 @@ export function WorkIndex({ entries, initial }: { entries: ListEntry[]; initial:
               role="radio"
               aria-checked={selected}
               onClick={() => choose(f.id)}
-              className="relative rounded-full px-4 py-2 text-small pointer-coarse:py-3 text-ink-2 transition-colors duration-[var(--dur-2)] hover:text-ink aria-checked:text-paper"
+              className="relative rounded-sm px-4 py-2 text-small pointer-coarse:py-3 text-ink-2 transition-colors duration-[var(--dur-2)] hover:text-ink aria-checked:text-paper"
             >
               {selected && (
-                <motion.span layoutId="filter-pill" transition={spring.snappy} className="absolute inset-0 rounded-full bg-ink" />
+                <motion.span layoutId="filter-pill" transition={spring.snappy} className="absolute inset-0 rounded-sm bg-ink" />
               )}
               <span className="relative">
                 {f.label}

@@ -68,7 +68,7 @@ export default async function EntryPage({ params }: { params: Promise<Params> })
             </li>
             <li aria-hidden>/</li>
             <li>{collectionLabels[entry.collection]}</li>
-            {entry.draft && <li className="meta rounded-full border border-rule px-2 py-0.5">Draft</li>}
+            {entry.draft && <li className="rounded-sm bg-paper-2 px-2 py-0.5 text-ink-2">Draft</li>}
           </ol>
         </nav>
         <SplitReveal
@@ -81,7 +81,7 @@ export default async function EntryPage({ params }: { params: Promise<Params> })
         <ScrollHighlight className="col-span-12 mt-8 max-w-[40ch] text-lede leading-snug text-ink md:col-span-8 lg:col-span-6">
           {entry.summary}
         </ScrollHighlight>
-        <dl className="col-span-12 mt-12 grid grid-cols-2 gap-x-[var(--gutter)] gap-y-6 border-t border-rule pt-6 md:grid-cols-4">
+        <dl className="col-span-12 mt-12 grid grid-cols-2 gap-x-[var(--gutter)] gap-y-6 md:grid-cols-4">
           {facts.map((fact) => (
             <div key={fact.label}>
               <dt className="kicker mb-1">{fact.label}</dt>

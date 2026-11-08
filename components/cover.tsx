@@ -20,9 +20,9 @@ function hash(input: string) {
 }
 
 const surfaces = [
-  { bg: "var(--sky)", form: "var(--accent)", line: "var(--accent-ink)", text: "var(--accent-ink)" },
-  { bg: "var(--ink)", form: "var(--accent)", line: "var(--paper)", text: "var(--paper)" },
-  { bg: "var(--accent)", form: "var(--ink)", line: "var(--accent-ink)", text: "var(--accent-ink)" },
+  { bg: "var(--sky)", form: "var(--accent)", text: "var(--accent-ink)" },
+  { bg: "var(--ink)", form: "var(--accent)", text: "var(--paper)" },
+  { bg: "var(--accent)", form: "var(--ink)", text: "var(--accent-ink)" },
 ] as const;
 
 type FormProps = { fill: string; seed: number };
@@ -127,19 +127,10 @@ export function Cover({
         preserveAspectRatio="xMidYMid slice"
         className="absolute inset-0 h-full w-full"
       >
-        <g stroke={surface.line} strokeOpacity="0.14" strokeWidth="0.75" vectorEffect="non-scaling-stroke">
-          {Array.from({ length: 11 }, (_, i) => (
-            <line key={`v${i}`} x1={(i + 1) * (400 / 12)} y1="0" x2={(i + 1) * (400 / 12)} y2="300" />
-          ))}
-          {Array.from({ length: 7 }, (_, i) => (
-            <line key={`h${i}`} x1="0" y1={(i + 1) * (300 / 8)} x2="400" y2={(i + 1) * (300 / 8)} />
-          ))}
-        </g>
         <Form fill={fill} seed={seed} />
       </svg>
 
-      <div className={`absolute inset-0 flex flex-col justify-between ${pad}`}>
-        <span className="font-mono text-micro tracking-[0.06em] uppercase">{entry.collection}</span>
+      <div className={`absolute inset-0 flex flex-col justify-end ${pad}`}>
         {size !== "sm" && (
           <p
             className={`type-display max-w-[14ch] leading-[0.95] ${

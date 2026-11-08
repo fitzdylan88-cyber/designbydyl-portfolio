@@ -130,7 +130,7 @@ export function Cursor() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.6 }}
                 transition={spring.snappy}
-                className="font-mono text-[11px] font-medium tracking-[0.1em] text-paper uppercase"
+                className="text-[12px] font-medium text-paper"
               >
                 {mode.text}
               </motion.span>

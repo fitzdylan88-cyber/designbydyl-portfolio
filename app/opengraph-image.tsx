@@ -38,7 +38,7 @@ export default function Image() {
             background: accent,
           }}
         />
-        <div style={{ display: "flex", gap: 28, fontSize: 24, letterSpacing: 2, color: ink2, textTransform: "uppercase" }}>
+        <div style={{ display: "flex", gap: 28, fontSize: 26, color: ink2 }}>
           <span>{site.role}</span>
           <span>{site.location}</span>
         </div>
