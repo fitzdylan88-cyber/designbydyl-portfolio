@@ -46,7 +46,7 @@ export function ProjectRail({ children, label }: { children: React.ReactNode; la
       <ul
         ref={trackRef}
         aria-label={label}
-        className="rail-inset flex snap-x snap-mandatory gap-[var(--gutter)] overflow-x-auto overscroll-x-contain pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        className="rail-inset flex snap-x snap-mandatory gap-[var(--gutter)] overflow-x-auto overscroll-x-contain -my-4 py-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
         {Children.map(children, (child) => (
           <li className="rail-card shrink-0 snap-start">{child}</li>
