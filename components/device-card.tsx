@@ -48,7 +48,7 @@ export function DeviceCard({ entry, index }: { entry: CardEntry; index: number }
                 alt=""
                 fill
                 sizes="(min-width: 1024px) 30vw, (min-width: 768px) 50vw, 85vw"
-                className="object-cover object-right-bottom"
+                className="object-contain object-right-bottom"
               />
             </div>
           ) : (
