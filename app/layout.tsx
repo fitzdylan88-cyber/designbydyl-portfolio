@@ -1,10 +1,7 @@
 import type { Metadata } from "next";
 import { fontVariables } from "@/lib/fonts";
 import { site } from "@/lib/site";
-import { SmoothScroll } from "@/components/motion/smooth-scroll";
-import { Cursor } from "@/components/motion/cursor";
-import { Lightbox } from "@/components/lightbox";
-import { MotionProvider } from "@/components/motion/motion-provider";
+import { SiteShell } from "@/components/site-shell";
 import { readingModeScript } from "@/lib/reading-mode";
 import "./globals.css";
 
@@ -27,13 +24,7 @@ export default function RootLayout({
     <html lang="en" className={fontVariables} suppressHydrationWarning>
       <body className="min-h-dvh">
         <script dangerouslySetInnerHTML={{ __html: readingModeScript }} />
-        <MotionProvider>
-          <SmoothScroll>
-            {children}
-            <Lightbox />
-          </SmoothScroll>
-          <Cursor />
-        </MotionProvider>
+        <SiteShell>{children}</SiteShell>
       </body>
     </html>
   );
