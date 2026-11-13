@@ -2,7 +2,7 @@
 
 Published pages live in Sanity and are edited in the Studio at `/studio`.
 New pieces start as an MDX file in `content/inbox/` that starts with this
-YAML, then `npm run import` turns it into a Sanity draft. The importer checks
+YAML, then `npm run import` puts it into Sanity. The importer checks
 these fields (zod), so a bad field fails there. Briefs from either export
 prompt use the same keys, which means promoting a brief is mostly writing the
 prose.
@@ -36,8 +36,10 @@ prose.
 - **projects/**: shipped side projects and vibe-coded apps. Shorter, with a live link.
 - **play/**: experiments and passion projects. Can be a single interactive demo.
 
-Everything imports as an unpublished draft. It goes live when Dylan presses
-Publish in the Studio.
+`npm run import -- <file> --publish` puts a piece live straight away;
+without `--publish` it arrives as an unpublished draft. Either way Dylan
+tweaks it afterwards in the Studio. The importer never overwrites a page that
+already exists, so Studio changes aren't lost.
 
 ## MDX components the importer understands
 

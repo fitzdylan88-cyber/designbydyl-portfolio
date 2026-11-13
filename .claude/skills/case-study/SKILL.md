@@ -1,6 +1,6 @@
 ---
 name: case-study
-description: Turn a portfolio brief into a Sanity draft (written as MDX, then imported into the Studio), or draft a brief from a local project folder. Use when Dylan says "promote <slug>", "write up <project>", "draft a brief for <folder>", or drops a file in content/inbox.
+description: Turn a portfolio brief into a live page in Sanity (written as MDX, then imported and published; Dylan tweaks it in the Studio), or draft a brief from a local project folder. Use when Dylan says "promote <slug>", "write up <project>", "draft a brief for <folder>", or drops a file in content/inbox.
 ---
 
 # Case study skill
@@ -18,11 +18,12 @@ Two jobs. Read `content/_pipeline/brief-schema.md` first either way.
    results and lessons. Put your questions in the file as `TODO:` lines too.
 4. Set that item's status to `brief` in `content/_pipeline/backlog.md`.
 
-## Job 2: promote `content/inbox/<slug>.md` → a draft in the Sanity Studio
+## Job 2: promote `content/inbox/<slug>.md` → a live page in Sanity
 
-Pages live in Sanity now. You write the page as MDX in the inbox, then the
-importer turns it into an unpublished draft that Dylan arranges and publishes
-in the Studio (`/studio`).
+Pages live in Sanity. You write the page as MDX in the inbox, then the
+importer publishes it to the site. Dylan then tweaks it in the Studio
+(`/studio`) whenever they like. Dylan asked for this on 2026-11-13: push it
+live for them, and they make changes after publishing.
 
 1. **Safety pass first** (work pieces). Re-read the brief for names,
    companies, URLs, exact business numbers and internal tool names. If
@@ -48,18 +49,27 @@ in the Studio (`/studio`).
      relative path. Where a visual is needed, leave
      `{/* VISUAL: <description> */}` (it becomes a Studio-only note) and add
      it to the list you hand back. Open questions go in `{/* TODO: … */}`.
-4. **Check, then import**:
-   - `npm run import -- content/inbox/<slug>.mdx --collection=<collection> --dry`
-     checks the frontmatter and lists anything it couldn't convert.
-   - Then run it without `--dry`. It uploads the images and creates the draft.
-     It never touches published content, and refuses to overwrite an existing
-     draft (`--replace` overrides that, and loses edits made in the Studio, so
-     ask Dylan first).
-   - Open the draft in the Studio's Presentation tab to check it renders.
-5. **Hand back**: the Studio link the importer prints, a short list of open
-   questions, visuals to make, and anything you softened for safety. Update
-   the backlog status to `draft`. Delete the inbox files only when Dylan
-   confirms.
+     Notes never show on the site.
+4. **Check**: `npm run import -- content/inbox/<slug>.mdx --collection=<collection> --dry`
+   checks the frontmatter and lists anything it couldn't convert.
+5. **Publish**: run it again with `--publish`. It uploads the images and puts
+   the page live within seconds, no redeploy. Import as a draft instead
+   (leave off `--publish`) and say why when:
+   - the safety pass raised anything still unanswered,
+   - a TODO says not to publish yet, or a claim on the page is unconfirmed
+     (a number, a decision owner, a sign-off),
+   - the piece is employer work that still needs the employer's sign-off
+     (check the backlog notes),
+   - or Dylan asked for a draft.
+6. **Never overwrite Dylan's tweaks.** The importer refuses if the page
+   already exists. Don't add `--replace` unless Dylan says to, because it
+   discards everything changed in the Studio. To change a page that's
+   already live, edit it in Sanity instead (or tell Dylan what to change).
+7. **Hand back**: the site and Studio links the importer prints, a short
+   list of open questions, visuals to make, and anything you softened for
+   safety. Update the backlog status to `published` (or `draft`). Delete the
+   inbox files only when Dylan confirms.
 
-Dylan arranges the sections, adds "Text and image" layouts and presses
-Publish in the Studio. Later edits happen there too, not in MDX.
+Dylan tweaks the live page in the Studio's Presentation tab: rewrite text,
+swap pictures, reorder sections, add "Text and image" layouts and change the
+home card. Changes go live when they press Publish.

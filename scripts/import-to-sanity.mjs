@@ -1,19 +1,21 @@
 /**
- * Import an MDX case study into Sanity as an unpublished draft.
+ * Import an MDX case study into Sanity, as a draft or straight onto the site.
  *
- *   npm run import -- content/inbox/my-project.mdx --collection=work
  *   npm run import -- content/inbox/my-project.mdx --collection=work --dry
+ *   npm run import -- content/inbox/my-project.mdx --collection=work            # draft
+ *   npm run import -- content/inbox/my-project.mdx --collection=work --publish  # live
  *
  * The case-study skill writes new pieces as MDX in content/inbox (the same
  * frontmatter and components the site used before Sanity), then runs this.
- * The draft then shows in the Studio, where Dylan arranges and publishes it.
+ * Either way Dylan can keep tweaking it in the Studio afterwards.
  *
  * - Collection: `--collection=work|projects|play`, else the file's folder
  *   (content/work/…), else `collection:` in the frontmatter.
  * - Images: `/work/x.png` is read from public/; any other path is relative to
  *   the MDX file. Each is uploaded to Sanity once.
- * - Never touches published content. It refuses if a draft with the same id
- *   exists, unless `--replace` (which overwrites that draft's edits).
+ * - `--publish` puts it live at once. Without it, it's an unpublished draft.
+ * - Never overwrites: it refuses if that page (or draft) already exists, so
+ *   Studio tweaks are never lost. `--replace` overrides this and discards them.
  * - `--dry` writes the document JSON to `--out=<dir>` (default
  *   content/inbox/.sanity-dry) instead of uploading.
  * - TODO and VISUAL comments in the MDX become Studio-only notes.
@@ -33,6 +35,7 @@ const args = process.argv.slice(2);
 const flag = (name) => args.find((a) => a.startsWith(`--${name}=`))?.split("=")[1];
 const dry = args.includes("--dry");
 const replace = args.includes("--replace");
+const publish = args.includes("--publish");
 const outDir = flag("out") ?? "content/inbox/.sanity-dry";
 const files = args.filter((a) => !a.startsWith("--"));
 const root = process.cwd();
@@ -40,7 +43,7 @@ const collections = ["work", "projects", "play"];
 const tagOptions = ["UI design", "UX research", "Accessibility", "Industrial design", "Design + build", "AI-assisted", "Measurable impact"];
 
 if (!files.length) {
-  console.error("Usage: npm run import -- <file.mdx> [--collection=work|projects|play] [--dry] [--replace]");
+  console.error("Usage: npm run import -- <file.mdx> [--collection=work|projects|play] [--dry] [--publish] [--replace]");
   process.exit(1);
 }
 
@@ -322,7 +325,7 @@ async function toDocument(file) {
 
   const id = `${collection}-${slug}`;
   const doc = {
-    _id: `drafts.${id}`,
+    _id: publish ? id : `drafts.${id}`,
     _type: "caseStudy",
     collection,
     slug: { _type: "slug", current: slug },
@@ -374,11 +377,21 @@ if (dry) {
     await tx.commit();
   } catch (error) {
     if (String(error).includes("already exists")) {
-      console.error("\nA draft with this id already exists in Sanity. Re-run with --replace to overwrite its edits.");
+      console.error(
+        `\nThat ${publish ? "page is already live" : "draft already exists"} in Sanity, so it was left alone.` +
+          " Re-run with --replace to overwrite it, which discards any changes made in the Studio.",
+      );
       process.exit(1);
     }
     throw error;
   }
-  console.log(`\nUploaded ${uploaded.size} images and created ${docs.length} draft(s):`);
-  for (const d of docs) console.log(`  ${d._id}  →  /studio/structure/${d.collection};${d._id.replace("drafts.", "")}`);
+  console.log(`\nUploaded ${uploaded.size} images.`);
+  console.log(publish ? "Published (live now):" : "Created as unpublished drafts:");
+  for (const d of docs) {
+    const id = d._id.replace("drafts.", "");
+    console.log(`  ${d.title}`);
+    if (publish) console.log(`    Site:   https://www.designbydyl.com/${d.collection}/${d.slug.current}`);
+    console.log(`    Studio: https://www.designbydyl.com/studio/presentation?preview=/${d.collection}/${d.slug.current}`);
+    console.log(`    Local:  http://localhost:3000/studio/structure/${d.collection};${id}`);
+  }
 }
