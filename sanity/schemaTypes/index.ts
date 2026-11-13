@@ -7,6 +7,7 @@ import {
   imageSection,
   metric,
   metricsSection,
+  noteSection,
   picture,
   promptSection,
   shortVersionSection,
@@ -30,6 +31,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     metricsSection,
     beforeAfterSection,
     promptSection,
+    noteSection,
     shortVersionSection,
   ],
 };

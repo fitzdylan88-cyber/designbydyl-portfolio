@@ -26,7 +26,7 @@ export const caseStudy = defineType({
       group: "page",
       validation: (r) => r.required().max(220),
     }),
-    defineField({ name: "cover", title: "Cover image", type: "picture", group: "page" }),
+    defineField({ name: "cover", title: "Cover image", type: "image", options: { hotspot: true }, group: "page" }),
     defineField({
       name: "sections",
       title: "Sections",

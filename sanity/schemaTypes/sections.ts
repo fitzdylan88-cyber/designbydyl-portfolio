@@ -188,6 +188,18 @@ export const promptSection = defineType({
   },
 });
 
+/** A note to self: shown in the Studio only, never on the site. */
+export const noteSection = defineType({
+  name: "noteSection",
+  title: "Note (Studio only)",
+  type: "object",
+  fields: [defineField({ name: "text", title: "Note", type: "text", rows: 3 })],
+  preview: {
+    select: { text: "text" },
+    prepare: ({ text }) => ({ title: text ?? "Note", subtitle: "Note · not shown on the site" }),
+  },
+});
+
 /** Sections that can go anywhere, including inside the short version. */
 export const contentSections = [
   "textSection",
@@ -198,6 +210,7 @@ export const contentSections = [
   "metricsSection",
   "beforeAfterSection",
   "promptSection",
+  "noteSection",
 ] as const;
 
 export const shortVersionSection = defineType({
