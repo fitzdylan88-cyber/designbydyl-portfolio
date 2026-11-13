@@ -43,6 +43,22 @@ export const frontmatterSchema = z.object({
   cover: z.string().optional(),
   /** Device mockup on a transparent background, cropped into the home swimlane card. */
   mockup: z.string().optional(),
+  /**
+   * Home swimlane card theme, so each card looks like its project. `bg` is
+   * any CSS background (a colour or gradient). `picture`: "inset" frames the
+   * cover in from the left and lets it run off the right and bottom edges,
+   * "bleed" runs it the full card width, "float" shows the mockup on the card
+   * with no frame. `summary` is a shorter blurb for the card only.
+   */
+  card: z
+    .object({
+      bg: z.string(),
+      title: z.string(),
+      text: z.string(),
+      picture: z.enum(["inset", "bleed", "float"]).default("inset"),
+      summary: z.string().optional(),
+    })
+    .optional(),
   accent: z.string().optional(),
   liveUrl: z.url().optional(),
   repoUrl: z.url().optional(),
