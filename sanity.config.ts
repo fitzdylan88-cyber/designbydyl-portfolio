@@ -6,11 +6,13 @@
  */
 import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
+import { presentationTool } from "sanity/presentation";
 import { visionTool } from "@sanity/vision";
 import { colorInput } from "@sanity/color-input";
 import { apiVersion, dataset, projectId } from "./sanity/env";
 import { schema } from "./sanity/schemaTypes";
 import { structure } from "./sanity/structure";
+import { resolve } from "./sanity/presentation";
 
 export default defineConfig({
   basePath: "/studio",
@@ -31,5 +33,11 @@ export default defineConfig({
       },
     ],
   },
-  plugins: [structureTool({ structure }), colorInput(), visionTool({ defaultApiVersion: apiVersion })],
+  plugins: [
+    // "Presentation": the site beside the editor. Click any text or picture to edit it.
+    presentationTool({ resolve, previewUrl: { previewMode: { enable: "/api/draft-mode/enable" } } }),
+    structureTool({ structure }),
+    colorInput(),
+    visionTool({ defaultApiVersion: apiVersion }),
+  ],
 });

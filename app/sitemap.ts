@@ -4,11 +4,11 @@ import { href } from "@/lib/paths";
 
 const base = "https://www.designbydyl.com";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   return [
     { url: base, changeFrequency: "monthly", priority: 1 },
     { url: `${base}/work`, changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/about`, changeFrequency: "yearly", priority: 0.6 },
-    ...getAllEntries().map((entry) => ({ url: `${base}${href(entry)}`, changeFrequency: "yearly" as const, priority: 0.7 })),
+    ...(await getAllEntries({ build: true })).map((entry) => ({ url: `${base}${href(entry)}`, changeFrequency: "yearly" as const, priority: 0.7 })),
   ];
 }

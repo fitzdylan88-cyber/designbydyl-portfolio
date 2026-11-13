@@ -10,8 +10,8 @@ import { DeviceCard } from "@/components/device-card";
 import { ScrollHighlight } from "@/components/motion/scroll-highlight";
 import { ScrollReveal } from "@/components/motion/scroll-reveal";
 
-export default function Home() {
-  const entries = getAllEntries();
+export default async function Home() {
+  const entries = await getAllEntries();
   const featured = [
     ...entries.filter((e) => e.featured),
     ...entries.filter((e) => !e.featured),

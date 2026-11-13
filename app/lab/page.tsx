@@ -7,10 +7,10 @@ import { Lab } from "./lab";
 export const metadata: Metadata = { title: "Lab", robots: { index: false } };
 
 /** Dev and preview-only playground for art-directing tokens, type and motion. */
-export default function LabPage() {
+export default async function LabPage() {
   if (!showDrafts) notFound();
 
-  const entries = getAllEntries().map(({ collection, slug, title, draft }) => ({
+  const entries = (await getAllEntries()).map(({ collection, slug, title, draft }) => ({
     href: `/${collection}/${slug}`,
     title,
     draft,

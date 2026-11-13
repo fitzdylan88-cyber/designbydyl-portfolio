@@ -1,6 +1,6 @@
-export function Metrics({ items }: { items: { value: string; label: string }[] }) {
+export function Metrics({ items, edit }: { items: { value: string; label: string }[]; edit?: string }) {
   return (
-    <dl className="my-14 grid grid-cols-2 gap-x-[var(--gutter)] gap-y-8 md:grid-cols-3">
+    <dl data-sanity={edit} className="my-14 grid grid-cols-2 gap-x-[var(--gutter)] gap-y-8 md:grid-cols-3">
       {items.map((item) => (
         <div key={item.label}>
           <dt className="sr-only">{item.label}</dt>

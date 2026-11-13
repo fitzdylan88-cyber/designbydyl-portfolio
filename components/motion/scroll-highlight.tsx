@@ -11,7 +11,16 @@ const SOFT = 10; // about ten letters are mid-fade at once
  * readers get the plain text; the letter spans are presentational. Takes a
  * plain string so the split stays simple.
  */
-export function ScrollHighlight({ children, className }: { children: string; className?: string }) {
+export function ScrollHighlight({
+  children,
+  className,
+  edit,
+}: {
+  children: string;
+  className?: string;
+  /** Click-to-edit attribute for the Studio's preview. */
+  edit?: string;
+}) {
   const ref = useRef<HTMLParagraphElement>(null);
 
   useEffect(() => {
@@ -50,7 +59,7 @@ export function ScrollHighlight({ children, className }: { children: string; cla
   const words = children.split(/(\s+)/);
 
   return (
-    <p ref={ref} className={className}>
+    <p ref={ref} className={className} data-sanity={edit}>
       <span className="sr-only">{children}</span>
       <span aria-hidden>
         {words.map((word, w) =>

@@ -16,6 +16,8 @@ type Props = {
   immediate?: boolean;
   delay?: number;
   className?: string;
+  /** Click-to-edit attribute for the Studio's preview. */
+  edit?: string;
   children: React.ReactNode;
 };
 
@@ -29,6 +31,7 @@ export function SplitReveal({
   immediate = false,
   delay = 0,
   className,
+  edit,
   children,
 }: Props) {
   const ref = useRef<HTMLHeadingElement>(null);
@@ -68,7 +71,7 @@ export function SplitReveal({
   );
 
   return (
-    <Tag ref={ref} className={className}>
+    <Tag ref={ref} className={className} data-sanity={edit}>
       {children}
     </Tag>
   );

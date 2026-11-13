@@ -6,13 +6,15 @@ export function PromptBlock({
   tool = "Claude",
   prompt,
   children,
+  edit,
 }: {
   tool?: string;
   prompt: string;
   children?: React.ReactNode;
+  edit?: string;
 }) {
   return (
-    <figure className="my-12 overflow-hidden rounded-sm bg-paper-2 font-mono text-small">
+    <figure data-sanity={edit} className="my-12 overflow-hidden rounded-sm bg-paper-2 font-mono text-small">
       <div className="px-4 pt-3">
         <span className="meta">Prompt to {tool}</span>
       </div>

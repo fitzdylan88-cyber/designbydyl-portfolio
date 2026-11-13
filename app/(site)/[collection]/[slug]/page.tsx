@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ViewTransition } from "react";
-import { collections, getAllEntries, getEntry, type Collection } from "@/lib/content";
+import { stegaClean } from "next-sanity";
+import { collections, getAllEntries, getEntry, isPreview, type Collection } from "@/lib/content";
+import { editor } from "@/lib/edit";
 import { Cover } from "@/components/cover";
 import { SplitReveal } from "@/components/motion/split-reveal";
 import { href } from "@/lib/paths";
@@ -10,34 +12,34 @@ import { Arrow } from "@/components/icons";
 import { ReadingToggle } from "@/components/reading-mode";
 import { ScrollHighlight } from "@/components/motion/scroll-highlight";
 import { ScrollReveal } from "@/components/motion/scroll-reveal";
+import { Sections } from "@/components/sections";
 
 type Params = { collection: string; slug: string };
 
 const collectionLabels: Record<Collection, string> = { work: "Case study", projects: "Project", play: "Play" };
 
-export const dynamicParams = false;
+// New case studies published in Sanity render on first visit, no redeploy needed.
+export const dynamicParams = true;
 
-export function generateStaticParams(): Params[] {
-  return getAllEntries().map(({ collection, slug }) => ({ collection, slug }));
+export async function generateStaticParams(): Promise<Params[]> {
+  return (await getAllEntries({ build: true })).map(({ collection, slug }) => ({ collection, slug }));
 }
 
-function resolve({ collection, slug }: Params) {
+async function resolve({ collection, slug }: Params) {
   if (!collections.includes(collection as Collection)) return undefined;
   return getEntry(collection as Collection, slug);
 }
 
 export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
-  const entry = resolve(await params);
-  return entry ? { title: entry.title, description: entry.summary } : {};
+  const entry = await resolve(await params);
+  return entry ? { title: stegaClean(entry.title), description: stegaClean(entry.summary) } : {};
 }
 
 export default async function EntryPage({ params }: { params: Promise<Params> }) {
-  const entry = resolve(await params);
+  const entry = await resolve(await params);
   if (!entry) notFound();
 
-  const { default: Body } = await import(`@/content/${entry.collection}/${entry.slug}.mdx`);
-
-  const all = getAllEntries();
+  const all = await getAllEntries();
   const position = all.findIndex((e) => e.collection === entry.collection && e.slug === entry.slug);
   const next = all.length > 1 ? all[(position + 1) % all.length] : undefined;
 
@@ -74,12 +76,16 @@ export default async function EntryPage({ params }: { params: Promise<Params> })
         <SplitReveal
           as="h1"
           immediate
+          edit={entry.edit?.title}
           className="type-display col-span-12 text-h1 leading-[0.95] text-balance lg:col-span-10"
         >
-          {entry.title}
+          {stegaClean(entry.title)}
         </SplitReveal>
-        <ScrollHighlight className="col-span-12 mt-8 max-w-[40ch] text-lede leading-snug text-ink md:col-span-8 lg:col-span-6">
-          {entry.summary}
+        <ScrollHighlight
+          edit={entry.edit?.summary}
+          className="col-span-12 mt-8 max-w-[40ch] text-lede leading-snug text-ink md:col-span-8 lg:col-span-6"
+        >
+          {stegaClean(entry.summary)}
         </ScrollHighlight>
         <dl className="col-span-12 mt-12 grid grid-cols-2 gap-x-[var(--gutter)] gap-y-6 md:grid-cols-4">
           {facts.map((fact) => (
@@ -119,7 +125,7 @@ export default async function EntryPage({ params }: { params: Promise<Params> })
       <div data-hero className="container-grid mb-24">
         <div className="col-span-12">
           <ViewTransition name={`cover-${entry.collection}-${entry.slug}`} share="morph">
-            <Cover entry={entry} index={position} size="lg" expandable className="aspect-[4/3] w-full md:aspect-[2/1]" />
+            <Cover entry={entry} index={position} size="lg" expandable edit={entry.edit?.cover} className="aspect-[4/3] w-full md:aspect-[2/1]" />
           </ViewTransition>
         </div>
       </div>
@@ -131,7 +137,7 @@ export default async function EntryPage({ params }: { params: Promise<Params> })
           data-story={entry.hasTldr || undefined}
           className="col-span-12"
         >
-          <Body />
+          <Sections sections={entry.sections} edit={editor(entry._id, await isPreview())} />
         </div>
       </div>
 

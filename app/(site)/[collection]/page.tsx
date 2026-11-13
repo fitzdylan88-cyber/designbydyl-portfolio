@@ -19,7 +19,7 @@ export default async function IndexPage({ params }: { params: Promise<{ collecti
   const { collection } = await params;
   if (!collections.includes(collection as Collection)) notFound();
 
-  const entries = getAllEntries()
+  const entries = (await getAllEntries())
     .sort((a, b) => b.date.localeCompare(a.date))
     .map(({ slug, collection, title, summary, date, role, tools, tags, cover, accent, draft }) => ({
       slug, collection, title, summary, date, role, tools, tags, cover, accent, draft,

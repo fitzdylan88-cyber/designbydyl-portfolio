@@ -80,12 +80,15 @@ export function Cover({
   size = "md",
   className = "",
   expandable = false,
+  edit,
 }: {
   entry: Pick<Entry, "slug" | "title" | "collection" | "cover" | "accent">;
   index?: number;
   size?: "sm" | "md" | "lg";
   className?: string;
   expandable?: boolean;
+  /** Click-to-edit attribute for the Studio's preview. */
+  edit?: string;
 }) {
   if (entry.cover) {
     const Frame = expandable ? "button" : "div";
@@ -96,6 +99,7 @@ export function Cover({
           ...lightboxTrigger([{ src: entry.cover, alt: entry.title }]),
           "aria-label": `Expand cover image: ${entry.title}`,
         })}
+        data-sanity={edit}
         className={`relative block overflow-hidden bg-paper-2 ${expandable ? "cursor-zoom-in" : ""} ${className}`}
       >
         <Image

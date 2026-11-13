@@ -9,11 +9,13 @@ type Props = {
   height?: number;
   /** Break out of the text column. */
   wide?: boolean;
+  /** Click-to-edit attribute for the Studio's preview. */
+  edit?: string;
 };
 
-export function Figure({ src, alt, caption, width = 2400, height = 1500, wide }: Props) {
+export function Figure({ src, alt, caption, width = 2400, height = 1500, wide, edit }: Props) {
   return (
-    <figure data-wide={wide || undefined} className={wide ? "my-16 -mx-[var(--margin)] md:mx-0" : "my-12"}>
+    <figure data-sanity={edit} data-wide={wide || undefined} className={wide ? "my-16 -mx-[var(--margin)] md:mx-0" : "my-12"}>
       <button
         type="button"
         {...lightboxTrigger([{ src, alt, caption }])}

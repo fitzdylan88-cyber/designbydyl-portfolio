@@ -13,6 +13,7 @@ export function BeforeAfter({
   labels = ["Before", "After"],
   width = 2400,
   height = 1500,
+  edit,
 }: {
   before: string;
   after: string;
@@ -20,12 +21,13 @@ export function BeforeAfter({
   labels?: [string, string];
   width?: number;
   height?: number;
+  edit?: string;
 }) {
   const [split, setSplit] = useState(50);
   const id = useId();
 
   return (
-    <figure className="my-12">
+    <figure data-sanity={edit} className="my-12">
       <div className="relative overflow-hidden bg-paper-2 select-none">
         <Image src={after} alt={`${alt} — ${labels[1]}`} width={width} height={height} className="h-auto w-full" />
         <div className="absolute inset-0" style={{ clipPath: `inset(0 ${100 - split}% 0 0)` }}>

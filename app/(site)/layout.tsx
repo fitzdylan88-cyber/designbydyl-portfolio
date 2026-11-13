@@ -1,8 +1,11 @@
 import { ViewTransition } from "react";
+import { draftMode } from "next/headers";
+import { VisualEditing } from "next-sanity/visual-editing";
+import { SanityLive } from "@/sanity/lib/live";
 import { Header } from "@/components/site/header";
 import { Footer } from "@/components/site/footer";
 
-export default function SiteLayout({ children }: { children: React.ReactNode }) {
+export default async function SiteLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
       <a
@@ -20,6 +23,10 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
         <main id="main">{children}</main>
       </ViewTransition>
       <Footer />
+      {/* Refreshes pages the moment content is published in the Studio. */}
+      <SanityLive />
+      {/* Click-to-edit overlays, only in the Studio's preview. */}
+      {(await draftMode()).isEnabled && <VisualEditing />}
     </>
   );
 }

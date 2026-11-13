@@ -454,3 +454,35 @@ dialog.lightbox * {
   padding-block: 0.08em 0.16em;
   margin-block: -0.08em -0.16em;
 }
+
+/* ── Text and image section (components/sections.tsx) ─────────────
+ * Text on one side, open space, then the picture. On wide screens it spans
+ * the whole story grid: text in columns 1–5, picture in 7–12 (or mirrored).
+ * Below that, the picture follows the text.
+ */
+[data-text-image] {
+  margin-block: 3rem;
+}
+[data-text-image] > [data-text-image-text] > :first-child {
+  margin-top: 0;
+}
+[data-text-image] figure {
+  margin: 0;
+}
+@media (min-width: 64rem) {
+  [data-prose] > [data-text-image] {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: var(--gutter);
+    align-items: center;
+    margin-block: 4rem;
+  }
+  [data-text-image="right"] > [data-text-image-text] { grid-column: 1 / span 5; }
+  [data-text-image="right"] > [data-text-image-picture] { grid-column: 7 / -1; }
+  [data-text-image="left"] > [data-text-image-picture] { grid-column: 1 / span 6; grid-row: 1; }
+  [data-text-image="left"] > [data-text-image-text] { grid-column: 8 / -1; grid-row: 1; }
+}
+@media (max-width: 63.99rem) {
+  [data-text-image] > [data-text-image-picture] { margin-top: 1.5rem; }
+}

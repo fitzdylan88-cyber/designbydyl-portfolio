@@ -27,7 +27,7 @@ const tints = [
 
 const sizes = "(min-width: 1024px) 30vw, (min-width: 768px) 50vw, 85vw";
 
-type CardEntry = Pick<Entry, "slug" | "collection" | "title" | "summary" | "cover" | "mockup" | "accent" | "card">;
+type CardEntry = Pick<Entry, "slug" | "collection" | "title" | "summary" | "cover" | "mockup" | "accent" | "card" | "edit">;
 
 export function DeviceCard({ entry, index }: { entry: CardEntry; index: number }) {
   const theme = entry.card;
@@ -43,17 +43,22 @@ export function DeviceCard({ entry, index }: { entry: CardEntry; index: number }
     >
       <div className="relative z-10 min-h-[46%] shrink-0 p-6 pb-5 md:p-7 md:pb-6">
         <h3
+          data-sanity={entry.edit?.title}
           className="type-display max-w-[18ch] text-h3 leading-tight text-ink"
           style={theme && { color: theme.title }}
         >
           {entry.title.split(":")[0]}
         </h3>
-        <p className="mt-3 line-clamp-3 max-w-[40ch] text-small text-ink-2" style={theme && { color: theme.text }}>
+        <p
+          data-sanity={entry.edit?.cardSummary}
+          className="mt-3 line-clamp-3 max-w-[40ch] text-small text-ink-2"
+          style={theme && { color: theme.text }}
+        >
           {theme?.summary ?? entry.summary}
         </p>
       </div>
 
-      <div className="relative min-h-0 flex-1">
+      <div className="relative min-h-0 flex-1" data-sanity={entry.edit?.card}>
         <ViewTransition name={`cover-${entry.collection}-${entry.slug}`} share="morph">
           {picture === "float" && entry.mockup ? (
             <div className="absolute top-0 right-0 w-[70%]">
