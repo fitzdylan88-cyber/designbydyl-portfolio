@@ -1,12 +1,22 @@
 /**
- * One-off move of the MDX case studies into Sanity.
+ * Import an MDX case study into Sanity as an unpublished draft.
  *
- *   node --env-file=.env.local scripts/migrate-to-sanity.mjs --dry   # write JSON only
- *   node --env-file=.env.local scripts/migrate-to-sanity.mjs         # upload images, write docs
+ *   npm run import -- content/inbox/my-project.mdx --collection=work
+ *   npm run import -- content/inbox/my-project.mdx --collection=work --dry
  *
- * Safe to re-run: documents use fixed ids (`<collection>-<slug>`) and are
- * replaced, and Sanity de-duplicates identical image uploads. Entries marked
- * `draft: true` go in as unpublished drafts.
+ * The case-study skill writes new pieces as MDX in content/inbox (the same
+ * frontmatter and components the site used before Sanity), then runs this.
+ * The draft then shows in the Studio, where Dylan arranges and publishes it.
+ *
+ * - Collection: `--collection=work|projects|play`, else the file's folder
+ *   (content/work/…), else `collection:` in the frontmatter.
+ * - Images: `/work/x.png` is read from public/; any other path is relative to
+ *   the MDX file. Each is uploaded to Sanity once.
+ * - Never touches published content. It refuses if a draft with the same id
+ *   exists, unless `--replace` (which overwrites that draft's edits).
+ * - `--dry` writes the document JSON to `--out=<dir>` (default
+ *   content/inbox/.sanity-dry) instead of uploading.
+ * - TODO and VISUAL comments in the MDX become Studio-only notes.
  */
 import fs from "node:fs";
 import path from "node:path";
@@ -17,11 +27,55 @@ import remarkParse from "remark-parse";
 import remarkMdx from "remark-mdx";
 import remarkGfm from "remark-gfm";
 import { createClient } from "@sanity/client";
+import { z } from "zod";
 
-const dry = process.argv.includes("--dry");
-const outDir = process.argv.find((a) => a.startsWith("--out="))?.slice(6) ?? "sanity-migration";
+const args = process.argv.slice(2);
+const flag = (name) => args.find((a) => a.startsWith(`--${name}=`))?.split("=")[1];
+const dry = args.includes("--dry");
+const replace = args.includes("--replace");
+const outDir = flag("out") ?? "content/inbox/.sanity-dry";
+const files = args.filter((a) => !a.startsWith("--"));
 const root = process.cwd();
 const collections = ["work", "projects", "play"];
+const tagOptions = ["UI design", "UX research", "Accessibility", "Industrial design", "Design + build", "AI-assisted", "Measurable impact"];
+
+if (!files.length) {
+  console.error("Usage: npm run import -- <file.mdx> [--collection=work|projects|play] [--dry] [--replace]");
+  process.exit(1);
+}
+
+/** Frontmatter checks, so a half-filled brief fails here rather than in the Studio. */
+const frontmatter = z.object({
+  title: z.string().min(1),
+  summary: z.string().min(1).max(220),
+  date: z.string().regex(/^\d{4}-\d{2}$/, "date must be YYYY-MM"),
+  role: z.string().min(1),
+  duration: z.string().optional(),
+  team: z.union([z.string(), z.array(z.string())]).optional(),
+  context: z.string().optional(),
+  tools: z.array(z.string()).optional(),
+  tags: z.array(z.enum(tagOptions)).max(3).optional(),
+  ai: z.array(z.string()).optional(),
+  metrics: z.array(z.object({ label: z.string(), value: z.string() })).optional(),
+  cover: z.string().optional(),
+  mockup: z.string().optional(),
+  card: z
+    .object({
+      bg: z.string(),
+      title: z.string(),
+      text: z.string(),
+      picture: z.enum(["inset", "bleed", "float"]).optional(),
+      summary: z.string().optional(),
+    })
+    .optional(),
+  accent: z.string().optional(),
+  liveUrl: z.url().optional(),
+  repoUrl: z.url().optional(),
+  featured: z.boolean().optional(),
+  anonymised: z.boolean().optional(),
+  order: z.number().optional(),
+  collection: z.enum(collections).optional(),
+});
 
 const client = createClient({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
@@ -38,11 +92,13 @@ const warnings = [];
 
 const uploaded = new Map();
 
-/** Upload a /public image once and return a Sanity image reference. */
+/** The MDX file being imported, for resolving relative image paths. */
+let current = "";
+
+/** Upload an image once and return a Sanity image reference. */
 async function image(src) {
   if (!src) return undefined;
-  if (!src.startsWith("/")) throw new Error(`Image path must start with /: ${src}`);
-  const file = path.join(root, "public", src);
+  const file = src.startsWith("/") ? path.join(root, "public", src) : path.resolve(path.dirname(current), src);
   if (!fs.existsSync(file)) throw new Error(`Missing image ${file}`);
   if (!uploaded.has(src)) {
     if (dry) {
@@ -239,9 +295,16 @@ async function sections(nodes) {
 
 const parser = unified().use(remarkParse).use(remarkMdx).use(remarkGfm);
 
-async function toDocument(collection, file) {
-  const slug = file.replace(/\.mdx$/, "");
-  const { data: fm, content } = matter(fs.readFileSync(path.join(root, "content", collection, file), "utf8"));
+async function toDocument(file) {
+  current = file;
+  const slug = path.basename(file).replace(/\.mdx?$/, "");
+  const { data, content } = matter(fs.readFileSync(file, "utf8"));
+  const parsed = frontmatter.safeParse(data);
+  if (!parsed.success) throw new Error(`Invalid frontmatter in ${file}:\n${z.prettifyError(parsed.error)}`);
+  const fm = parsed.data;
+  const folder = path.basename(path.dirname(path.resolve(file)));
+  const collection = flag("collection") ?? (collections.includes(folder) ? folder : fm.collection);
+  if (!collections.includes(collection)) throw new Error(`Say which collection ${file} goes in: --collection=work|projects|play`);
   const tree = parser.parse(content);
 
   const card = fm.card
@@ -259,7 +322,7 @@ async function toDocument(collection, file) {
 
   const id = `${collection}-${slug}`;
   const doc = {
-    _id: fm.draft ? `drafts.${id}` : id,
+    _id: `drafts.${id}`,
     _type: "caseStudy",
     collection,
     slug: { _type: "slug", current: slug },
@@ -289,12 +352,9 @@ async function toDocument(collection, file) {
 }
 
 const docs = [];
-for (const collection of collections) {
-  const dir = path.join(root, "content", collection);
-  for (const file of fs.readdirSync(dir).filter((f) => f.endsWith(".mdx") && !f.startsWith("_"))) {
-    warnings.push(`— ${collection}/${file}`);
-    docs.push(await toDocument(collection, file));
-  }
+for (const file of files) {
+  warnings.push(`— ${file}`);
+  docs.push(await toDocument(file));
 }
 
 const problems = warnings.filter((w) => !w.startsWith("—"));
@@ -306,8 +366,19 @@ if (dry) {
   console.log(`\nDry run: ${docs.length} documents and ${uploaded.size} images written to ${outDir}/`);
 } else {
   const tx = client.transaction();
-  for (const d of docs) tx.createOrReplace(d);
-  await tx.commit();
-  console.log(`\nUploaded ${uploaded.size} images and wrote ${docs.length} documents:`);
-  for (const d of docs) console.log(`  ${d._id}`);
+  for (const d of docs) {
+    if (replace) tx.createOrReplace(d);
+    else tx.create(d);
+  }
+  try {
+    await tx.commit();
+  } catch (error) {
+    if (String(error).includes("already exists")) {
+      console.error("\nA draft with this id already exists in Sanity. Re-run with --replace to overwrite its edits.");
+      process.exit(1);
+    }
+    throw error;
+  }
+  console.log(`\nUploaded ${uploaded.size} images and created ${docs.length} draft(s):`);
+  for (const d of docs) console.log(`  ${d._id}  →  /studio/structure/${d.collection};${d._id.replace("drafts.", "")}`);
 }

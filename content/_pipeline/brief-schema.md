@@ -1,9 +1,11 @@
 # Brief & frontmatter schema
 
-Every page in `content/{work,projects,play}/*.mdx` starts with this YAML.
-It's validated by `lib/content.ts` (zod), so a bad field fails the build.
-Briefs from either export prompt use the same keys, which means promoting
-a brief is mostly writing the prose.
+Published pages live in Sanity and are edited in the Studio at `/studio`.
+New pieces start as an MDX file in `content/inbox/` that starts with this
+YAML, then `npm run import` turns it into a Sanity draft. The importer checks
+these fields (zod), so a bad field fails there. Briefs from either export
+prompt use the same keys, which means promoting a brief is mostly writing the
+prose.
 
 | Key          | Required | Notes                                                                    |
 | ------------ | -------- | ------------------------------------------------------------------------ |
@@ -18,13 +20,14 @@ a brief is mostly writing the prose.
 | `tags`       |          | Up to 3 from `tagOptions` in `lib/content.ts`                            |
 | `ai`         |          | AI techniques used                                                       |
 | `metrics`    |          | `[{ value, label }]`, sanitised                                          |
-| `cover`      |          | `/work/<slug>/cover.jpg` in `public/`                                    |
+| `cover`      |          | `/work/<slug>/cover.jpg` in `public/`, or a path relative to the MDX file |
+| `mockup`     |          | Device on a transparent background, for the home card's floating picture |
+| `card`       |          | Home card theme: `{ bg, title, text, picture: inset/bleed/float, summary }` |
 | `accent`     |          | Optional per-piece accent colour (CSS colour)                            |
 | `liveUrl`    |          | Full URL                                                                 |
 | `repoUrl`    |          | Full URL                                                                 |
 | `featured`   |          | Show on the home page                                                    |
 | `anonymised` |          | `true` for employer work. Shows an "anonymised" label                    |
-| `draft`      |          | `true` hides it in production and shows it in dev                        |
 | `order`      |          | Manual sort (lower first). Otherwise pieces sort newest first            |
 
 ## Collections
@@ -33,11 +36,25 @@ a brief is mostly writing the prose.
 - **projects/**: shipped side projects and vibe-coded apps. Shorter, with a live link.
 - **play/**: experiments and passion projects. Can be a single interactive demo.
 
-## MDX components available in any page
+Everything imports as an unpublished draft. It goes live when Dylan presses
+Publish in the Studio.
 
-`<Callout label="…">`, `<Figure src alt caption wide />`,
-`<Metrics items={[{ value, label }]} />`, `<PromptBlock tool prompt>output</PromptBlock>`,
-`<BeforeAfter before after alt labels />`
+## MDX components the importer understands
+
+Each becomes a section in the Studio:
+
+- `<Callout label="…">` → Callout
+- `<Figure src alt caption wide />` → Image (contained, or wide)
+- `<FigureRow phone>` of `<Figure>`s → Image pair or row
+- `<Metrics items={[{ value, label }]} />` → Metrics
+- `<PromptBlock tool prompt>output</PromptBlock>` → Prompt
+- `<BeforeAfter before after alt labels />` → Before / after slider
+- `<Tldr>` → Short version
+- `{/* TODO … */}` and `{/* VISUAL … */}` → Note (shown in the Studio only)
+- Headings, paragraphs, lists, quotes and links → Text
+
+"Text and image" sections (text on one side, the picture on the other) are
+added in the Studio.
 
 ## Quick read (`<Tldr>`)
 

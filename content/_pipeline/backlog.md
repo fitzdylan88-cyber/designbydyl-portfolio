@@ -3,7 +3,7 @@
 Everything that could become a page. Aim to move one item a fortnight so
 the portfolio builds up steadily over the next 12 months.
 
-**Status:** `idea` → `brief` (in content/inbox) → `draft` (mdx, `draft: true`) → `published`
+**Status:** `idea` → `brief` (in content/inbox) → `draft` (unpublished in the Sanity Studio) → `published`
 
 Aim for a balanced launch set: **2–3 work (AI) case studies · 3–4 projects · 2–3 play**.
 
