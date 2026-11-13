@@ -3,6 +3,7 @@ import fs from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
 import { z } from "zod";
+import { tagOptions } from "@/lib/tags";
 
 /**
  * One schema for every piece of content. It mirrors
@@ -11,16 +12,7 @@ import { z } from "zod";
 export const collections = ["work", "projects", "play"] as const;
 export type Collection = (typeof collections)[number];
 
-/** Outcome tags shown on index rows. A fixed list keeps the wording consistent. */
-export const tagOptions = [
-  "UI design",
-  "UX research",
-  "Accessibility",
-  "Industrial design",
-  "Design + build",
-  "AI-assisted",
-  "Measurable impact",
-] as const;
+export { tagOptions };
 
 export const frontmatterSchema = z.object({
   title: z.string().min(1),
