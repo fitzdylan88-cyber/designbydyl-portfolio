@@ -9,8 +9,9 @@ import { Cover } from "@/components/cover";
  * Swimlane card: title and summary up top, the device below, cropped by the
  * card's bottom and right edges so only part of it shows. The picture starts
  * where the text ends, so a long title never runs into it, and the summary is
- * capped at three lines so the picture keeps its room. A `mockup` (a
- * device PNG on a transparent background) sits on the card's tint. Until one
+ * capped at three lines so the picture keeps its room. A `mockup` is a device
+ * PNG on a transparent background, already cropped at its right and bottom
+ * edges, so it sits in the card's bottom-right corner on the tint. Until one
  * exists, the cover image stands in as a screen peeking in from the corner,
  * and entries with neither fall back to the generative cover. On hover the
  * whole card lifts 1% and its shadow deepens; the picture stays put.
@@ -41,13 +42,13 @@ export function DeviceCard({ entry, index }: { entry: CardEntry; index: number }
       <div className="relative min-h-0 flex-1">
         <ViewTransition name={`cover-${entry.collection}-${entry.slug}`} share="morph">
           {entry.mockup ? (
-            <div className="absolute top-0 -right-[12%] -bottom-[14%] left-[14%]">
+            <div className="absolute inset-0">
               <Image
                 src={entry.mockup}
                 alt=""
                 fill
                 sizes="(min-width: 1024px) 30vw, (min-width: 768px) 50vw, 85vw"
-                className="object-contain object-left-top"
+                className="object-cover object-right-bottom"
               />
             </div>
           ) : (
